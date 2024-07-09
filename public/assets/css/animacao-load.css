@@ -1,0 +1,40 @@
+.hidden{
+    opacity: 0;
+}
+
+.load {
+    position: absolute;
+    width: 100vw;
+    height: 50vh;
+    z-index: 5;
+    background-color: black;
+    
+}
+
+.load-cima{
+    animation: load-cima 2s ease-in-out;
+}
+
+.load-baixo{
+    top: 50%;
+    transform-origin: top;
+    animation: load-baixo 2s ease-in-out;
+}
+
+@keyframes load-cima{
+    from{
+        height: 50vh;
+    }
+    to{
+        height: 0;
+    }
+}
+
+@keyframes load-baixo{
+    from{
+        top: 50%;
+    }
+    to{
+        top: 100%;
+    }
+}

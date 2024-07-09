@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: rgb(98,35,11);
+    text-decoration: none;
+}
+
+body{
+    background-image: url(../midias/imgs/background-inicio.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.versao{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+}
+
+.config button{
+    width: 50px;
+    height: 50px;
+}
+
+.config img{
+    width: 40px;
+    height: 30px;
+    padding: 1px;
+}
+
+.config{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+@font-face{
+    font-family: 'Blank River';
+    src: url(../fonte/Blank\ River.ttf);
+}
+
+.logo{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Blank River';
+    font-size: 3rem;
+    font-weight: bold;
+    -webkit-text-stroke: 1px white;
+    flex-direction: column;
+    z-index: 1;
+    position: absolute;
+    top: 10%;
+}
+
+.logo #db{
+    background: -webkit-linear-gradient(rgba(12,0,0,255),rgba(33,3,5,255),rgba(75,12,7,255),rgba(106,17,11,255));
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo #ap{
+    position: absolute;
+    top: 45%;
+    background: -webkit-linear-gradient(rgba(33,6,2,255),rgba(78,11,12,255),rgba(185,28,33,255),rgba(186,30,34,255));
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: 3;
+}
+
+.logo img{
+    position: absolute;
+    height: 150px;
+    top: 25%;
+    left: 57%;
+    filter: grayscale(45%);
+    z-index: 2;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;   
+}
+
+.buttons button{
+    width: 300px;
+    height: 50px;
+}
+
+button {
+    background-color: rgb(238,106,13);
+    border: 5px   rgb(167, 72, 4) solid;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: rgb(180, 78, 4);
+}
+
+button img{
+    width: 40px;
+    margin-right: 10px;
+}
+
+.logout{
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+}
+
+.logout button{
+    width: 50px;
+    height: 50px;
+}
+
+.logout img{
+    width: 30px;
+    height: 40px;
+    padding: 2px;
+}
+
+.direitos{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: 5%;
+    right: 5%;
+}
+
+.direitos button{
+    width: 50px;
+    height: 50px;
+}
