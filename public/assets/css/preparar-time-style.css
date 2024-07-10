@@ -352,13 +352,11 @@ button {
     width: 100%;
     margin-top: 5px;
     text-align: center;
-    border-bottom: 1px black solid;
+    font-size: 10px;
 }
 
-.descricao-per{
-    font-size: 10px;
-    margin-top: 1px;
-    text-align: center;
+.nome p {
+    margin-top: 7px;
 }
 
 .var-per{
@@ -383,4 +381,28 @@ button {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 0.1px brown;
+}
+
+.card2, .slot2{
+    left: 27%;
+}
+
+.card3, .slot3{
+    left: 39%;
+}
+
+.card4, .slot4{
+    left: 51%;
+}
+
+.card5, .slot5{
+    left: 63%;
+}
+
+.card5 .var-per{
+    left: -10px;
+}
+
+.slots{
+    top: 20%;
 }

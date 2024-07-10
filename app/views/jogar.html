@@ -28,19 +28,20 @@
         </div>
 
         <div class="time">
-            <div class="ceramicas"></div>
 
             <div class="ceramicas"></div>
 
-            <div class="ceramicas"></div>
+            <div class="ceramicas slots slot1"></div>
 
-            <div class="ceramicas"></div>
+            <div class="ceramicas slots slot2"></div>
 
-            <div class="ceramicas"></div>
+            <div class="ceramicas slots slot3"></div>
 
-            <div class="ceramicas"></div>
+            <div class="ceramicas slots slot4"></div>
 
-            <div class="ceramicas"></div>
+            <div class="ceramicas slots slot5"></div>
+
+            <div class="ceramicas slots slot5"></div>
 
             <div class="ceramicas"></div>
 
@@ -91,7 +92,7 @@
         
         <div class="buttons-baixo">
             
-            <form action="jogar.php">
+            <form action="../controllers/jogarController.php" method="post">
 
                 <button name="girar" id="atualizar"><img src="../../public/assets/midias/icons/icons8-dado-60.png">
 
@@ -101,7 +102,7 @@
 
             </form>
 
-            <form action="jogar.php">
+            <form action="../controllers/jogarController.php" method="post">
 
                 <button name="finalizarTurno" value="1" id="finalizar">Finalizar turno<img src="../../public/assets/midias/icons/espadas.png"></button>
 
@@ -117,7 +118,7 @@
 
         </div>
 
-        <div class="card">
+        <div class="card card1" draggable="true">
 
             <div class="header">
                 
@@ -163,9 +164,9 @@
 
             <div class="desc">
 
-                <div class="nome">Gotenks</div>
-
-                <div class="descricao-per">Fusão Goten e Trunks</div>
+                <div class="nome">
+                    <p>Vegeta (Super Saiyajin Deus Super Saiyajin Evolução)</p>
+                </div>
 
                 <div class="var-per">
 
@@ -180,9 +181,12 @@
                 </div>
 
             </div>
+
         </div>
 
     </div>
+
+    <script src="../../public/assets/js/jogar.js"></script>
 
 </body>
 </html>

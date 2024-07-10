@@ -12,7 +12,7 @@ class GirarCarta
     private int $quantosPegarDoTurnoAnterior;
 
     //*Constantes:
-    const MOEDAS_POR_GIRO = 3;
+    const MOEDAS_POR_GIRO = 1;
     const MIN_PERSONAGENS = 1;
     const MAX_PERSONAGENS = 9;
 
