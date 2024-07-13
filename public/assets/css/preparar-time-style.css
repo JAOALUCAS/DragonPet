@@ -4,6 +4,7 @@
     box-sizing: border-box;
     color: rgb(98,35,11);
     text-decoration: none;
+    user-select: none;
 }
 
 body, html {
@@ -51,13 +52,14 @@ body, html {
     background-color: white;
     border: 3px black solid;
     border-left: none;
-    border-radius: 5px;
-    font-size: 2rem;
+    border-radius: 5px; 
+    color: black;
 }
 
 i{
     position: absolute;
     top: -15%;
+    font-size: 2rem;
 }
 
 #vida{
@@ -78,10 +80,14 @@ i{
     left: 50px;
 }
 
+#moeda{
+    margin-top: 5px;
+    margin-left: 19px;
+}
+
 .nome-time{
     border-left: 3px black solid;;
 }
-
 
 .buttons-cima{
     position: absolute;
@@ -238,6 +244,40 @@ button {
     margin-right: 0;
 }
 
+#congelar, #vender , #descongelar {
+    position: absolute;
+    right: 27%;
+    display: none;
+}
+
+#congelar img{
+    width: 45px;
+    margin-left: 5px;
+}
+
+#descongelar button{
+    width: 170px;
+}
+
+#descongelar img{
+    width: 40px;
+    margin-left: 5px;
+}
+
+
+.gelo{
+    position: absolute;
+    height: 180px;
+    width: 130px;
+    background-color: rgba(0, 0, 255, 0.4);
+    z-index: 5;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: 2px blue solid;
+    top: 45%;
+}
+
 .card{
     position: absolute;
     height: 150px;
@@ -246,6 +286,7 @@ button {
     border: 5px black solid;
     top: 45%;
     left: 15%;
+    display: none;
 }
 
 .header{
@@ -381,6 +422,26 @@ button {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 0.1px brown;
+}
+
+.gelo1{
+    left: 15%;
+}
+
+.gelo2{
+    left: 27%;
+}
+
+.gelo3{
+    left: 39%;
+}
+
+.gelo4{
+    left: 51%;
+}
+
+.gelo5{
+    left: 63%;
 }
 
 .card2, .slot2{

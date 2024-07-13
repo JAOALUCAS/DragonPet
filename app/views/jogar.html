@@ -15,7 +15,9 @@
 
         <div class="variaveis">
 
-            <div class="variavel moeda"><img src="../../public/assets/midias/icons/moeda.png"></div>
+            <div class="variavel moeda"><img src="../../public/assets/midias/icons/moeda.png">
+                <p id="moeda"></p>
+            </div>
 
             <div class="variavel vida"> <i id="vida">❤️</i></div>
     
@@ -92,7 +94,7 @@
         
         <div class="buttons-baixo">
             
-            <form action="../controllers/jogarController.php" method="post">
+            <form id="formAtualizar">
 
                 <button name="girar" id="atualizar"><img src="../../public/assets/midias/icons/icons8-dado-60.png">
 
@@ -102,7 +104,13 @@
 
             </form>
 
-            <form action="../controllers/jogarController.php" method="post">
+            <button id="congelar"><img src="../../public/assets/midias/icons/icons8-snowflake-50.png">Congelar</button>
+
+            <button id="vender"><img src="../../public/assets/midias/icons/icons8-bilhete-50.png">Vender</button>
+
+            <button id="descongelar"><img src="../../public/assets/midias/icons/gotas-de-agua.png">Descongelar</button>
+
+            <form>
 
                 <button name="finalizarTurno" value="1" id="finalizar">Finalizar turno<img src="../../public/assets/midias/icons/espadas.png"></button>
 
@@ -116,6 +124,26 @@
 
             <button id="config"><img src="../../public/assets/midias/icons/icons8-linhas-50.png"></button>
 
+        </div>
+
+        <div class="gelo gelo1">
+            <img src="../../public/assets/midias/icons/icons8-gelo-64.png">
+        </div>
+
+        <div class="gelo gelo2">
+            <img src="../../public/assets/midias/icons/icons8-gelo-64.png">
+        </div>
+
+        <div class="gelo gelo3">
+            <img src="../../public/assets/midias/icons/icons8-gelo-64.png">
+        </div>
+
+        <div class="gelo gelo4">
+            <img src="../../public/assets/midias/icons/icons8-gelo-64.png">
+        </div>
+
+        <div class="gelo gelo5">
+            <img src="../../public/assets/midias/icons/icons8-gelo-64.png">
         </div>
 
         <div class="card card1" draggable="true">
@@ -165,7 +193,7 @@
             <div class="desc">
 
                 <div class="nome">
-                    <p>Vegeta (Super Saiyajin Deus Super Saiyajin Evolução)</p>
+                    <p id="nome">Vegeta (Super Saiyajin Deus Super Saiyajin Evolução)</p>
                 </div>
 
                 <div class="var-per">
@@ -187,6 +215,7 @@
     </div>
 
     <script src="../../public/assets/js/jogar.js"></script>
+    <script src="../../public/assets/js/formAtualizar.js"></script>
 
 </body>
 </html>
