@@ -50,10 +50,11 @@ body, html {
     height: 30px;
     width: 60px;
     background-color: white;
-    border: 3px black solid;
+    border: 1px black solid;
     border-left: none;
     border-radius: 5px; 
     color: black;
+    font-size: 1.5rem;
 }
 
 i{
@@ -81,12 +82,11 @@ i{
 }
 
 #moeda{
-    margin-top: 5px;
-    margin-left: 19px;
+    margin-left: 20px;
 }
 
 .nome-time{
-    border-left: 3px black solid;;
+    border-left: 1px black solid;;
 }
 
 .buttons-cima{
@@ -269,12 +269,13 @@ button {
     position: absolute;
     height: 180px;
     width: 130px;
-    background-color: rgba(0, 0, 255, 0.4);
+    background-color: rgba(54, 114, 192, 0.4);
     z-index: 5;
     display: none;
     justify-content: center;
     align-items: center;
-    border: 2px blue solid;
+    border: 30px solid transparent;
+    border-image: url("../midias/icons/4679c4dc8329b5d4689ce79b42d1a791.png") 70 round;
     top: 45%;
 }
 
@@ -465,5 +466,5 @@ button {
 }
 
 .slots{
-    top: 20%;
+    top: 15%;
 }

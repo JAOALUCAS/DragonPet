@@ -4,9 +4,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     let numCard = null;
 
+    let cardVendido = null;
+
+    let cardCongelado = null;
+
+    let numGelo = null;
+
     let seMoveuNosSlots = false;
 
     const cards = document.querySelectorAll(".card");
+
+    const dm = document.querySelector(".moeda");
 
     const divMoeda = document.getElementById("moeda");
 
@@ -32,80 +40,213 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         moeda+=decremento;
 
-        divMoeda.innerHTML = moeda + "/10";
+        if(moeda < 3){
+
+            cards.forEach((card)=>{
+
+                card.draggable = false;
+
+            });
+
+        }
+        
+        if(moeda < 1){
+
+            atualizar.style.display = "none";
+
+        }else{
+
+            atualizar.style.display = "block";
+
+        }
+
+        if(decremento >= 0){
+   
+            dm.style.background = "green";
+
+            setTimeout(()=>{
+
+                dm.style.background = "white";
+
+            },100);
+
+        }else{
+
+            dm.style.background = "yellow";
+
+            setTimeout(()=>{
+
+                dm.style.background = "white";
+
+            },100);
+
+        }
+
+        divMoeda.innerHTML = moeda;
+
+        return moeda;
 
     }
 
-    cards.forEach((card)=>{
+    function definirNumCard(){
 
-        card.addEventListener("dragstart",()=>{
+        cards.forEach((card)=>{
 
-            numCard = card;
-
+            card.addEventListener("dragstart",()=>{
+    
+                numCard = card;
+    
+            });
+    
         });
 
-    });
+    }
 
-    slots.forEach((slot)=>{
+    function cardDragAndDrop(){
 
-        slot.addEventListener("dragover",(event)=>{
+        slots.forEach((slot)=>{
 
-            event.preventDefault();
+            slot.addEventListener("dragover",(event)=>{
 
-        });
+                event.preventDefault();
 
-        slot.addEventListener("drop", (event)=>{
+            });
 
-            const selecionarSound = new Audio("/public/assets/midias/audios/selecionarSound.mp3");
+            slot.addEventListener("drop", (event)=>{
 
-            selecionarSound.play();
+                const selecionarSound = new Audio("/public/assets/midias/audios/selecionarSound.mp3");
 
-            congelar.style.display = "none";
+                selecionarSound.play();
 
-            const classList = slot.classList;
+                congelar.style.display = "none";
 
-            Array.from(classList).forEach((classe)=>{
+                const classList = slot.classList;
 
-                if(classe == "slot1" || classe == "slot2" || classe == "slot3" 
-                    || classe == "slot4" || classe == "slot5"){
+                Array.from(classList).forEach((classe)=>{
 
-                    cards.forEach((card)=>{
+                    if(classe == "slot1" || classe == "slot2" || classe == "slot3" 
+                        || classe == "slot4" || classe == "slot5"){
 
-                        if(card == numCard){
+                        cards.forEach((card)=>{
 
-                            const cardClasses = card.classList;
+                            if(card == numCard){
 
-                            Array.from(cardClasses).forEach((slotC) => {
+                                const cardClasses = card.classList;
 
-                                if(slotC == "slot1" || slotC == "slot2" || slotC == "slot3" || 
-                                    slotC == "slot4" || slotC == "slot5"){
+                                Array.from(cardClasses).forEach((slotC) => {
+
+                                    if(slotC == "slot1" || slotC == "slot2" || slotC == "slot3" || 
+                                        slotC == "slot4" || slotC == "slot5"){
             
-                                    if(slotC !== classe){
+                                        if(slotC !== classe){
 
-                                        seMoveuNosSlots = true;
+                                            seMoveuNosSlots = true;
+
+                                        }
+
+                                        card.classList.replace(slotC, classe);
+            
+                                    }else{
+
+                                        card.classList.add(classe);
+                                        card.classList.add("slots");
 
                                     }
-
-                                    card.classList.replace(slotC, classe);
             
-                                }else{
+                                });
 
-                                    card.classList.add(classe);
-                                    card.classList.add("slots");
+                                if(!seMoveuNosSlots){
+
+                                    atualizarMoeda(-3);
 
                                 }
-            
-                            });
-
-                            if(!seMoveuNosSlots){
-
-                                atualizarMoeda(-3);
 
                             }
 
-                        }
+                        });
 
-                    });
+                    }
+
+                });
+
+            });
+
+        });
+
+    }
+
+    function sumirBotaoAoClicarFora(){
+                
+        document.addEventListener("click",(event)=>{
+
+            const elemento = event.target;
+
+            if(elemento.classList.contains("card") || elemento.classList.contains("desc") 
+                || elemento.classList.contains("var-per")){
+
+                cardCongelado = elemento;
+                cardVendido = elemento;
+            
+                if(elemento.classList.contains("slot1") || elemento.classList.contains("slot2")
+                    || elemento.classList.contains("slot3") || elemento.classList.contains("slot4")
+                    || elemento.classList.contains("slot5")){
+
+                    vender.style.display = "block";
+
+                }else{
+
+                    vender.style.display = "none";
+                    congelar.style.display = "block";
+
+                }
+
+            }else{
+
+                congelar.style.display = "none";
+                vender.style.display = "none";
+
+                if(!elemento.classList.contains("gelo")){
+
+                    descongelar.style.display = "none";
+
+                }
+
+            }
+
+        });
+
+    }
+
+    function atualizarClick(){
+   
+        atualizar.addEventListener("click", ()=>{
+
+            const moedaSound = new Audio("/public/assets/midias/audios/moedaSound.mp3");
+
+            moedaSound.play();
+
+            atualizarMoeda(-1);
+
+        });
+
+    }
+
+
+    function venderClick(){
+        
+        vender.addEventListener("click",()=>{
+
+            const vender = new Audio("/public/assets/midias/audios/venderSound.mp3");
+
+            vender.play();
+
+            cards.forEach((card)=>{
+
+                if(card == cardVendido){
+
+                    atualizarMoeda(1);
+
+                    card.remove();
 
                 }
 
@@ -113,182 +254,141 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         });
 
-    });
-
-    let cardVendido = null;
-    let cardCongelado = null;
-
-    document.addEventListener("click",(event)=>{
-
-        const elemento = event.target;
-
-        if(elemento.classList.contains("card") || elemento.classList.contains("desc") 
-            || elemento.classList.contains("var-per")){
-
-            cardCongelado = elemento;
-            cardVendido = elemento;
-            
-            if(elemento.classList.contains("slot1") || elemento.classList.contains("slot2")
-                || elemento.classList.contains("slot3") || elemento.classList.contains("slot4")
-                || elemento.classList.contains("slot5")){
-
-                vender.style.display = "block";
-
-            }else{
-
-                vender.style.display = "none";
-                congelar.style.display = "block";
-
-            }
-
-        }else{
-
-            congelar.style.display = "none";
-            vender.style.display = "none";
-
-            if(!elemento.classList.contains("gelo")){
-
-                descongelar.style.display = "none";
-
-            }
-
-        }
-
-    });
+    }
 
 
-    atualizar.addEventListener("click", ()=>{
+    function congelarClick(){
 
-        const moedaSound = new Audio("/public/assets/midias/audios/moedaSound.mp3");
+        congelar.addEventListener("click",()=>{
 
-        moedaSound.play();
+            const congelar = new Audio("/public/assets/midias/audios/congelarSound.mp3");
 
-        atualizarMoeda(-1);
+            congelar.play();
 
-    });
+            cards.forEach((card)=>{
 
-    vender.addEventListener("click",()=>{
+                if(card == cardCongelado){
 
-        const vender = new Audio("/public/assets/midias/audios/venderSound.mp3");
+                    card.classList.add("congelado");
 
-        vender.play();
+                }
 
-        cards.forEach((card)=>{
+            });
 
-            if(card == cardVendido){
+            switch (true){
 
-                card.remove();
+                case cardCongelado.classList.contains("card1"):
+
+                    const gelo1 = document.querySelector(".gelo1");
+
+                    gelo1.style.display = "flex";
+
+                    break;
+
+                case cardCongelado.classList.contains("card2"):
+
+                    const gelo2 = document.querySelector(".gelo2");
+
+                    gelo2.style.display = "flex";
+
+                    break;
+
+                case cardCongelado.classList.contains("card3"):
+
+                    const gelo3 = document.querySelector(".gelo3");
+
+                    gelo3.style.display = "flex";
+
+                    break;
+
+                case cardCongelado.classList.contains("card4"):
+
+                    const gelo4 = document.querySelector(".gelo4");
+
+                    gelo4.style.display = "flex";
+
+                    break;
+
+                case cardCongelado.classList.contains("card5"):
+
+                    const gelo5 = document.querySelector(".gelo5");
+
+                    gelo5.style.display = "flex";
+
+                    break;
 
             }
 
         });
 
-    });
+    }
 
-    congelar.addEventListener("click",()=>{
 
-        const congelar = new Audio("/public/assets/midias/audios/congelarSound.mp3");
 
-        congelar.play();
-
-        cards.forEach((card)=>{
-
-            if(card == cardCongelado){
-
-                card.classList.add("congelado");
-
-            }
-
-        });
-
-        switch (true){
-
-            case cardCongelado.classList.contains("card1"):
-
-                const gelo1 = document.querySelector(".gelo1");
-
-                gelo1.style.display = "flex";
-
-                break;
-
-            case cardCongelado.classList.contains("card2"):
-
-                const gelo2 = document.querySelector(".gelo2");
-
-                gelo2.style.display = "flex";
-
-                break;
-
-            case cardCongelado.classList.contains("card3"):
-
-                const gelo3 = document.querySelector(".gelo3");
-
-                gelo3.style.display = "flex";
-
-                break;
-
-            case cardCongelado.classList.contains("card4"):
-
-                const gelo4 = document.querySelector(".gelo4");
-
-                gelo4.style.display = "flex";
-
-                break;
-
-            case cardCongelado.classList.contains("card5"):
-
-                const gelo5 = document.querySelector(".gelo5");
-
-                gelo5.style.display = "flex";
-
-                break;
-
-        }
-
-    });
-
-    let numGelo = null;
-
-    gelo.forEach((gelo)=>{
-
-        gelo.addEventListener("click", ()=>{
-
-            numGelo = gelo;
-
-            descongelar.style.display = "block";
-
-        });
-
-    });
-
-    descongelar.addEventListener("click",()=>{
-
-        const descongelarSound = new Audio("/public/assets/midias/audios/descongelarSound.mp3");
-
-        descongelarSound.play();
-
+    function mostrarDescongelar(){
+    
         gelo.forEach((gelo)=>{
 
-            if(gelo == numGelo){
+            gelo.addEventListener("click", ()=>{
 
-                gelo.style.display = "none";
+                numGelo = gelo;
 
-            }
+                descongelar.style.display = "block";
 
-        });
-
-        cards.forEach((card)=>{
-
-            if(card == cardCongelado){
-
-                card.classList.remove("congelado");
-
-            }
+            });
 
         });
 
-        descongelar.style.display = "none";
+    }
 
-    });
+    function descongelarClick(){
+  
+        descongelar.addEventListener("click",()=>{
+
+            const descongelarSound = new Audio("/public/assets/midias/audios/descongelarSound.mp3");
+
+            descongelarSound.play();
+
+            gelo.forEach((gelo)=>{
+
+                if(gelo == numGelo){
+
+                    gelo.style.display = "none";
+
+                }
+
+            });
+
+            cards.forEach((card)=>{
+
+                if(card == cardCongelado){
+
+                    card.classList.remove("congelado");
+
+                }
+
+            });
+
+            descongelar.style.display = "none";
+
+        });
+
+    }
     
+    definirNumCard();
+
+    cardDragAndDrop();
+
+    sumirBotaoAoClicarFora();
+
+    atualizarClick();
+
+    venderClick();
+
+    congelarClick();
+
+    mostrarDescongelar();
+
+    descongelarClick();
+
 });

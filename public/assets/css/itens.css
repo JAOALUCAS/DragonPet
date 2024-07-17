@@ -1,0 +1,23 @@
+.item{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 55%;
+}
+
+.item img{
+    width: 80px;
+    height: 80px;
+}
+
+.item:hover{
+    cursor: pointer;
+}
+
+.item1{
+    right: 15%;
+}
+
+.item2{
+    right: 3%;
+}

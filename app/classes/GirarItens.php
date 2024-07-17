@@ -3,105 +3,141 @@
 class GirarItens
 {
     private int $moedas;
-    private int $turno;
+    
+    private int $vitorias;
+
+    private array $raridades;
+
+    const MOEDAS_POR_GIRO = 1;
     
     private $itens = [
         'Comum' => [
-            'Curry Picante',
-            'Frango Grelhado',
-            'Ensopado',
-            'Bandagens',
-            'Pesos de Treinamento',
-            'Pilula',
-            'Carne de Dinossauro',
-            'Arroz Cozido',
-            'Frutas Frescas',
-            'Legumes Variados',
-            'Tofu',
-            'Macarrão Instantâneo'
+            1 => ['Curry Picante', 'Aumenta a velocidade de ataque em 10%'],
+            2 => ['Frango Grelhado', 'Aumenta a vida em 4 pontos'],
+            3 => ['Ensopado', 'Aumenta a vida em 3 pontos e o ataque em 1 ponto'],
+            4 => ['Bandagens', 'Aumenta a vida em 6 pontos'],
+            5 => ['Pesos de treinamento', 'Aumenta o ataque em 2 pontos e diminui a velocidade de ataque em 10%'],
+            6 => ['Pílula', 'Aumenta a vida em 5 pontos'],
+            7 => ['Carne de dinossauro', 'Aumenta o ataque em 3 pontos'],
+            8 => ['Arroz Cozido', 'Aumenta a vida em 2 pontos e a velocidade de ataque em 5%'],
+            9 => ['Frutas Frescas', 'Aumenta a vida em 3 pontos'],
+            10 => ['Legumes Variados', 'Aumenta o ataque em 1 ponto e a vida em 2 pontos'],
+            11 => ['Tofu', 'Aumenta a vida em 4 pontos'],
+            12 => ['Macarrão Instantâneo', 'Aumenta a velocidade de ataque em 5% e o ataque em 1 ponto']
         ],
         'Incomum' => [
-            'Radar das Esferas do Dragão',
-            'Medidor de Ki',
-            'Nuvem do Goku',
-            'Casco da Tartaruga',
-            'Mafuba Jar',
-            'Água Sagrada',
-            'Injeção',
-            'Battle Armor',
-            'Tree of Might Fruit'
+            1 => ['Radar das Esferas do Dragão', 'Permite encontrar uma esfera do dragão a cada 3 batalhas vencidas'],
+            2 => ['Medidor de Ki', 'Aumenta o ataque em 2 pontos e a velocidade de ataque em 5%'],
+            3 => ['Nuvem do Goku', 'Aumenta a velocidade de ataque em 15%'],
+            4 => ['Casco da Tartaruga', 'Aumenta a vida em 10 pontos, mas diminui a velocidade de ataque em 10%'],
+            5 => ['Mafuba Jar', 'Tem uma chance de 10% de selar um inimigo por 1 turno'],
+            6 => ['Água Sagrada', 'Aumenta o ataque em 3 pontos e a vida em 5 pontos'],
+            7 => ['Injeção', 'Aumenta a vida em 8 pontos'],
+            8 => ['Battle Armor', 'Aumenta a defesa, reduzindo o dano recebido em 2 pontos por ataque'],
+            9 => ['Tree of Might Fruit', 'Aumenta o ataque em 4 pontos e a vida em 2 pontos']
         ],
         'Raro' => [
-            'Espada Z',
-            'Cápsula do Tempo',
-            'Semente dos Deuses',
-            'Brave Sword',
-            'Brincos Potara',
-            'Esfera do Dragão',
-            'Great Saiyaman Costume',
-            'Weighted Training Clothes'
+            1 => ['Espada Z', 'Aumenta o ataque em 5 pontos'],
+            2 => ['Cápsula do Tempo', 'Permite reviver um personagem com metade da vida uma vez por batalha'],
+            3 => ['Semente dos Deuses', 'Recupera totalmente a vida do personagem uma vez por batalha'],
+            4 => ['Brave Sword', 'Aumenta o ataque em 4 pontos e a velocidade de ataque em 5%'],
+            5 => ['Brincos Potara', 'Permite fusão com outro personagem, combinando suas vidas e ataques'],
+            6 => ['Esfera do Dragão', 'Coletar todas as sete esferas permite realizar um desejo poderoso (balanceamento a ser definido)'],
+            7 => ['Great Saiyaman Costume', 'Aumenta a vida em 6 pontos e o ataque em 3 pontos'],
+            8 => ['Weighted Training Clothes', 'Aumenta a vida em 8 pontos, mas diminui a velocidade de ataque em 5%']
         ],
         'Lendário' => [
-            'Super esféras do dragão'
+            1 => ['Super esferas do dragão', 'Coletar todas as sete super esferas permite realizar um desejo extremamente poderoso (balanceamento a ser definido)']
         ]
     ];
     
-    public function __construct(int $moedas, int $turno){
+    
+    public function __construct(int $moedas, int $vitorias)
+    {
         $this->moedas = $moedas;
-        $this->turno = $turno;
+
+        $this->vitorias = $vitorias;
+
+        $this->gerarPorcentagem();
+
     }
 
-    private function girarItens(){
+    private function gerarPorcentagem()
+    {
+    
+        $porcentagens = [];
 
-        if($this->moedas >= 5){
+        //*Representação das raridades em números para facilitar o giro:
 
-            $pegarItens = [];
-            $porcentagemFinal = random_int(0,100);
-            
-            /* 
-                Comum:44.44%
-                Incomun: 44.44%
-                Raro:11.11%
-                Lendário: 0,1%
-            */
+        /*
+            Comun 44%
+            Incomun 44%
+            Raro 11%
+            Lendário 1%
+        */
 
-            if($porcentagemFinal <= 89){
+        $porcentagemPrimeiroItem = random_int(0, 100);
 
-                $comumOuIncomun = random_int(1,2);
+        $porcentagemSegundoItem = random_int(0, 100);
 
-                if($comumOuIncomun == 1){
+        //*Guardar a string das porcentagens
+        array_push($porcentagens, $porcentagemPrimeiroItem, $porcentagemSegundoItem);
 
-                    shuffle($this->itens['comum']);
-                    $pegarItens = $this->itens['comum'][0];
+        $this->raridades = $this->definirRaridade($porcentagens);
 
-                    return $pegarItens;
+        $this->girarItens();
 
-                }else{
+    }
 
-                    shuffle($this->itens['incomum']);
-                    $pegarItens = $this->itens['incomum'][0];
+    private function definirRaridade($porcentagens)
+    {
+        //*Transformar os números das porcentagens em strings
 
-                    return $pegarItens;
-                }
-            }elseif($porcentagemFinal >= 90 && $porcentagemFinal< 99){
+        foreach ($porcentagens as $item) {
 
-                shuffle($this->itens['raro']);
-                $pegarItens = $this->itens['raro'][0];
+            if ($item < 45) {
 
-                return $pegarItens;
+                $this->raridades[] = 'Comum';
 
-            }elseif($porcentagemFinal >=99){
+            } elseif ($item < 88) {
 
-                shuffle($this->itens['lendario']);
-                $pegarItens = $this->itens['lendario'][0];
+                $this->raridades[] = 'Incomum';
 
-                return $pegarItens;
+            } elseif ($item <= 99) {
+
+                $this->raridades[] = 'Raro';
+
+            } else {
+
+                $this->raridades[] = 'Lendário';
+
             }
-
-            
-        }else {
-            echo 'Número de moedas insuficientes.';
-            return [];
         }
+
+        return $this->raridades;
+    }
+
+    public function girarItens()
+    {
+
+        if ($this->moedas < self::MOEDAS_POR_GIRO) {
+            //* Retorna um error personalizado.
+            throw new Exception('Moedas insuficientes');
+        }
+
+        $this->moedas -= self::MOEDAS_POR_GIRO;
+
+        $quaisPegar = [];
+
+        foreach ($this->raridades as $raridade) {
+
+            //* Pegar o número de itens dentro dos arrays
+            $index = random_int(1, count($this->itens[$raridade]));
+
+            $quaisPegar[] = $this->itens[$raridade][$index];
+
+        }
+
+        return $quaisPegar;
     }
 }

@@ -123,16 +123,21 @@ class GirarCarta
     public function __construct(int $turno, int $moedas)
     {
         $this->turno = $turno;
+
         $this->moedas = $moedas;
+
         $this->chamarMetodos();
+
     }
 
     private function chamarMetodos()
     {
         $this->decidirGirarDoTurnoAnteriorEQuantos();
+
         if(isset($this->quantosPegarDoTurnoAnterior)){
 
             $this->guardarPersonagensDoTurnoAtual(); 
+
             $this->guardarPersonagensDoTurnoAnterior();
 
         }else {
@@ -188,9 +193,13 @@ class GirarCarta
         $this->moedas -= self::MOEDAS_POR_GIRO;
         //*Uma maneira de sempre retornar o valor de giros por turno.
         if($this->turno < 5){
+
             $decidirQuantosGirar = 3;
+
         }else{
+
             $decidirQuantosGirar = 5;
+            
         }
 
         if(isset($this->personagensDoTurnoAnterior)){
@@ -211,6 +220,7 @@ class GirarCarta
             $quantosFaltam = $decidirQuantosGirar - count($personagensEscolhidos);
             //! quantosFaltam pode retornar 2-1 ou 4-3
             $quaisPegar = [];
+
             for($i=1;$i<=$quantosFaltam;$i++){
                 
                 $quaisPegar[] = random_int(self::MIN_PERSONAGENS,self::MAX_PERSONAGENS);

@@ -6,10 +6,15 @@
     <title>DragonPet - Preparar time</title>
     <link rel="stylesheet" href="../../public/assets/css/preparar-time-style.css">
     <link rel="stylesheet" href="../../public/assets/css/animacao-load.css">
+    <link rel="stylesheet" href="../../public/assets/css/itens.css">
+    <script src="../../public/assets/js/jogar.js" defer></script>
+    <script src="../../public/assets/js/formAtualizar.js" defer></script>
+    <script src="../../public/assets/js/salvarEstado.js" defer></script>
+    <script src="../../public/assets/js/buscarEstado.js" defer></script>
 </head>
 <body>
 
-    <div class="container">
+    <div class="container" id="container">
         
         <div class="background"></div>
 
@@ -193,18 +198,18 @@
             <div class="desc">
 
                 <div class="nome">
-                    <p id="nome">Vegeta (Super Saiyajin Deus Super Saiyajin Evolução)</p>
+                    <p class="nome-personagem">Vegeta (Super Saiyajin Deus Super Saiyajin Evolução)</p>
                 </div>
 
                 <div class="var-per">
 
                     <img src="../../public/assets/midias/icons/icons8-filled-heart-48 (1).png">
 
-                    <p>100</p>
+                    <p class="vida-personagem">100</p>
 
                     <img src="../../public/assets/midias/icons/icons8-espada-48.png">
 
-                    <p>100</p>
+                    <p class="ataque-personagem">100</p>
 
                 </div>
 
@@ -212,10 +217,78 @@
 
         </div>
 
-    </div>
+        
+        <div class="card card2" draggable="true">
 
-    <script src="../../public/assets/js/jogar.js"></script>
-    <script src="../../public/assets/js/formAtualizar.js"></script>
+            <div class="header">
+                
+                <div class="lado-esquerdo">
+                    
+                    <img src="../../public/assets/midias/imgs/ico.jpg">
+                
+                </div>
+
+                <div class="laterais"></div>
+
+                <div class="centro">
+
+                    <div class="barra barra-lado-esq"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra barra-lado-dir"></div>
+
+                </div>
+                
+                <div class="lado-direito">
+                    
+                    <img src="../../public/assets/midias/imgs/simbolo-go-goku-dragon-ball-pegatina-negativo.png">
+                
+                </div>
+
+            </div>
+
+            <div class="desc">
+
+                <div class="nome">
+                    <p class="nome-personagem">Vegeta (Super Saiyajin Deus Super Saiyajin Evolução)</p>
+                </div>
+
+                <div class="var-per">
+
+                    <img src="../../public/assets/midias/icons/icons8-filled-heart-48 (1).png">
+
+                    <p class="vida-personagem">100</p>
+
+                    <img src="../../public/assets/midias/icons/icons8-espada-48.png">
+
+                    <p class="ataque-personagem">100</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="item item1">
+            <img src="">
+        </div>
+
+    </div>
 
 </body>
 </html>
