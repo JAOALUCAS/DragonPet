@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DragonPet - Preparar time</title>
+    <link rel="shortcut icon" href="../../public/assets/midias/ico/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../public/assets/css/preparar-time-style.css">
     <link rel="stylesheet" href="../../public/assets/css/animacao-load.css">
     <link rel="stylesheet" href="../../public/assets/css/itens.css">
-    <script src="../../public/assets/js/jogar.js" defer></script>
-    <script src="../../public/assets/js/formAtualizar.js" defer></script>
-    <script src="../../public/assets/js/salvarEstado.js" defer></script>
-    <script src="../../public/assets/js/buscarEstado.js" defer></script>
+    <script src="../../public/assets/js/prepararTime/jogar.js"></script>
+    <script src="../../public/assets/js/prepararTime/formAtualizar.js"></script>
+    <script src="../../public/assets/js/prepararTime/salvarEstado.js"></script>
+    <script src="../../public/assets/js/prepararTime/buscarEstado.js"></script>
+    <script src="../../public/assets/js/prepararTime/itens.js"></script>
+    <script src="../../public/assets/js/prepararTime/variaveis.js"></script>
+    <script src="../../public/assets/js/prepararTime/animacaoLoad.js"></script>
 </head>
 <body>
+
+    <div id="load-cima" class="load hidden load-cima"></div>
+    <div id="load-baixo" class="load hidden load-baixo"></div>
 
     <div class="container" id="container">
         
@@ -24,11 +31,29 @@
                 <p id="moeda"></p>
             </div>
 
-            <div class="variavel vida"> <i id="vida">❤️</i></div>
+            <i id="vidaI">❤️</i>
+
+            <div class="variavel vida">
+
+                <p id="vida"></p>
+
+            </div>
     
-            <div class="variavel turno"> <i id="turno">⌛</i></div>
+            <i id="turnoI">⌛</i>
+
+            <div class="variavel turno">
+
+                <p id="turno"></p>
+
+            </div>
     
-            <div class="variavel vitorias"> <i id="vitorias">🏆</i></div>
+            <i id="vitoriasI">🏆</i>
+
+            <div class="variavel vitorias">
+
+                <p id="vitorias"></p>
+
+            </div>
 
             <div class="variavel nome-time"></div>
 
@@ -148,6 +173,14 @@
         </div>
 
         <div class="gelo gelo5">
+            <img src="../../public/assets/midias/icons/icons8-gelo-64.png">
+        </div>
+
+        <div class="gelo gelo6">
+            <img src="../../public/assets/midias/icons/icons8-gelo-64.png">
+        </div>
+
+        <div class="gelo gelo7">
             <img src="../../public/assets/midias/icons/icons8-gelo-64.png">
         </div>
 
@@ -283,9 +316,111 @@
             </div>
 
         </div>
+        
+        <div class="card card3" draggable="true">
+
+            <div class="header">
+                
+                <div class="lado-esquerdo">
+                    
+                    <img src="../../public/assets/midias/imgs/ico.jpg">
+                
+                </div>
+
+                <div class="laterais"></div>
+
+                <div class="centro">
+
+                    <div class="barra barra-lado-esq"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra"></div>
+
+                    <div class="barra barra-lado-dir"></div>
+
+                </div>
+                
+                <div class="lado-direito">
+                    
+                    <img src="../../public/assets/midias/imgs/simbolo-go-goku-dragon-ball-pegatina-negativo.png">
+                
+                </div>
+
+            </div>
+
+            <div class="desc">
+
+                <div class="nome">
+                    <p class="nome-personagem">Vegeta (Super Saiyajin Deus Super Saiyajin Evolução)</p>
+                </div>
+
+                <div class="var-per">
+
+                    <img src="../../public/assets/midias/icons/icons8-filled-heart-48 (1).png">
+
+                    <p class="vida-personagem">100</p>
+
+                    <img src="../../public/assets/midias/icons/icons8-espada-48.png">
+
+                    <p class="ataque-personagem">100</p>
+
+                </div>
+
+            </div>
+
+        </div>
 
         <div class="item item1">
-            <img src="">
+
+            <img class="img" src="../../public/assets/midias/itens/Brave Sword.png">
+
+        </div>
+
+        <div class="item item2">
+
+            <img class="img" src="../../public/assets/midias/itens/Cápsula do Tempo.png">
+
+        </div>
+
+        <div class="itemEfect">
+
+            <div class="i i1">
+                <img src="../../public/assets/midias/itens/Esfera do Dragão.png">
+            </div>
+
+            <div class="i i2">
+                <img src="../../public/assets/midias/itens/Esfera do Dragão.png">
+            </div>
+
+            <div class="i i3">
+                <img src="../../public/assets/midias/itens/Esfera do Dragão.png">
+            </div>
+
+            <div class="i i4">
+                <img src="../../public/assets/midias/itens/Esfera do Dragão.png">
+            </div>
+
+            <div class="i i5">
+                <img src="../../public/assets/midias/itens/Esfera do Dragão.png">
+            </div>
+
+        </div>
+
+        <div class="crosshair">
+            <img src="../../public/assets/midias/icons/icons8-definir-localização-90.png">
         </div>
 
     </div>

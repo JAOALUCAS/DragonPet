@@ -45,7 +45,7 @@ window.addEventListener("beforeunload", ()=>{
 
             if(gelo.style.display == "flex"){
 
-                geloArray.push(gelo);
+                geloArray.push(gelo.classList);
 
             }
 
@@ -53,7 +53,7 @@ window.addEventListener("beforeunload", ()=>{
 
         gameObjects.push({
             "gelo": geloArray,
-            "moedas": moedas.textContent,
+            "moedas": moedas.innerText,
             "vida": vida.textContent,
             "turno": turno.textContent,
             "vitorias": vitorias.textContent

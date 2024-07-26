@@ -64,6 +64,7 @@ body{
     z-index: 1;
     position: absolute;
     top: 10%;
+    pointer-events: none;
 }
 
 .logo #db{

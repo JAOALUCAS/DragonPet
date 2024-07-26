@@ -63,15 +63,16 @@ i{
     font-size: 2rem;
 }
 
-#vida{
+
+#vidaI{
     left: 160px;
 }
 
-#turno{
+#turnoI{
     left: 290px;
 }
 
-#vitorias{
+#vitoriasI{
     left: 410px;
 }
 
@@ -81,7 +82,7 @@ i{
     left: 50px;
 }
 
-#moeda{
+#moeda, #vida , #turno, #vitorias{
     margin-left: 20px;
 }
 
@@ -275,7 +276,7 @@ button {
     justify-content: center;
     align-items: center;
     border: 30px solid transparent;
-    border-image: url("../midias/icons/4679c4dc8329b5d4689ce79b42d1a791.png") 70 round;
+    border-image: url("../midias/icons/borda-gelo.png") 70 round;
     top: 45%;
 }
 
@@ -376,6 +377,7 @@ button {
     background-color: rgba(255, 255, 255, 0.5);
     margin-top: 75px;
     border: 5px rgb(180, 180, 11) solid;
+    pointer-events: none;
 }
 
 .desc::before {

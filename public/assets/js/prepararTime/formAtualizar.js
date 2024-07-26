@@ -21,28 +21,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const cards = document.querySelectorAll(".card");
 
-    cards.forEach((card)=>{
+    const itens = document.querySelectorAll(".item");
 
-        if(card !== null){
+    function roletar(){
 
-            card.style.display = "block";
+        formAtualizar.addEventListener("click", ()=>{
 
-        }
+            cards.forEach((card)=>{
+    
+                if(!card.classList.contains("slots") && !card.classList.contains("congelado")){
+    
+                    card.remove();
+    
+                }
+    
+            });
 
-    });
+            itens.forEach((item)=>{
 
-    formAtualizar.addEventListener("click", ()=>{
+                if(!item.classList.contains("congelado")){
 
-        cards.forEach((card)=>{
+                    item.remove();
 
-            if(!card.classList.contains("slots") && !card.classList.contains("congelado")){
+                }
 
-                card.remove();
-
-            }
-
+            });
+    
         });
 
-    });
+    }
+
+    roletar();
 
 });
