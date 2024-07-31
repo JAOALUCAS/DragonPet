@@ -1,0 +1,365 @@
+.cutscene{
+    position: fixed;
+    height: 300px;
+    width: 300px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #FF4500;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    animation: cutsceneMoveShow 2s ease-in-out;
+    left: 0%;
+}
+
+@keyframes cutsceneMoveShow {
+    from{left: -25%;}
+    to{left: 0%;}
+}
+
+.aClose{
+    animation: cutsceneMoveClose 1s ease-in-out;
+}
+
+@keyframes cutsceneMoveClose {
+    from{left: 0%;}
+    to{left: -25%;}
+}
+
+.close-button{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.close-button img{
+    height: 30px;
+}
+
+.close-cutscene{
+    top: -10%;
+    left: 105%;
+}
+
+.inicio{
+    border: 30px #95a5a6 solid;
+    border-top: #7f8c8d 30px solid;
+    border-bottom: #7f8c8d 45px solid;
+}
+
+.inicio img{
+    height: 200px;
+    width: 200px;
+}
+
+.final{
+    border: 30px #95a5a6 solid;
+    border-top: #7f8c8d 30px solid;
+    border-bottom: #7f8c8d 45px solid;
+}
+
+.final img{
+    height: 200px;
+    width: 200px;
+}
+
+.background{
+    position: relative;
+    display: none;
+    filter: grayscale(45%);
+    border: 30px #95a5a6 solid;
+    border-top: #7f8c8d 30px solid;
+    border-bottom: #7f8c8d 45px solid;
+    box-shadow: 5px 5px 5px 5px black;
+}
+
+.background img{
+    height: 200px;
+    width: 200px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.8); }
+    to { transform: scale(1); }
+}
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(-2deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes grayScale{
+    from{filter: grayscale(100%);};
+    to{filter: grayscale(0%);};
+}
+
+@keyframes moveLeft{
+    from{left: 80%;}
+    to{left: 15%;}
+}
+
+@keyframes divisoria {
+    from{
+        left: 0%;
+        opacity: 0;
+    }
+    to{
+        left: 16%;
+        opacity: 0.7;
+    }
+}
+
+.apresentador{
+    position: absolute;
+    z-index: 2;
+    left: 20%;
+    top: 40%;
+    filter: grayscale(45%);
+    display: none;
+    animation: fadeIn 1s ease-in-out forwards, scaleIn 0.5s ease-in-out forwards, moveUp 3s ease-in-out infinite;
+}
+
+.apresentador img{
+    width: 100px;
+    height: 100px;
+}
+
+@font-face{
+    font-family: 'Comic Sans';
+    src: url(../fonte/ComicSansMS3.ttf);
+}
+
+.falas{
+    position: absolute;
+    z-index: 2;
+    width: 100px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-left: 70px;
+    padding: 10px;
+    border-radius: 10px;
+    display: none;
+    color: #000;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Comic Sans';
+    font-size: 5px;
+}
+
+.falas::after{
+    content: '';
+    position: absolute;
+    bottom: -10px; 
+    left: 20%;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: rgba(255, 255, 255, 0.8);
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -10px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+}
+
+.grayScale {
+    animation: grayscale 5s ease-in;
+    filter: grayscale(0%);
+}
+
+.pulse{
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.divisoria{
+    position: absolute;
+    filter: grayscale(40%);
+    animation: divisoria 4s;
+    display: none;
+    margin-bottom: 10px;
+}
+
+.divisoria img{
+    height: 205px;
+    width: 200px;
+}
+
+.goku{
+    position: absolute;
+    z-index: 3;
+    animation: moveLeft 8s;
+    display: none;
+    top: 23%;
+}
+
+.goku img{
+    width: 10px;
+    height: 10px;
+}
+
+.final{
+    display: none;
+}
+
+.manchete{
+    display: flex;
+    width: 180px;
+    height: 40px;
+    position: absolute;
+    z-index: 4;
+    top: 65%;
+}
+
+.ao-vivo{
+    position: absolute;
+    height: 8px;
+    width: 25px;
+    background-color:  red;
+    margin-top: 0;
+    font-size: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 1px 1px 1px 1px black;
+}
+
+.simbolo{
+    width: 70px;
+    height: 35px;
+    background-color: #0057B7;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    box-shadow: 1px 1px 1px 1px black;
+}
+
+.simbolo img{
+    height: 30px;
+}
+
+.manchete-tx{
+    width: 400px;
+    height: 30px;
+    padding-left: 10px;
+    margin-top: 15px;
+    background-color: #002366;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8px;
+    display: flex;
+    align-items: center;
+    box-shadow: 1px 1px 1px 1px black;
+}
+
+.emissora{
+    position: absolute;
+    top: 23%;
+    left: 75%;
+    z-index: 4;
+    animation: pulse 1s infinite;
+}
+
+.emissora img{
+    height: 10px;
+}
+
+.tv-buttons{
+    width: 210px;
+    height: 25px;
+    position: absolute;
+    top: 85%;
+    display: flex;
+    z-index: 4;
+}
+
+.button{
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: #4b535e;
+    margin-top: 10px;
+    margin-right: 10px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.button-ligar{
+    height: 15px;
+    width: 15px;
+    margin-right: 120px;
+    margin-top: 7px;
+}
+
+.comercial{
+    position: absolute;
+    display: none;
+    background-color: black;
+    border: 30px #95a5a6 solid;
+    border-top: #7f8c8d 30px solid;
+    border-bottom: #7f8c8d 45px solid;
+}
+
+.comercial img{
+    height: 200px;
+    width: 200px;
+}
+
+@font-face{
+    font-family: 'Blank River';
+    src: url(../fonte/Blank\ River.ttf);
+}
+
+.marca{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: grayscale(45%);
+    pointer-events: none;
+    z-index: 4;
+}
+
+.marca1{
+    top: 8%;
+    font-size: 7px;
+    color: black;
+}
+
+.marca2{
+    top: 84%;
+}
+
+.marca2 img{
+    height: 15px;
+}

@@ -67,14 +67,14 @@ body{
     pointer-events: none;
 }
 
-.logo #db{
+.logo .db{
     background: -webkit-linear-gradient(rgba(12,0,0,255),rgba(33,3,5,255),rgba(75,12,7,255),rgba(106,17,11,255));
     background-clip: border-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.logo #ap{
+.logo .ap{
     position: absolute;
     top: 45%;
     background: -webkit-linear-gradient(rgba(33,6,2,255),rgba(78,11,12,255),rgba(185,28,33,255),rgba(186,30,34,255));
@@ -90,7 +90,7 @@ body{
     top: 25%;
     left: 57%;
     filter: grayscale(45%);
-    z-index: 2;
+    z-index: 4;
 }
 
 .buttons{
@@ -150,4 +150,169 @@ button img{
 .direitos button{
     width: 50px;
     height: 50px;
+}
+
+@font-face{
+    font-family: 'Comic Sans';
+    src: url(../fonte/ComicSansMS3.ttf);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.pop-up{
+    position: absolute;
+    width: 320px;
+    height: 30px;
+    background-color: white;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Comic Sans';
+    font-size: 20px;
+    border: 1px black solid;
+    box-shadow: 2px 2px 2px gray;
+    opacity: 0.4;
+    animation: pulse 1.5s infinite ease-in-out;
+    cursor: pointer;
+}
+
+.shop-up{
+    top: 80%;
+    left: 38%;
+}
+
+.img{
+    position: absolute;
+    z-index: 2;
+    height: 70px;
+    width: 70px;
+}
+
+.img-shop{
+    top: 74%;
+    left: 35%;
+}
+
+.img img{
+    width: 65px;
+    height: 65px;
+    opacity: 0.7;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+  
+.hover{
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+.shop{
+    position: absolute;
+    height: 90vh;
+    width: 95vw;   
+    background: linear-gradient(to top right, rgba(255, 68, 0), rgb(255, 145, 0));
+    z-index: 5;
+    margin: 15px;
+    border: 10px rgb(167, 72, 4) solid;
+    border-radius: 10px;
+    padding: 10px;
+    display: grid;
+    grid-template-areas: "m  a"
+                         "s  s";
+    grid-template-columns: 7fr 3fr;
+    grid-template-rows: 7fr 3fr;
+    gap: 10px;
+}
+
+.carrocel-container, .categorias, .informacoes{
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.carrocel-container{
+    grid-area: m;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+}
+
+.card{
+    position: absolute;
+}
+
+.carrocel{
+    height: 350px;
+    width: 650px;
+    background-color: aqua;
+}
+
+.carrocel img{
+    height: inherit;
+    width: inherit;
+}
+
+.prints{
+    height: 350px;
+    width: 150px;
+    background-color: aqua;
+    margin-left: 30px;
+}
+
+.categorias{
+    grid-area: a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.categorias button{
+    width: 350px;
+}
+
+.informacoes{
+    grid-area: s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.perfil{
+    height: 60px;
+    width: 300px;
+    background-color: aqua;
+}
+
+.dinheiro{
+    height: 60px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 280px;
+    margin-right: 20px;
+}
+
+.dinheiro img{
+    height: 60px;
+    width: 60px;
+    margin-right: 15px;
+}
+
+.dinheiro p{
+    color: greenyellow;
+    -webkit-text-stroke: 0.5px green;
+    font-size: 2.5rem;
+    letter-spacing: 5px;
+}
+
+.voltar{
+    margin-top: 20px;
+}
+
+.voltar button{
+    height: 60px;
+    width: 300px;
 }

@@ -4,17 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const formData = new FormData(this);
 
-        fetch(window.location.href, { 
+        fetch('http://localhost:8000/app/controllers/jogarController.php', { 
             method: 'POST',
             body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            
-            console.log(data); 
-           
-        })
-        .catch(error => console.error('Error:', error));
+        }).catch(error => console.error('Error:', error));
+        
     });
 
     const formAtualizar = document.getElementById("formAtualizar");

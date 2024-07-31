@@ -1,30 +1,57 @@
 <?php
 
-require_once "../classes/GirarCarta.php";
+session_start();
 
-if(isset($_POST["finalizarTurno"]) && !isset($turno)){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $turno = 2;
+    $girar = $_POST["girar"] ?? null;
 
-}elseif(isset($_POST["finalizarTurno"]) && isset($turno)){
+    $finalizarTurno = $_POST["finalizarTurno"] ?? null;
 
-    $turno += 1;
+    require_once "../classes/GirarCarta.php";
 
-}
+    if (isset($finalizarTurno)) {
 
-if(isset($_POST["girar"]) && !isset($turno)){
+        if (!isset($turno)) {
 
-    $turno = 1;
+            $turno = 2;
 
-}
+        } else {
 
-$girarCarta = new GirarCarta($turno, 3);
-$personagens = $girarCarta->girarCarta();
+            $turno += 1;
 
-foreach($personagens as $key=>$item){
+        }
 
-    echo $item[0];
-    echo $item[1];
-    echo $item[2];
+    } elseif (isset($girar)) {
+
+        if (!isset($turno)) {
+
+            $turno = 1;
+
+        }
+
+    }
+
+    if (isset($girar)) {
+
+        $girarCarta = new GirarCarta($turno, 3);
+
+        $personagens = $girarCarta->girarCarta();
+
+        foreach($personagens as $key => $item) {
+
+            $i = $key + 1;
+
+            $_SESSION["nome$i"] = $item[0];
+
+            $_SESSION["vida"] = $item[1];
+
+            $_SESSION["ataque"] = $item[2];
+
+            $_SESSION["numCard$i"] = $i;
+
+        }
+
+    }
 
 }

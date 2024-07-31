@@ -1,0 +1,15 @@
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+  
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+  
+.logo {
+    animation: fadeIn 2s ease-in-out, pulse 1.5s infinite ease-in-out;
+}
+  

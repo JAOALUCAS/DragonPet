@@ -135,20 +135,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     }
 
-    function mostrarCard(){
-
-        cards.forEach((card)=>{
-
-            if(card !== null){
-    
-                card.style.display = "block";
-    
-            }
-    
-        });
-
-    }
-
     function cardDragAndDrop(){
 
         let style = null;
@@ -665,8 +651,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
         });
 
     }
-
-    mostrarCard();
 
     definirNumCard();
 
