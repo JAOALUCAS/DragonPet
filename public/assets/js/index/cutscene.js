@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         
             video.src = "/public/assets/midias/cutscene/comerciais/" + videoFiles[index]  + ".gif";
 
-            if(index != 3){
+            if(index != 2){
 
                 setTimeout(()=>{
         

@@ -106,7 +106,7 @@ body{
 
 button {
     background-color: rgb(238,106,13);
-    border: 5px   rgb(167, 72, 4) solid;
+    border: 5px  rgb(167, 72, 4) solid;
     margin-bottom: 20px;
     font-size: 2.5rem;
     font-weight: bold;
@@ -208,56 +208,78 @@ button img{
     transition: opacity 1s;
 }
 
+@keyframes shopMoveShow {
+    from{left: -90%;}
+    to{left: 0%;}
+}
+
+@keyframes shopMoveClose {
+    from{left: 0%;}
+    to{left: -90%;}
+}
+
+@keyframes shopOpacity {
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
+
+@keyframes shopOpacityReverse {
+    from{opacity: 1;}
+    to{opacity: 0;}
+}
+
 .shop{
     position: absolute;
     height: 90vh;
     width: 95vw;   
-    background: linear-gradient(to top right, rgba(255, 68, 0), rgb(255, 145, 0));
+    background: rgba(0, 0, 0, 0.7);
+    border: 5px #FF4500 solid;
     z-index: 5;
     margin: 15px;
-    border: 10px rgb(167, 72, 4) solid;
     border-radius: 10px;
     padding: 10px;
-    display: grid;
+    display: none;
     grid-template-areas: "m  a"
                          "s  s";
     grid-template-columns: 7fr 3fr;
     grid-template-rows: 7fr 3fr;
     gap: 10px;
+    animation: shopMoveShow 2s ease-in-out;
 }
 
-.carrocel-container, .categorias, .informacoes{
-    background: rgba(0, 0, 0, 0.7);
+.sClose{
+    animation: shopMoveClose 2s ease-in-out;
 }
 
-.carrocel-container{
+.slider-container, .categorias, .informacoes{
+    background: rgba(129, 85, 18, 0.2);
+    animation: shopOpacity 2.5s ease-in-out;
+}
+
+.cClose{
+    animation: shopOpacityReverse 2.5s ease-in-out;
+}
+
+.slider-container{
     grid-area: m;
     display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     width: 100%;
     padding: 20px;
 }
 
-.card{
-    position: absolute;
-}
-
-.carrocel{
+.slider{
     height: 350px;
     width: 650px;
-    background-color: aqua;
 }
 
-.carrocel img{
+.slider img{
     height: inherit;
     width: inherit;
-}
-
-.prints{
-    height: 350px;
-    width: 150px;
-    background-color: aqua;
-    margin-left: 30px;
+    object-fit: cover;
+    border: 1px #FF4500 solid;
 }
 
 .categorias{
@@ -270,6 +292,41 @@ button img{
 
 .categorias button{
     width: 350px;
+    color: white;
+    border: 1px #FF4500 solid;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.categorias button:hover {
+    transform: translateY(-5px);
+}
+
+#card{
+    background-image: url(../midias/imgs/card-game-bkg.png);
+    background-size: cover;
+    color: #ff6347;
+}
+
+#background{
+    background-image: url(../midias/imgs/Rocky-Field_thumb.detail.png);
+    background-size: cover;
+    color: #4169e1;
+}
+
+#titulo{
+    background-image: url(../midias/imgs/titulo-bkg.jpg);
+    background-size: cover;
+    color: #ffd700;
+}
+
+#perfil{
+    background-image: url(../midias/backgroundPerfil/sheilong.gif);
+    background-size: cover;
+    color: #32cd32;
 }
 
 .informacoes{
@@ -285,7 +342,7 @@ button img{
     background-color: aqua;
 }
 
-.dinheiro{
+.dinheiro {
     height: 60px;
     width: 300px;
     display: flex;
@@ -293,16 +350,20 @@ button img{
     align-items: center;
     margin-left: 280px;
     margin-right: 20px;
+    margin-top: 5px;
+    background-color: #32cd32;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.dinheiro img{
+.dinheiro img {
     height: 60px;
     width: 60px;
     margin-right: 15px;
 }
 
-.dinheiro p{
-    color: greenyellow;
+.dinheiro p {
+    color: white;
     -webkit-text-stroke: 0.5px green;
     font-size: 2.5rem;
     letter-spacing: 5px;
@@ -312,7 +373,20 @@ button img{
     margin-top: 20px;
 }
 
-.voltar button{
+.voltar button {
     height: 60px;
-    width: 300px;
+    width: 350px;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px #cc5200;
+}
+
+.voltar button:hover {
+    background-color: #ff4500;
+    transform: translateY(-5px);
+    box-shadow: 0 6px #b33c00;
 }
