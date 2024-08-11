@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         popUp.forEach((popUp)=>{
 
-            const imgElement = popUp.getElementsByTagName('img');;
+            const imgElements = popUp.getElementsByTagName('img');
 
             popUp.addEventListener("mouseover", ()=>{
 
@@ -61,7 +61,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                     const opacity = getComputedStyle(popUp);
 
-                    imgElement.style.opacity = opacity.opacity;
+                    Array.from(imgElements).forEach((imgElement) => {
+
+                        imgElement.style.opacity = opacity.opacity;
+
+                    });
 
                 },700);
 
@@ -75,13 +79,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                     const opacity = getComputedStyle(popUp);
 
-                    imgElement.style.opacity = opacity.opacity;
+                    Array.from(imgElements).forEach((imgElement) => {
+
+                        imgElement.style.opacity = opacity.opacity;
+
+                    });
 
                 });
 
             });
                 
-            Array.from(imgElement).forEach((imgElement)=>{
+            Array.from(imgElements).forEach((imgElement)=>{
                     
                 imgElement.addEventListener("mouseover",()=>{
 
