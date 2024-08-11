@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DragonPet</title>
-    <link rel="shortcut icon" href="assets/midias/ico/z.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/midias/ico/dg.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/index-style.css">
     <link rel="stylesheet" href="assets/css/animacao-intro.css">
     <link rel="stylesheet" href="assets/css/cutscene.css">
-    <script src="../public/assets/js/index/index.js"></script>
-    <script src="../public/assets/js/index/cutscene.js"></script>
+    <link rel="stylesheet" href="assets/css/menu.css">
+    <script src="assets/js/index/index.js"></script>
+    <script src="assets/js/index/cutscene.js"></script>
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/click.js"></script>
 </head>
 <body>
+
+    <div class="overlay"></div>
 
     <div class="container">
 
@@ -23,7 +28,7 @@
 
         <div class="config">
 
-            <button id="config"><img src="assets/midias/icons/icons8-linhas-50.png"></button>
+            <button id="menu"><img src="assets/midias/icons/icons8-linhas-50.png"></button>
 
         </div>
 
@@ -51,15 +56,35 @@
 
             <button id="shop">Shop</button>
 
-            <button>Ranking</button>
+            <button id="ranking">Ranking</button>
 
         </div>
 
         <div class="pop-ups">
 
-            <div class="img img-shop"></div>
+            <div class="pop-up shop-up">
+                
+                <img id="imgShop" src="">
 
-            <div class="pop-up shop-up"></div>
+                <p>nova customização disponível</p>
+
+            </div>
+
+            <div class="pop-up intrucoes-up">
+
+                <img src="assets/midias/icons/icons8-pergunta-48.png">
+
+                <p>aprenda como jogar</p>
+
+            </div>
+
+            <div class="pop-up ranking-up">
+
+                <img src="assets/midias/icons/icons8-medalha-48.png">
+
+                <p>confira sua classificação</p>
+
+            </div>
 
         </div>
 
@@ -71,11 +96,11 @@
         
         <div class="direitos">
 
-            <a href="https://www.bandai.com/"> <button><img src="assets/midias/icons/icons8-internet-60.png"></button></a>
+            <a target="_blank" href="https://www.bandai.com/"> <button><img src="assets/midias/icons/icons8-internet-60.png"></button></a>
            
-            <a href="https://discord.com/invite/c2VcptyDYZ"><button><img src="assets/midias/icons/icons8-logo-discord-50.png"></button></a>
+            <a target="_blank" href="https://discord.com/invite/c2VcptyDYZ"><button><img src="assets/midias/icons/icons8-logo-discord-50.png"></button></a>
 
-            <a href="https://github.com/JAOALUCAS/DragonPet"> <button><img src="assets/midias/icons/icons8-github-50.png"></button></a>
+            <a target="_blank" href="https://github.com/JAOALUCAS/DragonPet"> <button><img src="assets/midias/icons/icons8-github-50.png"></button></a>
 
             <button><img src="assets/midias/icons/icons8-direitos-autorais-60.png"></button>
 
@@ -172,6 +197,136 @@
 
         </div>
 
+        <div class="menu">
+
+            <ul>
+
+                <li id="close-menu"><img src="assets/midias/icons/icons8-x2-48.png">
+                    <p>Fechar</p>
+                </li>
+
+                <li><img src="assets/midias/icons/icons8-engrenagem-50.png">
+                    <p>Configurações</p>
+                </li>
+
+                <li><img src="assets/midias/icons/icons8-relógio-30.png">
+                    <p>Histórico</p>
+                </li>
+
+                <li><img src="assets/midias/icons/icons8-pessoa-48.png">
+                    <p>Perfil</p>
+                </li>
+
+
+                <li><img src="assets/midias/icons/icons8-casa-50.png">
+                    <p>Home</p>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="config-menu">
+
+            <div class="opcoes">
+
+                <ul>
+
+                    <li><img src="assets/midias/icons/icons8-engrenagem2-50.png"> Configurações</li>
+
+                    <li><img src="assets/midias/icons/icons8-relógio2-60.png"> Histórico</li>
+
+                    <li><img src="assets/midias/icons/icons8-pessoa2-48.png"> Perfil</li>
+
+                    <li><img src="assets/midias/icons/icons8-x-48.png"> Fechar</li>
+
+                </ul>
+
+            </div>
+
+            <div class="config-opcoes">
+
+                <div class="game-opcoes">
+
+                    <h1>Configurações do jogo</h1>
+
+                    <div class="tela-cheia">
+
+                        <img src="assets/midias/icons/icons8-tela-cheia-64.png">
+
+                        <div class="texto">
+                            
+                            <h2>Tela cheia</h2>
+
+                            <p>Deixe a tela cheia para uma experiência mais imersiva</p>
+
+                        </div>
+
+                        <div class="toggle-container toggle-tela">
+
+                            <input type="checkbox" id="checkTela">
+
+                            <label for="checkTela" class="toggle"></label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="audio">
+
+                        <img src="assets/midias/icons/icons8-volume-alto-50.png">
+
+                        <div class="texto">
+
+                            <h2>Audio</h2>
+
+                            <p>Você pode mutar o som do jogo se te incomodar</p>
+
+                        </div>
+
+                        <div class="toggle-container toggle-audio">
+
+                            <input type="checkbox" id="checkAudio">
+
+                            <label for="checkAudio" class="toggle"></label>
+                            
+                        </div>
+
+                    </div>
+
+                    <div class="musica">
+
+                        <img src="assets/midias/icons/icons8-música-48.png">
+
+                        <div class="texto">
+                                
+                            <h2>Musica</h2>
+
+                            <p>Você pode mutar o som da música se te incomodar</p>
+
+                        </div>
+
+                        <div class="toggle-container toggle-musica">
+
+                            <input type="checkbox" id="checkMusica">
+
+                            <label for="checkMusica" class="toggle"></label>
+                            
+                        </div>
+
+                    </div>
+                    
+
+                </div>
+
+                <div class="historico-opcoes"></div>
+
+                <div class="perfil-opcoes"></div>
+
+            </div>
+
+        </div>
+
         <div class="shop">
 
             <div class="slider-container">
@@ -216,7 +371,68 @@
 
                 <div class="voltar">
 
-                    <button id="voltar"><img src="assets/midias/icons/icons8-voltar-64.png">Voltar</button>
+                    <button id="voltarShop"><img src="assets/midias/icons/icons8-voltar-64.png">Voltar</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="ranking">
+
+            <div class="header">
+                
+                <h1>Classificação dos campeões do torneio  🏆</h1>
+
+            </div>
+
+            <div class="tabela">
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Posição</th>
+
+                            <th>Perfil do jogador</th>
+
+                            <th>Vitorias</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>1</td>
+
+                            <td>nome do jogador</td>
+
+                            <td>10</td>
+
+                        </tr>
+
+                    </tbody>
+                    
+                </table>
+
+            </div>
+
+            <div class="footer">
+
+                <div class="posicao">
+
+                    <h1>N° 1000</h1>
+
+                </div>
+
+                <div class="voltar">
+
+                    <button id="voltarRanking"><img src="assets/midias/icons/icons8-voltar-64.png">Voltar</button>
 
                 </div>
 

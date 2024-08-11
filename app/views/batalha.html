@@ -3,60 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>Ranking de Vitórias</title>
     <style>
-
-        body{
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
-
-        .container{
-            height: 350px;
-            width: 650px;
-            background-image: url(../../public/assets/midias/backgroundPerfil/mais-de-8000.gif);
-            background-size: cover;
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
         }
-
-        .escrita{
-            position: absolute;
-            top: 45%;
-            left: 30%;
-            z-index: 3;
-            color: white;
-            font-size: 2rem;
-            text-shadow: 2px 1px green;
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 20px;
+            min-height: 70px;
+            border-bottom: #ddd 3px solid;
         }
-        
-        .overlay{
-            position: relative;
-            height: inherit;
-            width: inherit;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) ,90%, green) ;
+        header h1 {
+            text-align: center;
+            margin: 0;
         }
-        
-
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background: #fff;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background: #f4f4f4;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-
-        <div class="overlay"></div>
-
-        <div class="escrita">
-
-            ESTILIZE SEU PERFIL COMO QUISER
-
+    <header>
+        <div class="container">
+            <h1>Ranking de Vitórias</h1>
         </div>
-
+    </header>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Posição</th>
+                    <th>Nome do Jogador</th>
+                    <th>Vitórias</th>
+                    <th>Derrotas</th>
+                    <th>Pontos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Jogador1</td>
+                    <td>50</td>
+                    <td>10</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jogador2</td>
+                    <td>45</td>
+                    <td>15</td>
+                    <td>450</td>
+                </tr>
+                <!-- Mais linhas conforme necessário -->
+            </tbody>
+        </table>
     </div>
-
 </body>
 </html>
-

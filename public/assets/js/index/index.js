@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
                
     sl.src = "http://localhost:5500/public/assets/midias/silder/1.png";
 
-    const shopUp = document.querySelector(".shop-up");
+    const popUp = document.querySelectorAll(".pop-up");
 
-    shopUp.innerHTML = "nova customização disponível";
+    const overlay = document.querySelector(".overlay");
 
     const personagens = [
         "android8.png",
@@ -43,68 +43,73 @@ document.addEventListener("DOMContentLoaded", ()=>{
       
     const index = Math.floor(Math.random() * 30);
 
-    const img = document.createElement("img");
+    const imgShop = document.getElementById("imgShop");
 
-    const cImg = document.querySelector(".img");
-
-    img.src = "/public/assets/midias/popUps/" + personagens[index];
-
-    cImg.appendChild(img);
+    imgShop.src = "/public/assets/midias/popUps/" + personagens[index];
 
     function adicionarOuRemoverAnimacao(){
-    
-        shopUp.addEventListener("mouseover", ()=>{
 
-            shopUp.classList.add("hover");
+        popUp.forEach((popUp)=>{
 
-            setTimeout(()=>{
+            const imgElement = popUp.getElementsByTagName('img');;
 
-                const opacity = getComputedStyle(shopUp)
+            popUp.addEventListener("mouseover", ()=>{
 
-                img.style.opacity = opacity.opacity;
+                popUp.classList.add("hover");
 
-            },700);
+                setTimeout(()=>{
 
-        });
+                    const opacity = getComputedStyle(popUp);
 
+                    imgElement.style.opacity = opacity.opacity;
 
-        shopUp.addEventListener("mouseout", () => {
-
-            shopUp.classList.remove("hover");
-
-            setTimeout(()=>{
-
-                const opacity = getComputedStyle(shopUp)
-
-                img.style.opacity = opacity.opacity;
+                },700);
 
             });
+                
+            popUp.addEventListener("mouseout", () => {
 
-        });
+                popUp.classList.remove("hover");
 
-        img.addEventListener("mouseover",()=>{
+                setTimeout(()=>{
 
-            shopUp.classList.add("hover");
+                    const opacity = getComputedStyle(popUp);
 
-            setTimeout(()=>{
+                    imgElement.style.opacity = opacity.opacity;
 
-                const opacity = getComputedStyle(shopUp)
+                });
 
-                img.style.opacity = opacity.opacity;
+            });
+                
+            Array.from(imgElement).forEach((imgElement)=>{
+                    
+                imgElement.addEventListener("mouseover",()=>{
 
-            },700);
+                    popUp.classList.add("hover");
 
-        });
+                    setTimeout(()=>{
 
-        img.addEventListener("mouseout",()=>{
+                        const opacity = getComputedStyle(popUp);
+                        
+                        imgElement.style.opacity = opacity.opacity;
 
-            shopUp.classList.remove("hover");
+                    },700);
 
-            setTimeout(()=>{
+                });
 
-                const opacity = getComputedStyle(shopUp)
+                imgElement.addEventListener("mouseout",()=>{
 
-                img.style.opacity = opacity.opacity;
+                    popUp.classList.remove("hover");
+
+                    setTimeout(()=>{
+
+                        const opacity = getComputedStyle(popUp);
+
+                        imgElement.style.opacity = opacity.opacity;
+
+                    });
+
+                });
 
             });
 
@@ -114,46 +119,55 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
     function removerPopUp(){
+
+        popUp.forEach((popUp)=>{
+
+            popUp.addEventListener("click", ()=>{
+
+                popUp.remove();
+
+            });
+
+            setTimeout(()=>{
+
+                popUp.remove();
         
-        shopUp.addEventListener("click", ()=>{
-
-            shopUp.remove();
-            cImg.remove();
-            img.remove();
+            }, 1000000);
 
         });
-
-        img.addEventListener("click",()=>{
-
-            shopUp.remove();
-            cImg.remove();
-            img.remove();
-
-        });
-
-        setTimeout(()=>{
-
-            shopUp.remove();
-            cImg.remove();
-            img.remove();
-    
-        }, 100000);
 
     }
 
    const shopBtn = document.getElementById("shop");
 
+   const rankingBtn = document.getElementById("ranking");
+
    const shopContainer = document.querySelector(".shop");
 
-   const voltar = document.getElementById("voltar");
+   const rankingContainer = document.querySelector(".ranking");
+
+   const voltarShop = document.getElementById("voltarShop");
+
+   const voltarRanking = document.getElementById("voltarRanking");
+
 
    shopBtn.addEventListener("click", ()=>{
+
+        overlay.style.display = "flex";
 
         shopContainer.style.display = "grid";
 
    });
 
-   voltar.addEventListener("click", ()=>{
+   rankingBtn.addEventListener("click", ()=>{
+    
+        overlay.style.display = "flex";
+
+        rankingContainer.style.display = "flex";
+
+   });
+
+   voltarShop.addEventListener("click", ()=>{
 
         shopContainer.classList.add("sClose");
 
@@ -167,6 +181,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         setTimeout(()=>{
 
+            overlay.style.display = "none";
+
             shopContainer.style.display = "none";
             
             shopContainer.classList.remove("sClose");
@@ -175,6 +191,36 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                 filho.classList.remove("cClose");
     
+            });
+
+        }, 2000)
+
+   });
+
+   voltarRanking.addEventListener("click", ()=>{
+
+        rankingContainer.classList.add("rClose");
+
+        const filhosDiretos = rankingContainer.children;
+
+        Array.from(filhosDiretos).forEach((filho)=>{
+
+            filho.classList.add("cClose");
+
+        });
+
+        setTimeout(()=>{
+
+            overlay.style.display = "none";
+
+            rankingContainer.style.display = "none";
+            
+            rankingContainer.classList.remove("rClose");
+
+            Array.from(filhosDiretos).forEach((filho)=>{
+
+                filho.classList.remove("cClose");
+
             });
 
         }, 2000)

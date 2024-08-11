@@ -10,10 +10,13 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DragonPet - Preparar time</title>
-    <link rel="shortcut icon" href="../../public/assets/midias/ico/icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../public/assets/midias/ico/dg.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../public/assets/css/preparar-time-style.css">
     <link rel="stylesheet" href="../../public/assets/css/animacao-load.css">
     <link rel="stylesheet" href="../../public/assets/css/itens.css">
+    <link rel="stylesheet" href="../../public/assets/css/menu.css">
+    <script src="../../public/assets/js/click.js"></script>
+    <script src="../../public/assets/js/menu.js"></script>
     <script src="../../public/assets/js/prepararTime/jogar.js"></script>
     <script src="../../public/assets/js/prepararTime/formAtualizar.js"></script>
     <script src="../../public/assets/js/prepararTime/salvarEstado.js"></script>
@@ -28,6 +31,8 @@ session_start();
     <div id="load-baixo" class="load hidden load-baixo"></div>
 
     <div class="container" id="container">
+        
+        <div class="overlay"></div>
         
         <div class="background"></div>
 
@@ -162,9 +167,43 @@ session_start();
 
             <button><img src="../../public/assets/midias/icons/icons8-estrela-48.png"></button>
 
-            <button id="config"><img src="../../public/assets/midias/icons/icons8-linhas-50.png"></button>
+            <div class="config">
+
+                <button id="menu"><img src="../../public/assets/midias/icons/icons8-linhas-50.png"></button>
+    
+            </div>
 
         </div>
+
+        <div class="menu">
+
+            <ul>
+
+                <li id="close-menu"><img src="../../public/assets/midias/icons/icons8-x2-48.png">
+                    <p>Fechar</p>
+                </li>
+
+                <li><img src="../../public/assets/midias/icons/icons8-engrenagem-50.png">
+                    <p>Configurações</p>
+                </li>
+
+                <li><img src="../../public/assets/midias/icons/icons8-relógio-30.png">
+                    <p>Histórico</p>
+                </li>
+
+                <li><img src="../../public/assets/midias/icons/icons8-pessoa-48.png">
+                    <p>Perfil</p>
+                </li>
+
+
+                <li><img src="../../public/assets/midias/icons/icons8-casa-50.png">
+                    <p>Home</p>
+                </li>
+
+            </ul>
+
+        </div>
+
 
         <div class="gelo gelo1">
             <img src="../../public/assets/midias/icons/icons8-gelo-64.png">
