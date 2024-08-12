@@ -102,7 +102,7 @@ li img{
 .opcoes{
     height: 100%;
     width: 300px;
-    background-color: #FF4500;
+    background-color: rgb(238,106,13);
     font-size: 2rem;
 }
 
@@ -113,7 +113,7 @@ li img{
 .config-opcoes{
     height: 100%;
     width: 600px;
-    background-color: #A9A9A9;
+    background-color: #ffbe76;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -174,8 +174,7 @@ input:checked + .toggle::before{
 }
 
 input[type="checkbox"] {
-    display: none;
-    accent-color: #FF4500; 
+    display: none; 
 }
 
 .toggle-audio{
@@ -184,4 +183,39 @@ input[type="checkbox"] {
 
 .toggle-musica{
     margin-left: 45px;
+}
+
+.game-opcoes, .perfil-opcoes{
+    display: none;
+}
+
+.excluir-conta, .mudar-senha{
+    display: flex;
+    margin: 50px 0px;
+}
+
+.excluir-conta a, .mudar-senha a{
+    color: blue;
+    text-decoration: underline;
+}
+
+.batalhas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(238,106,13);
+}
+
+.batalhas h2{
+    width: 100%;
+    background-color: #FF4500;
+}
+
+.jogadores{
+    display: flex;
+}
+
+.jogadores img{
+    height: 20px;
 }
