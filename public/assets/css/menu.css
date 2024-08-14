@@ -93,7 +93,7 @@ li img{
     height: 500px;
     width: 900px;
     position: absolute;
-    display: flex;
+    display: none;
     z-index: 6;
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.5);
     font-family: 'Segoe UI';
@@ -185,8 +185,20 @@ input[type="checkbox"] {
     margin-left: 45px;
 }
 
-.game-opcoes, .perfil-opcoes{
+@keyframes opcoesMoveShow{
+    from{
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-opcoes, .historico-opcoes ,.perfil-opcoes{
     display: none;
+    animation: opcoesMoveShow 1s ease-in-out;
 }
 
 .excluir-conta, .mudar-senha{
@@ -204,16 +216,24 @@ input[type="checkbox"] {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: rgb(238,106,13);
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
+    border: 5px rgb(238,106,13) solid;
 }
 
 .batalhas h2{
     width: 100%;
-    background-color: #FF4500;
+    background-color: #eccc68;
+    text-align: center;
+    color: green;
 }
 
 .jogadores{
     display: flex;
+}
+
+.jogadores p{
+    color: rgb(238,106,13);
 }
 
 .jogadores img{

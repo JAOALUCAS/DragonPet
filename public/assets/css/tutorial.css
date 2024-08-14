@@ -1,0 +1,147 @@
+.tutorial{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 5px #FF4500 solid;
+    position: absolute;
+    z-index: 5;
+    display: none;
+    justify-content: center;
+    animation: rankingShowMove 2s ease-in-out, fadeIn 2s ease-in-out;
+}
+
+@keyframes rankingShowMove {
+    from{left: -100%;}
+    to{left: 0%;}
+}
+
+.rClose{
+    animation: rankingCloseMove 2s ease-in-out;
+}
+
+.projetor{
+    margin-top: 20px;
+    height: 440px;
+    width: 540px;
+    background-color: rgba(255, 255, 255, 0.1);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.projetor::before {
+    content: '';
+    height: 3px;
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    z-index: 2;
+    bottom: 5%; 
+    animation: estatica 3s infinite;
+}
+
+.projetor img{
+    box-shadow: 0px 0px 15px 10px white;
+    height: 400px;
+    width: 500px;
+    filter:   grayscale(40%);
+}
+
+.logo-tutorial{
+    top: 5%;
+    right: -40%;
+    font-size: 1rem;
+    -webkit-text-stroke: 0.1px whitesmoke;
+    animation: none;
+}
+
+.bola-tutorial{
+    position: absolute;
+    top: 5%;
+    right: 7%;
+}
+
+.bola-tutorial img{
+    height: 80px;
+}
+
+.logo-tutorial img{
+    height: 40px;
+    margin-left: -60px;
+    margin-top: 8px;
+}
+
+@keyframes estatica {
+    from{bottom: 5%;}
+    to{bottom: 90%;}
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.8); }
+    to { transform: scale(1); }
+}
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(-2deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+.personagem-tutorial{
+    position: absolute;
+    left: 1%;
+    bottom: 1%;
+    animation: fadeIn 1s ease-in-out forwards, scaleIn 0.5s ease-in-out forwards, moveUp 3s ease-in-out infinite;
+}
+
+.personagem-tutorial img{
+    height: 400px;
+    width: 400px;
+}
+
+.falas-tutorial{
+    height: 100px;
+    width: 620px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px black solid;
+    box-shadow: 2px 2px 2px gray;
+    position: absolute;
+    bottom: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.tutorial .emoji{
+    position: absolute;
+    left: 5%;
+    top: 5%;
+}
+
+.tutorial .emoji img{
+    height: 80px;
+}
+
+.tutorial .voltar{
+    position: absolute;
+    bottom: 5%;
+    right: 3%;
+}
+
+.tutorial .voltar button{
+    width: 290px;
+}

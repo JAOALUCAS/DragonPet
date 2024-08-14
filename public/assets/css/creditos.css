@@ -1,0 +1,70 @@
+.creditos{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 7;
+    background-color: black;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    animation: creditosMoveShow 5s ease-in-out;
+    display: none;
+}
+
+.creditos .voltar{
+    position: fixed;
+    z-index: 2;
+    right: 5%;
+    bottom: 5%;
+}
+
+@keyframes creditosMoveShow {
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
+
+@keyframes creditosMoveClose {
+    from{opacity: 1;}
+    to{opacity: 0;}
+}
+
+.crClose{
+    animation: creditosMoveClose 5s ease-in-out;
+}
+
+.creditos h1{
+    color: #EE5A24;
+    transform: rotateX(60deg);
+}
+
+@keyframes  creditosMoveRoll{
+    from{transform: translateY(0);}
+    to{transform: translateY(-750px);}
+}
+
+.creditos-texto{
+    animation: creditosMoveRoll 30s ease-in-out;
+}
+
+.credits-section {
+    margin-bottom: 40px;
+    font-size: 1.5rem;
+    transform: rotateX(60deg);
+}
+
+.credits-section h2 {
+    color: #EE5A24;
+    margin-top: 20px;
+}
+
+.credits-section p {
+    color: rgb(238,106,13);
+    margin: 10px 0;
+}
+
+.credits-section strong{
+    color: #FF4500;
+    text-decoration: underline;
+}
+

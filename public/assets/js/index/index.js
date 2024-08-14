@@ -250,6 +250,40 @@ document.addEventListener("DOMContentLoaded", ()=>{
         sl.src = `/public/assets/midias/silder/${idx}.png`;
 
    }
+
+   const creditos = document.getElementById("creditos");
+
+   const creditosContainer = document.querySelector(".creditos");
+
+   const voltarCreditos = document.getElementById("voltarCreditos");
+
+   voltarCreditos.addEventListener("click", ()=>{
+
+        creditosContainer.style.display = "none";
+
+   });
+
+   creditos.addEventListener("click", ()=>{
+
+        creditosContainer.style.display = "block";
+
+        setInterval(fecharCredito, 27000);
+
+   });
+
+   function fecharCredito(){
+
+        creditosContainer.classList.add("crClose");
+
+        setTimeout(()=>{
+
+            creditosContainer.classList.remove("crClose");
+
+            creditosContainer.style.display = "none";
+
+        },5000);
+
+   }
       
    setInterval(sliderMove, 7000);
 

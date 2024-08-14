@@ -7,12 +7,15 @@
     <link rel="shortcut icon" href="assets/midias/ico/dg.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/index-style.css">
     <link rel="stylesheet" href="assets/css/animacao-intro.css">
+    <link rel="stylesheet" href="assets/css/creditos.css">
     <link rel="stylesheet" href="assets/css/cutscene.css">
     <link rel="stylesheet" href="assets/css/menu.css">
+    <link rel="stylesheet" href="assets/css/tutorial.css">
     <script src="assets/js/index/index.js"></script>
     <script src="assets/js/index/cutscene.js"></script>
     <script src="assets/js/menu.js"></script>
     <script src="assets/js/click.js"></script>
+    <script src="assets/js/index/tutorial.js"></script>
 </head>
 <body>
 
@@ -52,7 +55,7 @@
 
             <button><a href="../app/views/jogar.php">Jogar</a></button>
 
-            <button>Intruções</button>
+            <button id="tutorial">Intruções</button>
 
             <button id="shop">Shop</button>
 
@@ -102,7 +105,91 @@
 
             <a target="_blank" href="https://github.com/JAOALUCAS/DragonPet"> <button><img src="assets/midias/icons/icons8-github-50.png"></button></a>
 
-            <button><img src="assets/midias/icons/icons8-direitos-autorais-60.png"></button>
+            <button id="creditos"><img src="assets/midias/icons/icons8-direitos-autorais-60.png"></button>
+
+        </div>
+
+        <div class="creditos">
+
+            <div class="voltar">
+
+                <button id="voltarCreditos"><img src="assets/midias/icons/icons8-voltar-64.png">Voltar</button>
+
+            </div>
+
+            <div class="creditos-texto"> 
+
+                <h1>Créditos</h1>
+
+                <div class="credits-section">
+
+                    <h2>Programação</h2>
+
+                    <p>Desenvolvido inteiramente por: <strong>João Lucas</strong></p>
+
+                </div>
+            
+                <div class="credits-section">
+
+                    <h2>Inspiração</h2>
+
+                    <p>Design: <strong>Super Auto Pets, Bloons TD6</strong></p>
+
+                    <p>Personagens: <strong>Dragon Ball Z</strong></p>
+
+                    <p>Temática: <strong>Super Auto Pets</strong></p>
+
+                </div>
+            
+                <div class="credits-section">
+
+                    <h2>Origem da Ideia</h2>
+
+                    <p>Concebida durante uma aula inspiradora do professor <strong>Rafael</strong>.</p>
+
+                </div>
+            
+                <div class="credits-section">
+
+                    <h2>Agradecimentos Especiais</h2>
+
+                    <p>Dicas de Design: <strong>Kevin, P. Vinicius, Ítalo</strong></p>
+
+                </div>
+            
+                <div class="credits-section">
+
+                    <h2>Conteúdo Utilizado</h2>
+
+                    <p>Franquia Dragon Ball Z: <strong>Personagens e elementos do universo DBZ</strong></p>
+
+                    <p>Ícones: <strong>Icons8, Flaticon</strong></p>
+
+                    <p>Paleta de Cores: <strong>FlatUI</strong></p>
+
+                    <p>Fontes: <strong>daFontes</strong></p>
+
+                    <p>Ilustrações de Personagens: <strong>Yoolk</strong></p>
+
+                    <p>Músicas: <strong>Rifti Beats</strong></p>
+
+                    <p>Efeitos Sonoros: <strong>Pixabay, Super Auto Pets</strong></p>
+
+                </div>
+            
+                <div class="credits-section">
+
+                    <h2>Agradecimentos Finais</h2>
+
+                    <p>Se esqueci de dar crédito a alguém, peço desculpas. Seu apoio foi fundamental.</p>
+
+                    <p>Um agradecimento especial ao mestre <strong>Akira Toriyama</strong>, cuja criação deu vida a este projeto.</p>
+
+                </div>
+            
+                <p><strong>Muito Obrigado a Todos!</strong></p>
+
+            </div>    
 
         </div>
 
@@ -169,8 +256,11 @@
             <div class="tv-buttons">
 
                 <div class="button button-ligar"></div>
+
                 <div class="button"></div>
+
                 <div class="button"></div>
+
                 <div class="button"></div>
 
             </div>
@@ -197,6 +287,53 @@
 
         </div>
 
+        <div class="tutorial">      
+            
+            <div class="emoji">
+
+                <img src="assets/midias/gifs/72gi.gif">
+
+            </div>
+
+            <div class="logo logo-tutorial">
+
+                <h1 class="db">DragonBall</h1>
+    
+                <h1 class="ap">Auto Pets</h1>
+    
+                <img src="assets/midias/imgs/z.png">
+    
+            </div>
+
+            <div class="bola bola-tutorial">
+
+                <img src="assets/midias/icons/Musett-Dragon-Ballz-Dragon-Ball.256.png">
+    
+            </div>
+    
+            
+            <div class="projetor">
+
+                <img class="imagem-projetor" src="assets/midias/imgs/imagem-projetor1.png">
+
+            </div>
+
+            <div class="personagem-tutorial">
+
+                <img src="assets/midias/popUps/kaiyo.png">
+
+            </div>
+
+            <div class="falas-tutorial"></div>
+
+            <div class="voltar">
+
+                <button id="voltarTutorial"><img src="assets/midias/icons/icons8-voltar-64.png">Voltar</button>
+
+            </div>
+
+        </div>
+
         <div class="menu">
 
             <ul>
@@ -209,7 +346,7 @@
 
                 </li>
 
-                <li>
+                <li class="rederecionar" id="rederecionar-config">
 
                     <img src="assets/midias/icons/icons8-engrenagem-50.png">
 
@@ -217,7 +354,7 @@
 
                 </li>
 
-                <li>
+                <li class="rederecionar" id="rederecionar-historico">
 
                     <img src="assets/midias/icons/icons8-relógio-30.png">
 
@@ -225,7 +362,7 @@
 
                 </li>
 
-                <li>
+                <li class="rederecionar" id="rederecionar-conta">
                     
                     <img src="assets/midias/icons/icons8-pessoa-48.png">
 
@@ -238,7 +375,7 @@
 
                     <img src="assets/midias/icons/icons8-casa-50.png">
 
-                    <p>Home</p>
+                    <p><a href="index.html"></a>Home</p>
 
                 </li>
 
@@ -251,44 +388,26 @@
             <div class="opcoes">
 
                 <ul>
-                    
-                    <input type="checkbox" id="checkConfig">
 
-                    <li>
+                    <li id="checkConfig">
 
-                        <label for="checkConfig">
-
-                            <img src="assets/midias/icons/icons8-engrenagem2-50.png"> Configurações
-
-                        </label>
+                        <img src="assets/midias/icons/icons8-engrenagem2-50.png"> Configurações
 
                     </li>
 
-                    <input type="checkbox" id="checkHistori">
+                    <li id="checkHistori">
 
-                    <li>
-
-                        <label for="checkHistori">
-
-                            <img src="assets/midias/icons/icons8-relógio2-60.png"> Histórico
-
-                        </label>
+                        <img src="assets/midias/icons/icons8-relógio2-60.png"> Histórico
 
                     </li>
 
-                    <input type="checkbox" id="checkPerfil">
+                    <li id="checkPerfil">
 
-                    <li>
-
-                        <label for="checkPerfil">
-
-                            <img src="assets/midias/icons/icons8-pessoa2-48.png"> Perfil
-
-                        </label>
+                        <img src="assets/midias/icons/icons8-pessoa2-48.png"> Perfil
 
                     </li>
 
-                    <li>
+                    <li id="fechar-menu">
 
                         <img src="assets/midias/icons/icons8-x-48.png"> Fechar
 
@@ -385,7 +504,7 @@
 
                             <p>Você</p>
 
-                            <img src="assets/midias/icons/icons8-x3-50.png">
+                            <img src="assets/midias/icons/icons8-x2-48.png">
 
                             <p>Adversário</p>
 
