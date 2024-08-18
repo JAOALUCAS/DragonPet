@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded",()=>{
-    
+
    const menuBtn = document.getElementById("menu");
 
    const config = document.querySelector(".config");
@@ -90,6 +90,24 @@ document.addEventListener("DOMContentLoaded",()=>{
 
         gameOpcoes.style.display = "block";
 
+        if(checkHistori.classList.contains("selecionado")){
+
+          checkHistori.classList.remove("selecionado");
+
+          checkConfig.classList.add("selecionado");
+
+        }else if(checkPerfil.classList.contains("selecionado")){
+
+          checkPerfil.classList.remove("selecionado");
+
+          checkConfig.classList.add("selecionado");
+
+        }else{
+          
+          checkConfig.classList.add("selecionado");
+
+        }
+
     });
 
     checkHistori.addEventListener("click", ()=>{
@@ -100,6 +118,25 @@ document.addEventListener("DOMContentLoaded",()=>{
 
         gameOpcoes.style.display = "none";
 
+        
+        if(checkConfig.classList.contains("selecionado")){
+
+          checkConfig.classList.remove("selecionado");
+          
+          checkHistori.classList.add("selecionado");
+
+        }else if(checkPerfil.classList.contains("selecionado")){
+
+          checkPerfil.classList.remove("selecionado");
+
+          checkHistori.classList.add("selecionado");
+
+        }else{
+          
+          checkHistori.classList.add("selecionado");
+
+        }
+
     });
 
     checkPerfil.addEventListener("click", ()=>{
@@ -109,6 +146,25 @@ document.addEventListener("DOMContentLoaded",()=>{
         perfilOpcoes.style.display = "block";
 
         gameOpcoes.style.display = "none";
+
+        
+        if(checkHistori.classList.contains("selecionado")){
+
+          checkHistori.classList.remove("selecionado");
+
+          checkPerfil.classList.add("selecionado");
+
+        }else if(checkConfig.classList.contains("selecionado")){
+
+          checkConfig.classList.remove("selecionado");
+
+          checkPerfil.classList.add("selecionado");
+
+        }else{
+          
+          checkPerfil.classList.add("selecionado");
+
+        }
 
     });
 
@@ -136,11 +192,15 @@ document.addEventListener("DOMContentLoaded",()=>{
 
         checkConfig.click();
 
+        checkConfig.classList.add("selecionado");
+
    });
 
    rederecionarHistorico.addEventListener("click", ()=>{
 
         checkHistori.click();
+
+        checkHistori.classList.add("selecionado");
 
    });
 
@@ -148,6 +208,94 @@ document.addEventListener("DOMContentLoaded",()=>{
 
         checkPerfil.click();
 
+        checkPerfil.classList.add("selecionado");
+
    });
+
+   let telaCheia = false;
+
+  const toggleTela = document.getElementById("checkTela");
+
+  toggleTela.addEventListener("click", () => {
+
+      if (telaCheia) {
+
+          if (document.exitFullscreen) {
+
+              document.exitFullscreen();
+
+          } else if (document.mozCancelFullScreen) { // Firefox
+
+              document.mozCancelFullScreen();
+
+          } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+
+              document.webkitExitFullscreen();
+
+          } else if (document.msExitFullscreen) { // IE/Edge
+
+              document.msExitFullscreen();
+
+          }
+
+      } else {
+
+          if (document.documentElement.requestFullscreen) {
+
+              document.documentElement.requestFullscreen();
+
+          } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+
+              document.documentElement.mozRequestFullScreen();
+
+          } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+
+              document.documentElement.webkitRequestFullscreen();
+
+          } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+
+              document.documentElement.msRequestFullscreen();
+
+          }
+
+      }
+      
+      telaCheia = !telaCheia;
+
+  });
+
+   function mutarAudio(){
+
+     const toggleAudio = document.getElementById("checkAudio");
+
+     let isPlaying = true;
+ 
+     toggleAudio.addEventListener("click", ()=>{
+ 
+         if(isPlaying){
+ 
+             localStorage.setItem("audio", "mudo");
+ 
+         }else {
+             
+             localStorage.removeItem("audio");
+ 
+         }
+ 
+         isPlaying = !isPlaying;
+ 
+     });
+     
+     const verificarAudio = localStorage.getItem("audio");
+
+     if(verificarAudio == "mudo"){
+
+          toggleAudio.click();
+
+     }
+
+   }
+
+   mutarAudio();
 
 });

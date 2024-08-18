@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     const voltarTutorial = document.getElementById("voltarTutorial");
     
+    const tutorialSound = new Audio("/public/assets/midias/audios/tutorialSound.mp3");
+    
     const overlay = document.querySelector(".overlay");
 
     tutorialBtn.addEventListener("click", ()=>{
@@ -14,12 +16,33 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         tutorialContainer.style.display = "flex";
         
+        const verificarAudioState = verificarAudio();
+                    
+        if(verificarAudioState === "mudo"){
+
+            tutorialSound.pause();
+
+        }else{
+        
+            tutorialSound.play();
+
+        }
+
+        tutorialSound.addEventListener("ended", ()=>{
+
+            tutorialSound.play();
+
+        });
+
+        
         mudarDialogosTutorial();
 
     });
 
     voltarTutorial.addEventListener("click", ()=>{
         
+        tutorialSound.pause();
+
         tutorialContainer.classList.add("rClose");
 
         setTimeout(()=>{
@@ -68,6 +91,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const falasTutoriais = document.querySelector(".falas-tutorial");
 
     const imagemProjetor = document.querySelector(".imagem-projetor");
+    
+    function verificarAudio(){
+
+        return localStorage.getItem("audio");
+
+    }
 
     async function mudarDialogosTutorial(){
             

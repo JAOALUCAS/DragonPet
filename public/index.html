@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/cutscene.css">
     <link rel="stylesheet" href="assets/css/menu.css">
     <link rel="stylesheet" href="assets/css/tutorial.css">
+    <script src="assets/js/musicas.js"></script>
     <script src="assets/js/index/index.js"></script>
     <script src="assets/js/index/cutscene.js"></script>
     <script src="assets/js/menu.js"></script>
@@ -171,7 +172,7 @@
 
                     <p>Ilustrações de Personagens: <strong>Yoolk</strong></p>
 
-                    <p>Músicas: <strong>Rifti Beats</strong></p>
+                    <p>Músicas: <strong>All Star Tower Defense</strong></p>
 
                     <p>Efeitos Sonoros: <strong>Pixabay, Super Auto Pets</strong></p>
 
@@ -184,10 +185,10 @@
                     <p>Se esqueci de dar crédito a alguém, peço desculpas. Seu apoio foi fundamental.</p>
 
                     <p>Um agradecimento especial ao mestre <strong>Akira Toriyama</strong>, cuja criação deu vida a este projeto.</p>
+                    
+                    <h1>Muito Obrigado a Todos!</h1>
 
                 </div>
-            
-                <p><strong>Muito Obrigado a Todos!</strong></p>
 
             </div>    
 
@@ -451,7 +452,7 @@
 
                         <div class="texto">
 
-                            <h2>Audio</h2>
+                            <h2>Desativar Audio</h2>
 
                             <p>Você pode mutar o som do jogo se te incomodar</p>
 
@@ -473,9 +474,9 @@
 
                         <div class="texto">
                                 
-                            <h2>Musica</h2>
+                            <h2>Ativar Musica</h2>
 
-                            <p>Você pode mutar o som da música se te incomodar</p>
+                            <p>Você pode aproveitar a trilha sonora enquanto joga</p>
 
                         </div>
 
@@ -497,16 +498,32 @@
                     <h1>Registro de batalha</h1>
 
                     <div class="batalhas">
+                            
+                        <div class="batalha">
 
-                        <h2>Resultado</h2>
+                            <h2>Resultado</h2>
 
-                        <div class="jogadores">
+                            <div class="jogadores">
+                    
+                                <div class="usuario">
+                    
+                                    <div class="foto-perfil"></div>
+                                    
+                                    <div class="bkg-perfil"></div>
+                
+                                </div>
 
-                            <p>Você</p>
+                                <img src="assets/midias/icons/icons8-batalha-64.png">
+                                
+                                <div class="usuario adversario">
+                    
+                                    <div class="foto-perfil"></div>
+                                    
+                                    <div class="bkg-perfil"></div>
+                
+                                </div>
 
-                            <img src="assets/midias/icons/icons8-x2-48.png">
-
-                            <p>Adversário</p>
+                            </div>
 
                         </div>
 
@@ -567,13 +584,13 @@
             
             <div class="categorias">
 
-                <button id="card">Cards</button>
+                <button class="shop-categoria" id="card">Cards</button>
 
-                <button id="background">Backgrounds</button>
+                <button class="shop-categoria" id="background">Backgrounds</button>
 
-                <button id="titulo">Titulos</button>
+                <button class="shop-categoria" id="titulo">Titulos</button>
 
-                <button id="perfil">Perfis</button>
+                <button class="shop-categoria" id="perfil">Perfis</button>
 
             </div>
 
@@ -603,52 +620,181 @@
 
             </div>
 
+            <div class="shop-card">
+
+                <div class="icon-categoria">
+
+                    <img src="assets/midias/icons/cartas-de-poker.png">
+
+                </div>
+             
+                <div class="produtos">
+
+                    <div class="card">
+
+                        <div class="titulo-card">                            
+
+                            <p class="n">#3</p>
+
+                            <h2>Card futurista</h2>
+
+                        </div>
+
+                        <img src="assets/midias/imgs/card1.png">
+
+                        <div class="custo">
+
+                            <img src="assets/midias/icons/dinheiro.png">
+    
+                            <p>$1000</p>
+    
+                        </div>
+
+                        <div class="comprar">
+
+                            <form action="">
+
+                                <button type="submit">Comprar</button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card">
+
+                        <div class="titulo-card">                            
+
+                            <p class="n">#2</p>
+
+                            <h2>Card Dourado</h2>
+
+                        </div>
+
+                        <img src="assets/midias/imgs/card2.jpeg">
+
+                        <div class="custo">
+
+                            <img src="assets/midias/icons/dinheiro.png">
+    
+                            <p>$5000</p>
+    
+                        </div>
+                        
+                        <div class="comprar">
+
+                            <form action="">
+
+                                <button type="submit">Comprar</button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card">
+
+                        <div class="titulo-card">                            
+
+                            <p class="n">#3</p>
+
+                            <h2>Card Oriental</h2>
+
+                        </div>
+
+                        <img src="assets/midias/imgs/card3.jpeg">
+
+                        <div class="custo">
+
+                            <img src="assets/midias/icons/dinheiro.png">
+    
+                            <p>$2750</p>
+    
+                        </div>
+                        
+                        <div class="comprar">
+
+                            <form action="">
+
+                                <button type="submit">Comprar</button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="informacoes-card">
+                
+                    <div class="perfil">
+
+                        <div class="foto-perfil"></div>
+
+                        <div class="bkg-perfil"></div>
+
+                    </div>
+
+                    <div class="dinheiro">
+
+                        <img src="assets/midias/icons/dinheiro.png">
+
+                        <p>$1000</p>
+
+                    </div>
+
+                    <div class="voltar">
+
+                        <button class="voltar-categorias"><img src="assets/midias/icons/icons8-voltar-64.png">Voltar</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+            <div class="shop-backgrounds">
+
+                <div class="icon-categoria">
+
+                    <img src="assets/midias/icons/icons8-galeria-48.png">
+
+                </div>
+
+                <div class="produtos"></div>
+
+            </div>
+
+            <div class="shop-titulos">
+
+                <div class="icon-categoria">
+
+                    <img src="assets/midias/icons/icons8-diploma-2-50.png">
+
+                </div>
+
+            </div>
+
+            <div class="shop-perfil"></div>
+
         </div>
 
         <div class="ranking">
 
-            <div class="header">
+            <div class="informacoes-ranking">
                 
-                <h1>Classificação dos campeões do torneio  🏆</h1>
-
-            </div>
-
-            <div class="tabela">
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Posição</th>
-
-                            <th>Perfil do jogador</th>
-
-                            <th>Vitorias</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <tr>
-
-                            <td>1</td>
-
-                            <td>nome do jogador</td>
-
-                            <td>10</td>
-
-                        </tr>
-
-                    </tbody>
+                <div class="usuario">
                     
-                </table>
+                    <div class="foto-perfil"></div>
+                    
+                    <div class="bkg-perfil"></div>
 
-            </div>
-
-            <div class="footer">
+                </div>
+                
+                <div class="info">Ganhe e Suba no Ranking</div>
 
                 <div class="posicao">
 
@@ -663,6 +809,46 @@
                 </div>
 
             </div>
+
+            <div class="tabela">
+
+                <table>
+                    
+                    <thead>
+
+                        <th>N°</th>
+
+                        <th>Perfil do jogador</th>
+
+                        <th>Vitorias</th>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td class="posicao-tabela">1</td>
+
+                            <td>
+
+                                <div class="usuario">
+                    
+                                    <div class="foto-perfil"></div>
+                                    
+                                    <div class="bkg-perfil"></div>
+                
+                                </div>
+
+                            </td>
+
+                            <td>10</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>            
 
         </div>
 

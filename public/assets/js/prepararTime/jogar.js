@@ -64,6 +64,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     atualizarMoeda(0);
 
+    function verificarAudio(){
+
+        return localStorage.getItem("audio");
+
+    }
+
     function atualizarMoeda(decremento){
 
         moeda+=decremento;
@@ -188,16 +194,36 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         }
 
                     });
+                    
+                    const verificarAudioState = verificarAudio();
 
                     const selecionarSound = new Audio("/public/assets/midias/audios/selecionarSound.mp3");
+                                
+                    if(verificarAudioState === "mudo"){
 
-                    selecionarSound.play();
+                        selecionarSound.pause();
+
+                    }else{
+                    
+                        selecionarSound.play();
+
+                    }
 
                 }else{
+                    
+                    const verificarAudioState = verificarAudio();
 
                     const errorSound = new Audio("/public/assets/midias/audios/errorSound.mp3");
+                                
+                    if(verificarAudioState == "mudo"){
 
-                    errorSound.play();
+                        errorSound.pause();
+
+                    }else{
+                    
+                        errorSound.play();
+
+                    }
 
                 }
 
@@ -262,10 +288,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
     function atualizarClick(){
    
         atualizar.addEventListener("click", ()=>{
+            
+            const verificarAudioState = verificarAudio();
 
             const moedaSound = new Audio("/public/assets/midias/audios/moedaSound.mp3");
+                        
+            if(verificarAudioState == "mudo"){
 
-            moedaSound.play();
+                moedaSound.pause();
+
+            }else{
+            
+                moedaSound.play();
+
+            }
 
             atualizarMoeda(-1);
 
@@ -277,10 +313,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
     function venderClick(){
         
         vender.addEventListener("click",()=>{
+            
+            const verificarAudioState = verificarAudio();
 
             const vender = new Audio("/public/assets/midias/audios/venderSound.mp3");
+                       
+            if(verificarAudioState == "mudo"){
 
-            vender.play();
+                vender.pause();
+
+            }else{
+            
+                vender.play();
+
+            }
 
             cards.forEach((card)=>{
 
@@ -310,10 +356,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
         });
 
         congelar.addEventListener("click",()=>{
+            
+            const verificarAudioState = verificarAudio();
 
             const congelar = new Audio("/public/assets/midias/audios/congelarSound.mp3");
+                      
+            if(verificarAudioState == "mudo"){
 
-            congelar.play();
+                congelar.pause();
+
+            }else{
+            
+                congelar.play();
+
+            }
 
             if(cardCongelado == ultimoElementoClicado){
 
@@ -466,10 +522,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
         });
   
         descongelar.addEventListener("click",()=>{
+            
+            const verificarAudioState = verificarAudio();
 
             const descongelarSound = new Audio("/public/assets/midias/audios/descongelarSound.mp3");
+                     
+            if(verificarAudioState == "mudo"){
 
-            descongelarSound.play();
+                descongelarSound.pause();
+
+            }else{
+            
+                descongelarSound.play();
+
+            }
 
             gelo.forEach((gelo)=>{
 
@@ -599,10 +665,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
                             }
 
                         });
+                        
+                        const verificarAudioState = verificarAudio();
                                             
                         const moedaSound = new Audio("/public/assets/midias/audios/moedaSound.mp3");
 
-                        moedaSound.play();
+                        if(verificarAudioState == "mudo"){
+
+                            moedaSound.pause();
+            
+                        }else{
+                        
+                            moedaSound.play();
+            
+                        }
             
                         atualizarMoeda(-4);     
                         

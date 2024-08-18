@@ -11,6 +11,10 @@
     animation: menuShowMove 2s ease-in-out;
 }
 
+ul p{
+    color: #FF4500;
+}
+
 .overlay{
     height: 100vh;
     width: 100vw;
@@ -69,13 +73,19 @@ li{
 }
 
 li:hover {
-    background-color: rgb(180, 78, 4);;
+    background-color: rgb(180, 78, 4);
     transform: translateY(-5px);
     box-shadow: 0 6px #b33c00;
 }
 
 li img{
     height: 40px;
+}
+
+.selecionado{
+    background-color: rgb(180, 78, 4);
+    transform: translateY(-5px);
+    box-shadow: 0 6px #b33c00;
 }
 
 #close-menu{
@@ -86,7 +96,6 @@ li img{
 
 #close-menu img{
     height: 50px;
-
 }
 
 .config-menu{
@@ -212,28 +221,30 @@ input[type="checkbox"] {
 }
 
 .batalhas{
+    height: 300px;
+    overflow-y: auto;
+}
+
+.batalha{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(137,118,137,255);
     overflow-y: auto;
-    border: 5px rgb(238,106,13) solid;
+    border: 5px black solid;
+    margin: 20px 0px;
 }
 
-.batalhas h2{
+.batalha h2{
     width: 100%;
-    background-color: #eccc68;
+    background-color: rgba(110,96,111,255);
     text-align: center;
-    color: green;
+    color: white;
 }
 
 .jogadores{
     display: flex;
-}
-
-.jogadores p{
-    color: rgb(238,106,13);
 }
 
 .jogadores img{

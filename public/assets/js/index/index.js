@@ -146,6 +146,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     }
 
+    function verificarAudio(){
+
+        return localStorage.getItem("audio");
+
+    }
+
    const shopBtn = document.getElementById("shop");
 
    const rankingBtn = document.getElementById("ranking");
@@ -165,6 +171,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         shopContainer.style.display = "grid";
 
+        const verificarAudioState = verificarAudio();
+
+        const shopSound = new Audio("/public/assets/midias/audios/shopSound.mp3");
+                    
+        if(verificarAudioState === "mudo"){
+
+            shopSound.pause();
+
+        }else{
+        
+            shopSound.play();
+
+        }
+
    });
 
    rankingBtn.addEventListener("click", ()=>{
@@ -172,6 +192,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
         overlay.style.display = "flex";
 
         rankingContainer.style.display = "flex";
+        
+        const verificarAudioState = verificarAudio();
+
+        const rankingSound = new Audio("/public/assets/midias/audios/rankingSound.mp3");
+                    
+        if(verificarAudioState === "mudo"){
+
+            rankingSound.pause();
+
+        }else{
+        
+            rankingSound.play();
+
+        }
 
    });
 
@@ -284,7 +318,69 @@ document.addEventListener("DOMContentLoaded", ()=>{
         },5000);
 
    }
-      
+
+   const card = document.getElementById("card");
+
+   const shopCard = document.querySelector(".shop-card");
+
+   const background = document.getElementById("background");
+
+   const titulo = document.getElementById("titulo");
+
+   const perfil = document.getElementById("perfil");
+
+   const categorias = document.querySelector(".categorias");
+
+   const sliderContainer = document.querySelector(".slider-container");
+
+   const informacoes = document.querySelector(".informacoes");
+   
+
+   const shopCategorias = document.querySelectorAll(".shop-categoria");
+
+   shopCategorias.forEach((shopCategoria)=>{
+
+        shopCategoria.addEventListener("click", ()=>{
+            
+            categorias.style.display = "none";
+
+            sliderContainer.style.display = "none";
+
+            informacoes.style.display = "none";
+
+        });
+
+   });
+
+
+   card.addEventListener("click", ()=>{
+    
+        shopCard.style.display = "block";
+
+        let iconCategoria = shopCard.querySelector(".icon-categoria");
+
+        iconCategoria.style.display = "block";
+
+   });
+
+   background.addEventListener("click", ()=>{
+
+   });
+
+   const voltarCategoria = document.querySelector(".voltar-categorias");
+
+   voltarCategoria.addEventListener("click", ()=>{
+        
+        shopCard.style.display = "none";
+
+        categorias.style.display = "flex";
+
+        sliderContainer.style.display = "flex";
+
+        informacoes.style.display = "flex";
+
+   });
+   
    setInterval(sliderMove, 7000);
 
     removerPopUp();
