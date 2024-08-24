@@ -325,7 +325,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
    const background = document.getElementById("background");
 
+   const shopBackground = document.querySelector(".shop-backgrounds");
+
    const titulo = document.getElementById("titulo");
+
+   const shopTitulo = document.querySelector(".shop-titulos");
+
+   const shopPerfil = document.querySelector(".shop-perfil");
 
    const perfil = document.getElementById("perfil");
 
@@ -352,7 +358,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
    });
 
-
    card.addEventListener("click", ()=>{
     
         shopCard.style.display = "block";
@@ -365,21 +370,58 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
    background.addEventListener("click", ()=>{
 
-   });
-
-   const voltarCategoria = document.querySelector(".voltar-categorias");
-
-   voltarCategoria.addEventListener("click", ()=>{
+        shopBackground.style.display = "block";
         
-        shopCard.style.display = "none";
+        let iconCategoria = shopBackground.querySelector(".icon-categoria");
 
-        categorias.style.display = "flex";
-
-        sliderContainer.style.display = "flex";
-
-        informacoes.style.display = "flex";
+        iconCategoria.style.display = "block";
 
    });
+
+   titulo.addEventListener("click", ()=>{
+
+        shopTitulo.style.display = "block";
+        
+        let iconCategoria = shopTitulo
+        .querySelector(".icon-categoria");
+
+        iconCategoria.style.display = "block";
+
+    });
+
+    perfil.addEventListener("click", ()=>{
+
+        shopPerfil.style.display = "block";
+        
+        let iconCategoria = shopPerfil.querySelector(".icon-categoria");
+
+        iconCategoria.style.display = "block";
+
+    });
+
+   const voltarCategorias = document.querySelectorAll(".voltar-categorias");
+
+    voltarCategorias.forEach((voltarCategoria)=>{
+
+        voltarCategoria.addEventListener("click", ()=>{
+        
+            const categoriaContainer = document.querySelectorAll(".categoria-container");
+    
+            categoriaContainer.forEach((categoriaContainer) => {
+                
+                categoriaContainer.style.display = "none";
+    
+            });
+    
+            categorias.style.display = "flex";
+    
+            sliderContainer.style.display = "flex";
+    
+            informacoes.style.display = "flex";
+    
+       });    
+
+    });
    
    setInterval(sliderMove, 7000);
 

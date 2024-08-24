@@ -7,7 +7,7 @@
 }
 
 body{
-    background-image: url(../midias/imgs/background-inicio.jpg);
+    background-image: url(../midias/backgroundTela/background-inicio.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden;
@@ -331,7 +331,7 @@ button img{
 }
 
 #background{
-    background-image: url(../midias/imgs/Rocky-Field_thumb.detail.png);
+    background-image: url(../midias/backgroundTela/Deserto\ Rochoso.png);
     background-size: cover;
     color: blue;
 }
@@ -530,7 +530,7 @@ td{
     background-color: rgba(110,96,111,255);
 }
 
-.shop-card, .shop-titulos, .shop-background, .shop-titulos{
+.shop-card, .shop-titulos, .shop-backgrounds, .shop-perfil{
     display: none;
     position: absolute;
     width: 95%;
@@ -543,7 +543,7 @@ td{
     animation: shopOpacity 1.5s ease-in-out;
 }
 
-.informacoes-card{
+.informacoes-card, .informacoes-background, .informacoes-titulos, .informacoes-perfil{
     height: 200px;
     width: 100%;
     margin-top: -3px;
@@ -568,9 +568,11 @@ td{
     top: 0%;
     left: -10%;
     animation: balanceMove 2s infinite ease-in-out;
+    position: absolute;
+    z-index: 2;
 }
 
-.card{
+.card, .titulo-container, .backgrounds-prods, .gif-perfil{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -612,15 +614,6 @@ td{
     font-weight: bold;
     margin-top: 5px;
     margin-right: 10px;
-}
-
-.n::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-bottom: 20px solid transparent;
-    border-left: 15px solid #d35400;
 }
 
 .custo{
@@ -670,3 +663,115 @@ td{
     margin-left: 150px;
 }
 
+.shop-backgrounds .produtos, .shop-perfil .produtos{
+    height: 73%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.produtos-bk, .produtos-pf{
+    flex-wrap: wrap;
+}
+
+.backgrounds-prods, .gif-perfil{
+    flex-direction: row;
+    height: 120px;
+    width: 215px;
+    margin: 0px 30px;
+    padding: 0px;
+}
+
+.backgrounds-prods:hover, .titulo-container:hover, .gif-perfil:hover{
+    animation: none;
+    background-color: #25293a;
+    transform: translateY(-20px);
+}
+
+.background-prod-container{
+    height: 90px;
+    width: 100%;
+}
+
+.background-prod-container img{
+    height: inherit;
+    width: inherit;
+    background-size: cover;
+}
+
+.background-aside{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 30%;
+}
+
+.background-aside .titulo-card{
+    margin-bottom: -10px;
+    font-size: 7px;
+}
+
+.background-aside .comprar{
+    margin-top: 0px;
+}
+
+.background-aside .comprar button{
+    font-size: 5px;
+}
+
+.coluna1, .coluna2, .coluna3{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.shop-titulos .produtos{
+    overflow-y: auto;
+    flex-direction: column;
+    height: 75%;
+}
+
+.shop-titulos .coluna1{
+    margin-top: 170px;
+}
+
+.titulo-container{
+    width: 150px;
+    margin: 5px 20px;
+}
+
+.titulo-container .tc{
+    background: linear-gradient(to right, #ffd700, #ffac33, #ffdd66);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5), 
+                 0px 0px 10px rgba(255, 223, 0, 0.7),
+                 0px 0px 20px rgba(255, 223, 0, 0.5);
+}
+
+.titulo-container .comprar{
+    padding: 0px;
+    margin-top: 0px;
+}
+
+.titulo-container .comprar button{
+    font-size: 5px;
+}
+
+.gif-perfil{
+    margin: 0px 20px;
+}
+
+.gif-perfil img{
+    height: 100px;
+    width: 150px;
+}
+
+.gif-perfil .background-aside img{
+    height: 30px;
+    width: 30px;
+}
