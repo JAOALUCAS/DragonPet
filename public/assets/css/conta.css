@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #afafaf;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body{
+    background-image: url(../midias/imgs/894815-Dragon-Ball-Z-Dragon-Ball-DRAGON-BALL-Z-KAKAROT.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.container{
+    background-color: rgba(83, 33, 15, 0.61);
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%; 
+    position: fixed;
+}
+
+.form-container{
+    height: 520px;
+    width: 500px;
+    background-color: #181a21;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1{
+    margin-bottom: 20px;
+}
+
+.email, .senha, .nick, .foto-perfil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 25px 0px;
+}
+
+.form-excluir h1{
+    color: #ff6347;
+}
+
+.email label{
+    color: #FF4500;
+}
+
+input{
+    height: 30px;
+    width: 450px;
+    background-color: #32353c;
+    border: none;
+    margin-top: 20px;
+}
+
+input:focus{
+    outline: none;
+    border: none;
+}
+
+button{
+    height: 50px;
+    width: 200px;
+    background: linear-gradient(to right, #FF4500, rgb(175, 59, 5));
+    border: none;
+}
+
+button:hover{
+    cursor: pointer;
+    background: linear-gradient(to right, #f36f3e, rgb(231, 112, 57));
+}
+
+.links{
+    margin-top: 50px;
+}
+
+a{
+    margin: 0px 10px;
+}
+
+button, form, a{
+    font-size: 20px;
+}
+
+input::placeholder{
+    padding-left: 180px;
+}
+
+.form-cadastro .email, .form-cadastro .senha, .form-cadastro .nick, .form-cadastro .foto-perfil{
+    margin: 10px 0px;
+}
+
+.form-cadastro h1{
+    margin-bottom: 0px;
+}
+
+.form-cadastro .links{
+    margin-top: 20px;
+}
+
+.form-cadastro input{
+    margin-top: 10px;
+}
+
+.foto-perfil{
+    height: 70px;
+    width: 450px;
+    background-color: #32353c;
+}
+
+input[type="file"]{
+    opacity: 0;
+    position: absolute;
+}
+
+#foto-label{
+    margin-left: 150px;
+}
+
+p{
+    margin: 10px 0px;
+    font-size: 10px;
+}
+
+.excluir{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 15px;
+    width: 100%;
+}
+
+.certeza{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0px;
+}
+
+input[type="checkbox"]{
+    height: 15px;
+    width: 15px;
+    margin-top: -1px;
+    margin-left: 10px;
+}
+
+@media  (max-width: 400px) {
+    .form-container{
+        height: 100vh;
+        width: 100vw;
+    }
+
+    a{
+        margin: 0;
+        font-size: 15px;
+    }
+}

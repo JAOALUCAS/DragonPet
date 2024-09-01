@@ -7,7 +7,35 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('http://localhost:8000/app/controllers/jogarController.php', { 
             method: 'POST',
             body: formData
-        }).catch(error => console.error('Error:', error));
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.success) {
+                
+                console.log('Response Data:', data.data);
+
+                // Exibindo os dados no console
+                for (let i = 1; i <= 5; i++) {
+
+                    const personagem = data.data[`personagem${i}`];
+
+                    if (personagem) {
+
+                        console.log(`Personagem ${i}:`, personagem);
+
+                    }
+
+                }
+
+            } else {
+
+                console.error('Error:', data.error);
+
+            }
+
+        })
+        .catch(error => console.error('Error:', error));
         
     });
 

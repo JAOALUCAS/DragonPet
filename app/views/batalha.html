@@ -3,83 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranking de Vitórias</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding-top: 20px;
-            min-height: 70px;
-            border-bottom: #ddd 3px solid;
-        }
-        header h1 {
-            text-align: center;
-            margin: 0;
-        }
-        table {
-            width: 100%;
-            margin: 20px 0;
-            border-collapse: collapse;
-            background: #fff;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background: #f4f4f4;
-        }
-    </style>
+    <title>DragonPet - Batalha</title>
+    <link rel="shortcut icon" href="../../public/assets/midias/ico/dg.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../public/assets/css/batalha.css">
+    <link rel="stylesheet" href="../../public/assets/css/menu.css">
+    <script src="../../public/assets/js/menu.js"></script>
+    <script src="../../public/assets/js/click.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Ranking de Vitórias</h1>
-        </div>
-    </header>
+    
+    <div class="overlay"></div>
+
+    <div class="background"></div>
+
     <div class="container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Posição</th>
-                    <th>Nome do Jogador</th>
-                    <th>Vitórias</th>
-                    <th>Derrotas</th>
-                    <th>Pontos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Jogador1</td>
-                    <td>50</td>
-                    <td>10</td>
-                    <td>500</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jogador2</td>
-                    <td>45</td>
-                    <td>15</td>
-                    <td>450</td>
-                </tr>
-                <!-- Mais linhas conforme necessário -->
-            </tbody>
-        </table>
+
+        <div class="config">
+
+            <button id="menu"><img src="../../public/assets/midias/icons/icons8-linhas-50.png"></button>
+
+        </div>
+
+        <div class="divisa"></div>
+
+        <div class="times">
+
+            <div class="ceramica"></div>
+
+            <div class="ceramica"></div>
+
+            <div class="ceramica"></div>
+
+            <div class="ceramica"></div>
+
+            <div class="ceramica"></div>
+
+            <div class="ceramica"></div>
+
+            <div class="ceramica"></div>
+
+            <div class="ceramica"></div>
+
+            <div class="ceramica"></div>
+
+            <div class="ceramica"></div>
+
+            <div class="ceramica"></div>
+
+        </div>
+
+        <div class="menu">
+
+            <ul>
+
+                <li id="close-menu">
+                    
+                    <img src="../../public/assets/midias/icons/icons8-x2-48.png">
+
+                    <p>Fechar</p>
+
+                </li>
+
+                <li class="rederecionar" id="rederecionar-config">
+
+                    <img src="../../public/assets/midias/icons/icons8-engrenagem-50.png">
+
+                    <p>Configurações</p>
+
+                </li>
+
+                <li class="rederecionar" id="rederecionar-historico">
+
+                    <img src="../../public/assets/midias/icons/icons8-relógio-30.png">
+
+                    <p>Histórico</p>
+
+                </li>
+
+                <li class="rederecionar" id="rederecionar-conta">
+                    
+                    <img src="../../public/assets/midias/icons/icons8-pessoa-48.png">
+
+                    <p>Perfil</p>
+
+                </li>
+
+
+                <li>
+
+                    <img src="../../public/assets/midias/icons/icons8-casa-50.png">
+
+                    <p><a href="index.html"></a>Home</p>
+
+                </li>
+
+            </ul>
+
+        </div>
+        
+        <div class="config-menu">
+
+            <div class="opcoes">
+
+                <ul>
+
+                    <li id="checkConfig">
+
+                        <img src="../../public/assets/midias/icons/icons8-engrenagem2-50.png"> Configurações
+
+                    </li>
+
+                    <li id="checkHistori">
+
+                        <img src="../../public/assets/midias/icons/icons8-relógio2-60.png"> Histórico
+
+                    </li>
+
+                    <li id="checkPerfil">
+
+                        <img src="../../public/assets/midias/icons/icons8-pessoa2-48.png"> Perfil
+
+                    </li>
+
+                    <li id="fechar-menu">
+
+                        <img src="../../public/assets/midias/icons/icons8-x-48.png"> Fechar
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="config-opcoes">
+
+                <div class="game-opcoes">
+
+                    <h1>Configurações do jogo</h1>
+
+                    <div class="tela-cheia">
+
+                        <img src="../../public/assets/midias/icons/icons8-tela-cheia-64.png">
+
+                        <div class="texto">
+                            
+                            <h2>Tela cheia</h2>
+
+                            <p>Deixe a tela cheia para uma experiência mais imersiva</p>
+
+                        </div>
+
+                        <div class="toggle-container toggle-tela">
+
+                            <input type="checkbox" id="checkTela">
+
+                            <label for="checkTela" class="toggle"></label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="audio">
+
+                        <img src="../../public/assets/midias/icons/icons8-volume-alto-50.png">
+
+                        <div class="texto">
+
+                            <h2>Desativar Audio</h2>
+
+                            <p>Você pode mutar o som do jogo se te incomodar</p>
+
+                        </div>
+
+                        <div class="toggle-container toggle-audio">
+
+                            <input type="checkbox" id="checkAudio">
+
+                            <label for="checkAudio" class="toggle"></label>
+                            
+                        </div>
+
+                    </div>
+
+                    <div class="musica">
+
+                        <img src="../../public/assets/midias/icons/icons8-música-48.png">
+
+                        <div class="texto">
+                                
+                            <h2>Ativar Musica</h2>
+
+                            <p>Você pode aproveitar a trilha sonora enquanto joga</p>
+
+                        </div>
+
+                        <div class="toggle-container toggle-musica">
+
+                            <input type="checkbox" id="checkMusica">
+
+                            <label for="checkMusica" class="toggle"></label>
+                            
+                        </div>
+
+                    </div>
+                    
+
+                </div>
+
+                <div class="historico-opcoes">
+
+                    <h1>Registro de batalha</h1>
+
+                    <div class="batalhas">
+                            
+                        <div class="batalha">
+
+                            <h2>Resultado</h2>
+
+                            <div class="jogadores">
+                    
+                                <div class="usuario">
+                    
+                                    <div class="foto-perfil"></div>
+                                    
+                                    <div class="bkg-perfil"></div>
+                
+                                </div>
+
+                                <img src="../../public/assets/midias/icons/icons8-batalha-64.png">
+                                
+                                <div class="usuario adversario">
+                    
+                                    <div class="foto-perfil"></div>
+                                    
+                                    <div class="bkg-perfil"></div>
+                
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="perfil-opcoes">
+
+                    <h1>Configurações da conta</h1>
+
+                    <div class="excluir-conta">
+
+                        <img src="../../public/assets/midias/icons/icons8-lixeira-48.png">
+
+                        <div class="texto">
+                                
+                            <h2>Excluir conta</h2>
+
+                            <p>Se deseja excluir sua conta <a href="">clique aqui</a></p>
+                        
+                        </div>
+
+                    </div>
+                    
+                    <div class="mudar-senha">
+
+                        <img src="../../public/assets/midias/icons/icons8-cadeado-aberto-48.png">
+
+                        <div class="texto">
+                                
+                            <h2>Mudar senha</h2>
+
+                            <p>Se deseja alterar a senha da sua conta <a href="">clique aqui</a></p>
+                        
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
+
 </body>
 </html>

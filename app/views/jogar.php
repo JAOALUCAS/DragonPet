@@ -33,8 +33,6 @@ session_start();
 
     <div class="container" id="container">
         
-        <div class="overlay"></div>
-        
         <div class="background"></div>
 
         <div class="variaveis">
@@ -431,17 +429,24 @@ session_start();
 
         <?php
 
+        for ($i = 1; $i <= 5; $i++) {
+            
+            if (isset($_SESSION["personagem$i"])) {
 
-        for($i=1;$i<=5;$i++){
+                $personagem = $_SESSION["personagem$i"];
 
-            if(isset($_SESSION["nome$i"])){
-    
-                $mensagem = $_SESSION["nome$i"];
-        
-                echo "<script type='text/javascript'>console.log('$mensagem');</script>";
-        
+                $nome = $personagem['nome'];
+
+                $vida = $personagem['vida'];
+
+                $ataque = $personagem['ataque'];
+
+                echo "<script type='text/javascript'>
+                        console.log('Personagem $i: Nome = $nome, Vida = $vida, Ataque = $ataque');
+                    </script>";
+
             }
-    
+
         }
 
         ?>

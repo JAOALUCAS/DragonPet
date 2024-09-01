@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: rgb(98,35,11);
+    text-decoration: none;
+    user-select: none;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background-color: #a0a19d;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    perspective: 1000px;
+    border-bottom: 10px rgba(73,78,57,255) solid;
+    position: relative;
+}
+
+.background {
+    height: 70%;
+    width: 100%;
+    background: url(../midias/backgroundTela/background-inicio.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    border-bottom: 10px rgba(73,78,57,255) solid;
+}
+
+.divisa{
+    height: 100vh;
+    width: 2px;
+    background-color: black;
+    position: absolute;
+    z-index: 3;
+    bottom: -1%;
+}
+
+.times{
+    height: 200px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -2%;
+    background: url(../midias/imgs/fundo-e-texturizado-de-parede-cimento-cinza-cor-gratis-foto.jpg);
+    background-size: cover; 
+    transform: rotateX(45deg);
+}
+
+.ceramica{
+    height: 130px;
+    width: 150px;
+    background-color: rgb(169,171,146);
+    border: 1px  rgb(68,73,51) solid;
+    border-bottom: 10px rgb(68,73,51) solid;
+    border-top: 10px  rgb(68,73,51) solid;
+}
+
+.config button{
+    width: 50px;
+    height: 50px;
+}
+
+.config img{
+    width: 40px;
+    height: 30px;
+    padding: 1px;
+}
+
+.config{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+button {
+    background-color: rgb(238,106,13);
+    border: 5px  rgb(167, 72, 4) solid;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: rgb(180, 78, 4);
+}
+
+button img{
+    width: 40px;
+    margin-right: 10px;
+}
