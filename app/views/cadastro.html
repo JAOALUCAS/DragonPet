@@ -6,56 +6,65 @@
     <title>DragonPet - cadastro</title>
     <link rel="shortcut icon" href="../../public/assets/midias/ico/dg.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../public/assets/css/conta.css">
+    <script src="../../public/assets/js/forms/senha.js"></script>
+    <script src="../../public/assets/js/forms/validacao.js"></script>
 </head>
 <body>
     
     <div class="container">
-
         
         <div class="form-container form-cadastro">
 
             <h1>Cadastra-se</h1>
 
-            <form action="" method="post">
+            <form id="form" enctype="multipart/form-data" action="../models/cadastro.php" method="post">
 
-                <div class="email">
-                        
-                    <label for="email">INSIRA SEU EMAIL</label>
+                <div class="email">   
 
-                    <input type="email" name="" id="email" placeholder="insira seu email">
+                    <input type="email" name="email" placeholder="Digite seu email" class="email-required">
+
+                    <span class="email-span-required">Digite um email válido</span>
 
                 </div>
 
                 <div class="nick">
 
-                    <label for="nick">INSIRA SEU NICK</label>
+                    <input type="text" name="nick" placeholder="Digite seu nick" class="nick-required">
 
-                    <input type="text" name="" id="nick" placeholder="insira seu nick">
+                    <span class="nick-span-required">O nick deve conter no mínimo 3 caracteres</span>
 
                 </div>
 
                 <div class="senha">
-                        
-                    <label for="senha">DIGITE SUA SENHA</label>
 
-                    <input type="password" name="" id="senha" placeholder="digite sua senha...">
+                    <input type="password" name="senha" placeholder="Digite sua senha" class="senha-required">
 
-                </div>
+                    <span class="senha-span-required">A senha de conter no mínimo 8 caracteres</span>
 
-                <label for="foto">
+                    <div class="ocultar-senha">
 
-                    <label for="foto"  id="foto-label">INSIRA SUA FOTO</label>
-                        
-                    <div class="foto-perfil">
-
-                        <img src="../../public/assets/midias/icons/adicionar-imagem.png">
-
-                        <input type="file" name="" id="foto" accept="image/*">
+                        <img src="../../public/assets/midias/icons/mostrarSenha.png">
 
                     </div>
 
-                </label>
+                </div>
+                
+                <label for="foto">
+                        
+                    <div class="foto-perfil">
 
+                        <img src="../../public/assets/midias/icons/adicionar-imagem.png" class="foto-img">
+
+                        <input type="file" name="foto" accept="image/*" class="foto-required">
+
+                        <p class="nome-arquivo"></p>
+
+                    </div>
+
+                    <span class="foto-span-required">Nenhum arquivo selecionado ou inválido</span>
+
+                </label>
+                
                 <button type="submit">Cadastra-se</button>
 
             </form>

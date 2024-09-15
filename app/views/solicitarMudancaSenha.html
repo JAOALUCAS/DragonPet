@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DragonPet - Solicitar Mudança de Senha</title>
+    <link rel="shortcut icon" href="../../public/assets/midias/ico/dg.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../public/assets/css/conta.css">
+    <script src="../../public/assets/js/forms/validacao.js"></script>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="form-container">
+
+            <h1>Solicitar alteração de senha</h1>
+
+            <form id="form" action="../models/solicitarMudancaSenha.php" method="post">
+
+                <div class="email">
+
+                    <input type="email" name="" id="email" placeholder="Digite seu email" class="email-required">
+                    
+                    <span class="email-span-required">Digite um email válido</span>
+
+                </div>
+
+                <p>Uma mensagem de validação será enviada ao email digitado,</p>
+
+                <p>para efetuar a mudança, deverá acessar o link disponibilizado.</p>
+
+                <button type="submit">Buscar</button>
+
+            </form>
+
+            <div class="links">
+
+                <a href="login.html">Não irei alterar minha senha</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -56,15 +56,7 @@ h1{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 25px 0px;
-}
-
-.form-excluir h1{
-    color: #ff6347;
-}
-
-.email label{
-    color: #FF4500;
+    margin: 35px 0px;
 }
 
 input{
@@ -72,12 +64,12 @@ input{
     width: 450px;
     background-color: #32353c;
     border: none;
-    margin-top: 20px;
+    text-align: center;
 }
 
 input:focus{
     outline: none;
-    border: none;
+    border: 1px white solid;
 }
 
 button{
@@ -104,12 +96,8 @@ button, form, a{
     font-size: 20px;
 }
 
-input::placeholder{
-    padding-left: 180px;
-}
-
 .form-cadastro .email, .form-cadastro .senha, .form-cadastro .nick, .form-cadastro .foto-perfil{
-    margin: 10px 0px;
+    margin: 15px 0px;
 }
 
 .form-cadastro h1{
@@ -128,6 +116,12 @@ input::placeholder{
     height: 70px;
     width: 450px;
     background-color: #32353c;
+    text-align: center;
+    overflow: auto;
+}
+
+.foto-perfil:hover{
+    border: 1px white solid;
 }
 
 input[type="file"]{
@@ -140,8 +134,8 @@ input[type="file"]{
 }
 
 p{
-    margin: 10px 0px;
-    font-size: 10px;
+    font-size: 17px;
+    margin-bottom: 20px;
 }
 
 .excluir{
@@ -157,14 +151,54 @@ p{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px 0px;
+    margin: 30px 0px;
 }
 
 input[type="checkbox"]{
     height: 15px;
     width: 15px;
-    margin-top: -1px;
-    margin-left: 10px;
+    margin-top: 10px;
+    margin-left: -30px;
+}
+
+.ocultar-senha{
+    position: absolute;
+    height: 25px;
+    padding-right: 18px;
+    padding-left: 5px;
+    background-color: #32353c;
+    margin-left: 400px;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.ocultar-senha img{
+    height: 25px;
+}
+
+.ocultar-senha-login{
+    margin-top: 1px;
+}
+
+span{
+    font-size: 12px;
+    color: red;
+    display: none;
+    margin-top: 2px;
+}
+
+.foto-span-required{
+    margin-top: -13px;
+    margin-bottom: 5px;
+    margin-left: 120px;
+}
+
+.nome-arquivo{
+    display: none;
+    font-size: 10px;
+    margin-bottom: 2px;
+    padding-bottom: 1px;
+    border-bottom: 1px #afafaf solid;
 }
 
 @media  (max-width: 400px) {

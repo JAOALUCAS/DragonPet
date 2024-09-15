@@ -24,8 +24,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 100%; 
-    position: fixed;
+    width: 100%;    
 }
 
 .versao{
@@ -782,6 +781,17 @@ td{
 .gif-perfil .background-aside img{
     height: 30px;
     width: 30px;
+}
+
+.zeno{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}
+
+.zeno img{
+    height: 100px;
+    width: 100px;
 }
 
 @media (max-width: 400px){
