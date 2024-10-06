@@ -1,3 +1,99 @@
+<?php
+
+session_start();
+
+$id = $_SESSION["id"];
+
+require_once "../app/conf/Conexao.php";
+
+// Selecionar os itens que já possuem para mudar o botão de comprar para equipar
+$mysql = "SELECT * FROM inventario WHERE id_jogador = :id";
+
+$pdo = Conexao::conectar('../app/conf/conf.ini');
+
+$stmt = $pdo->prepare($mysql);
+
+$stmt->execute([":id" => $id]);
+
+$itens = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+unset($_SESSION["gif"]);
+
+if (!empty($itens)) {
+
+    $data = [];
+
+    for($i = 0; $i < count($itens); $i++){
+
+        if($itens[$i]["categoria"] == "titulo" && $itens[$i]["equipado"] == " equipado"){
+                
+            $_SESSION["titulo"] = $itens[$i]["nome_item"];
+
+        }
+
+        if($itens[$i]["categoria"] == "gif" && $itens[$i]["equipado"] == " equipado"){
+
+            switch($itens[$i]["nome_item"]){
+                case " Goku e kuririn":
+                    $_SESSION["gif"] = "assets/midias/backgroundPerfil/goku-&-kuririn.gif";
+                    break;
+                case " Goku na nuvem":
+                    $_SESSION["gif"] = "assets/midias/backgroundPerfil/goku-nuvem-voadora.webp";
+                    break;
+                case " Goku vs vegeta":
+                    $_SESSION["gif"] = "assets/midias/backgroundPerfil/goku-vs-vegeta.gif";
+                    break;
+                case " +8000":
+                    $_SESSION["gif"] = "assets/midias/backgroundPerfil/mais-de-8000.gif";
+                    break;
+                case " Casa do mestre":
+                    $_SESSION["gif"] = "assets/midias/backgroundPerfil/mestre-kame-house.gif";
+                    break;
+                case " Visões do mestre":
+                    $_SESSION["gif"] = "assets/midias/backgroundPerfil/mestre-kame-oculos.gif";
+                    break;
+                case " Surpresa do mestre":
+                    $_SESSION["gif"] = "assets/midias/backgroundPerfil/mestre-kame-surpreso.gif";
+                    break;
+                case " Sheilong":
+                    $_SESSION["gif"] = "assets/midias/backgroundPerfil/sheilong.gif";
+                    break;
+
+            }
+
+        }
+        
+        $item = $itens[$i]["categoria"] . "=>" . $itens[$i]["nome_item"] . "=>" . $itens[$i]["equipado"];
+
+        array_push($data, $item);
+
+    }
+
+    echo "<script>
+        const itens = ".json_encode($data)."; 
+
+        localStorage.setItem('itens', JSON.stringify(itens));
+    </script>";
+
+    $displayStyle = isset($_SESSION["gif"]) ? "block" : "none";
+
+    $mysql = "SELECT saldo FROM jogadores WHERE id = :id";
+
+    $pdo = Conexao::conectar('../app/conf/conf.ini');
+
+    $stmt = $pdo->prepare($mysql);
+
+    $stmt->execute([":id" => $id]);
+
+    $saldoArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $saldo = $saldoArray[0]["saldo"];
+
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,12 +107,15 @@
     <link rel="stylesheet" href="assets/css/cutscene.css">
     <link rel="stylesheet" href="assets/css/menu.css">
     <link rel="stylesheet" href="assets/css/tutorial.css">
+    <link rel="stylesheet" href="assets/css/usuario.css">
     <script src="assets/js/musicas.js"></script>
     <script src="assets/js/index/index.js"></script>
     <script src="assets/js/index/cutscene.js"></script>
     <script src="assets/js/menu.js"></script>
     <script src="assets/js/click.js"></script>
     <script src="assets/js/index/tutorial.js"></script>
+    <script src="../public/assets/js/index/loja.js"></script>
+    <script src="../public/assets/js/index/equipar.js"></script>
 </head>
 <body>
 
@@ -95,6 +194,8 @@
         <div class="logout">
 
             <button><img src="assets/midias/icons/icons8-sair-50.png"></button>
+
+            <p id="nick"><?php echo $_SESSION["nome"]?></p>
 
         </div>
         
@@ -371,7 +472,6 @@
 
                 </li>
 
-
                 <li>
 
                     <img src="assets/midias/icons/icons8-casa-50.png">
@@ -392,25 +492,33 @@
 
                     <li id="checkConfig">
 
-                        <img src="assets/midias/icons/icons8-engrenagem2-50.png"> Configurações
+                        <img src="assets/midias/icons/icons8-engrenagem2-50.png"> 
+                        
+                        <p>Configurações</p>
 
                     </li>
 
                     <li id="checkHistori">
 
-                        <img src="assets/midias/icons/icons8-relógio2-60.png"> Histórico
+                        <img src="assets/midias/icons/icons8-relógio2-60.png"> 
+
+                        <p>Histórico</p>
 
                     </li>
 
                     <li id="checkPerfil">
 
-                        <img src="assets/midias/icons/icons8-pessoa2-48.png"> Perfil
+                        <img src="assets/midias/icons/icons8-pessoa2-48.png"> 
+
+                        <p>Perfil</p>
 
                     </li>
 
                     <li id="fechar-menu">
 
-                        <img src="assets/midias/icons/icons8-x-48.png"> Fechar
+                        <img src="assets/midias/icons/icons8-x-48.png"> 
+
+                        <p>Fechar</p>
 
                     </li>
 
@@ -425,14 +533,18 @@
                     <h1>Configurações do jogo</h1>
 
                     <div class="tela-cheia">
+                        
+                        <div class="opcoes-cima">
 
-                        <img src="assets/midias/icons/icons8-tela-cheia-64.png">
+                            <img src="assets/midias/icons/icons8-tela-cheia-64.png">
 
-                        <div class="texto">
-                            
-                            <h2>Tela cheia</h2>
-
-                            <p>Deixe a tela cheia para uma experiência mais imersiva</p>
+                            <div class="texto">
+                                
+                                <h2>Tela cheia</h2>
+    
+                                <p>Deixe a tela cheia para uma experiência mais imersiva</p>
+    
+                            </div>
 
                         </div>
 
@@ -447,14 +559,18 @@
                     </div>
 
                     <div class="audio">
+                        
+                        <div class="opcoes-cima">
+                                
+                            <img src="assets/midias/icons/icons8-volume-alto-50.png">
 
-                        <img src="assets/midias/icons/icons8-volume-alto-50.png">
+                            <div class="texto">
 
-                        <div class="texto">
+                                <h2>Desativar Audio</h2>
 
-                            <h2>Desativar Audio</h2>
+                                <p>Você pode mutar o som do jogo se te incomodar</p>
 
-                            <p>Você pode mutar o som do jogo se te incomodar</p>
+                            </div>
 
                         </div>
 
@@ -470,16 +586,20 @@
 
                     <div class="musica">
 
-                        <img src="assets/midias/icons/icons8-música-48.png">
+                        <div class="opcoes-cima">
 
-                        <div class="texto">
-                                
-                            <h2>Ativar Musica</h2>
+                            <img src="assets/midias/icons/icons8-música-48.png">
 
-                            <p>Você pode aproveitar a trilha sonora enquanto joga</p>
+                            <div class="texto">
+                                    
+                                <h2>Ativar Musica</h2>
+
+                                <p>Você pode aproveitar a trilha sonora enquanto joga</p>
+
+                            </div>
 
                         </div>
-
+                        
                         <div class="toggle-container toggle-musica">
 
                             <input type="checkbox" id="checkMusica">
@@ -489,7 +609,6 @@
                         </div>
 
                     </div>
-                    
 
                 </div>
 
@@ -572,61 +691,71 @@
 
         <div class="shop">
 
-            <div class="slider-container">
+            <div class="shop-cima">
+                    
+                <div class="slider-container">
 
-                <div id="slider" class="slider">
+                    <div id="slider" class="slider">
 
-                    <img id="sl" src="">
+                        <img id="sl" src="">
+
+                    </div>
+
+                </div>
+                
+                <div class="categorias">
+
+                    <button class="shop-categoria" id="card">Cards</button>
+
+                    <button class="shop-categoria" id="background">Backgrounds</button>
+
+                    <button class="shop-categoria" id="titulo">Titulos</button>
+
+                    <button class="shop-categoria" id="perfil">Perfis</button>
 
                 </div>
 
             </div>
-            
-            <div class="categorias">
 
-                <button class="shop-categoria" id="card">Cards</button>
+            <div class="shop-baixo">
+                    
+                <div class="informacoes">
 
-                <button class="shop-categoria" id="background">Backgrounds</button>
+                    <div class="perfil">
 
-                <button class="shop-categoria" id="titulo">Titulos</button>
+                        <div class="foto-perfil"><img src="<?php echo $_SESSION["path"]; ?>" /></div>
 
-                <button class="shop-categoria" id="perfil">Perfis</button>
+                        <div class="bkg-perfil">
+                            
+                            <p class="nick" ><?php echo $_SESSION["nome"]?></p>
 
-            </div>
+                            <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
 
-            <div class="informacoes">
+                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : 'Nenhum título equipado'; ?></p>
+                            
+                        </div>
 
-                <div class="perfil">
+                    </div>
 
-                    <div class="foto-perfil"></div>
+                    <div class="dinheiro">
 
-                    <div class="bkg-perfil"></div>
+                        <img src="assets/midias/icons/dinheiro.png">
 
-                </div>
+                        <p><?php echo $saldo?></p>
 
-                <div class="dinheiro">
+                    </div>
 
-                    <img src="assets/midias/icons/dinheiro.png">
+                    <div class="voltar">
 
-                    <p>$1000</p>
+                        <button id="voltarShop"><img src="assets/midias/icons/icons8-voltar-64.png">Voltar</button>
 
-                </div>
-
-                <div class="voltar">
-
-                    <button id="voltarShop"><img src="assets/midias/icons/icons8-voltar-64.png">Voltar</button>
+                    </div>
 
                 </div>
 
             </div>
 
             <div class="shop-card categoria-container">
-
-                <div class="icon-categoria">
-
-                    <img src="assets/midias/icons/cartas-de-poker.png">
-
-                </div>
              
                 <div class="produtos">
 
@@ -640,7 +769,7 @@
 
                         </div>
 
-                        <img src="assets/midias/imgs/card1.png">
+                        <img class="img-card" src="assets/midias/imgs/card1.png">
 
                         <div class="custo">
 
@@ -652,7 +781,7 @@
 
                         <div class="comprar">
 
-                            <form action="">
+                            <form method="post" action="../app/models/inserirInventario.php">
 
                                 <button type="submit">Comprar</button>
 
@@ -672,7 +801,7 @@
 
                         </div>
 
-                        <img src="assets/midias/imgs/card2.jpeg">
+                        <img class="img-card" src="assets/midias/imgs/card2.jpeg">
 
                         <div class="custo">
 
@@ -684,7 +813,7 @@
                         
                         <div class="comprar">
 
-                            <form action="">
+                            <form method="post" action="../app/models/inserirInventario.php">
 
                                 <button type="submit">Comprar</button>
 
@@ -704,7 +833,7 @@
 
                         </div>
 
-                        <img src="assets/midias/imgs/card3.jpeg">
+                        <img class="img-card" src="assets/midias/imgs/card3.jpeg">
 
                         <div class="custo">
 
@@ -716,7 +845,7 @@
                         
                         <div class="comprar">
 
-                            <form action="">
+                            <form method="post" action="../app/models/inserirInventario.php">
 
                                 <button type="submit">Comprar</button>
 
@@ -729,20 +858,28 @@
                 </div>
 
                 <div class="informacoes-card">
-                
+                   
                     <div class="perfil">
 
-                        <div class="foto-perfil"></div>
+                        <div class="foto-perfil"><img src="<?php echo $_SESSION["path"]; ?>" /></div>
 
-                        <div class="bkg-perfil"></div>
+                        <div class="bkg-perfil">
+                            
+                            <p class="nick" ><?php echo $_SESSION["nome"]?></p>
+
+                            <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
+
+                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : 'Nenhum título equipado'; ?></p>
+                            
+                        </div>
 
                     </div>
 
                     <div class="dinheiro">
 
                         <img src="assets/midias/icons/dinheiro.png">
-
-                        <p>$1000</p>
+                        
+                        <p><?php echo $saldo?></p>
 
                     </div>
 
@@ -757,12 +894,6 @@
             </div>
             
             <div class="shop-backgrounds categoria-container">
-
-                <div class="icon-categoria">
-
-                    <img src="assets/midias/icons/icons8-galeria-48.png">
-
-                </div>
 
                 <div class="produtos produtos-bk">
 
@@ -796,7 +927,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -836,7 +967,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -877,7 +1008,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -917,7 +1048,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -961,7 +1092,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -1001,7 +1132,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -1042,7 +1173,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -1059,12 +1190,20 @@
                 </div>
                 
                 <div class="informacoes-background">
-                
+                    
                     <div class="perfil">
 
-                        <div class="foto-perfil"></div>
+                        <div class="foto-perfil"><img src="<?php echo $_SESSION["path"]; ?>" /></div>
 
-                        <div class="bkg-perfil"></div>
+                        <div class="bkg-perfil">
+                            
+                            <p class="nick" ><?php echo $_SESSION["nome"]?></p>
+
+                            <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
+
+                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : 'Nenhum título equipado'; ?></p>
+                            
+                        </div>
 
                     </div>
 
@@ -1072,7 +1211,7 @@
 
                         <img src="assets/midias/icons/dinheiro.png">
 
-                        <p>$1000</p>
+                        <p><?php echo $saldo?></p>
 
                     </div>
 
@@ -1087,12 +1226,6 @@
             </div>
 
             <div class="shop-titulos categoria-container">
-
-                <div class="icon-categoria">
-
-                    <img src="assets/midias/icons/icons8-diploma-2-50.png">
-
-                </div>
 
                 <div class="produtos">
 
@@ -1118,7 +1251,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1148,7 +1281,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1178,7 +1311,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1208,7 +1341,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1238,7 +1371,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1268,7 +1401,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1298,7 +1431,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1332,7 +1465,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1362,7 +1495,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1392,7 +1525,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1422,7 +1555,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1452,7 +1585,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1482,7 +1615,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1512,7 +1645,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1546,7 +1679,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1576,7 +1709,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1606,7 +1739,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1636,7 +1769,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1666,7 +1799,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1696,7 +1829,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1726,7 +1859,7 @@
                             
                             <div class="comprar">
 
-                                <form action="">
+                                <form method="post" action="../app/models/inserirInventario.php">
 
                                     <button type="submit">Comprar</button>
 
@@ -1742,11 +1875,20 @@
                 
                 <div class="informacoes-titulos">
                 
+                   
                     <div class="perfil">
 
-                        <div class="foto-perfil"></div>
+                        <div class="foto-perfil"><img src="<?php echo $_SESSION["path"]; ?>" /></div>
 
-                        <div class="bkg-perfil"></div>
+                        <div class="bkg-perfil">
+                        
+                            <p class="nick" ><?php echo $_SESSION["nome"]?></p>
+
+                            <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
+
+                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : 'Nenhum título equipado'; ?></p>
+                        
+                        </div>
 
                     </div>
 
@@ -1754,7 +1896,7 @@
 
                         <img src="assets/midias/icons/dinheiro.png">
 
-                        <p>$1000</p>
+                        <p><?php echo $saldo?></p>
 
                     </div>
 
@@ -1770,12 +1912,6 @@
 
             <div class="shop-perfil categoria-container">
 
-                <div class="icon-categoria">
-
-                    <img src="assets/midias/icons/paleta-de-pintor.png">
-
-                </div>
-
                 <div class="produtos produtos-pf">
 
                     <div class="coluna1">
@@ -1784,7 +1920,7 @@
 
                             <img src="assets/midias/backgroundPerfil/goku-&-kuririn.gif">
                             
-                            <div class="background-aside">
+                            <div class="background-aside prod-gif">
 
                                 <div class="titulo-card">                            
 
@@ -1804,7 +1940,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -1820,7 +1956,7 @@
 
                             <img src="assets/midias/backgroundPerfil/goku-nuvem-voadora.webp">
                             
-                            <div class="background-aside">
+                            <div class="background-aside prod-gif">
 
                                 <div class="titulo-card">                            
 
@@ -1840,7 +1976,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -1856,7 +1992,7 @@
 
                             <img src="assets/midias/backgroundPerfil/goku-vs-vegeta.gif">
                             
-                            <div class="background-aside">
+                            <div class="background-aside prod-gif">
 
                                 <div class="titulo-card">                            
 
@@ -1876,7 +2012,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -1892,7 +2028,7 @@
 
                             <img src="assets/midias/backgroundPerfil/mais-de-8000.gif">
                             
-                            <div class="background-aside">
+                            <div class="background-aside prod-gif">
 
                                 <div class="titulo-card">                            
 
@@ -1912,7 +2048,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -1932,7 +2068,7 @@
 
                             <img src="assets/midias/backgroundPerfil/mestre-kame-house.gif">
                             
-                            <div class="background-aside">
+                            <div class="background-aside prod-gif">
 
                                 <div class="titulo-card">                            
 
@@ -1952,7 +2088,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -1968,7 +2104,7 @@
 
                             <img src="assets/midias/backgroundPerfil/mestre-kame-oculos.gif">
                             
-                            <div class="background-aside">
+                            <div class="background-aside prod-gif">
 
                                 <div class="titulo-card">                            
 
@@ -1988,7 +2124,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -2004,7 +2140,7 @@
 
                             <img src="assets/midias/backgroundPerfil/mestre-kame-surpreso.gif">
                             
-                            <div class="background-aside">
+                            <div class="background-aside prod-gif">
 
                                 <div class="titulo-card">                            
 
@@ -2024,7 +2160,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -2040,7 +2176,7 @@
 
                             <img src="assets/midias/backgroundPerfil/sheilong.gif">
                             
-                            <div class="background-aside">
+                            <div class="background-aside prod-gif">
 
                                 <div class="titulo-card">                            
 
@@ -2060,7 +2196,7 @@
                                 
                                 <div class="comprar">
 
-                                    <form action="">
+                                    <form method="post" action="../app/models/inserirInventario.php">
 
                                         <button type="submit">Comprar</button>
 
@@ -2077,12 +2213,20 @@
                 </div>
 
                 <div class="informacoes-perfil">
-                
+                    
                     <div class="perfil">
 
-                        <div class="foto-perfil"></div>
+                        <div class="foto-perfil"><img src="<?php echo $_SESSION["path"]; ?>" /></div>
 
-                        <div class="bkg-perfil"></div>
+                        <div class="bkg-perfil">
+                        
+                            <p class="nick" ><?php echo $_SESSION["nome"]?></p>
+
+                            <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
+
+                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : 'Nenhum título equipado'; ?></p>
+                        
+                        </div>
 
                     </div>
 
@@ -2090,7 +2234,7 @@
 
                         <img src="assets/midias/icons/dinheiro.png">
 
-                        <p>$1000</p>
+                        <p><?php echo $saldo?></p>
 
                     </div>
 
@@ -2108,38 +2252,7 @@
 
         <div class="ranking">
 
-            <div class="informacoes-ranking">
-                
-                <div class="usuario">
-                    
-                    <div class="foto-perfil"></div>
-                    
-                    <div class="bkg-perfil"></div>
-
-                </div>
-                
-                <div class="info">Ganhe e Suba no Ranking</div>
-
-                <div class="posicao">
-
-                    <h1>N° 1000</h1>
-
-                </div>
-
-                <div class="voltar">
-
-                    <button id="voltarRanking"><img src="assets/midias/icons/icons8-voltar-64.png">Voltar</button>
-
-                </div>
-
-            </div>
-
-            <div class="zeno">
-
-                <img src="assets/midias/imgs/zenos.png">
-
-            </div>
-
+        
             <div class="tabela">
 
                 <table>
@@ -2156,31 +2269,140 @@
 
                     <tbody>
 
-                        <tr>
+                        <?php 
 
-                            <td class="posicao-tabela">1</td>
+                        $mysql = "SELECT nick, vitorias FROM jogadores"; 
 
-                            <td>
+                        $pdo = Conexao::conectar('../app/conf/conf.ini');
 
-                                <div class="usuario">
-                    
-                                    <div class="foto-perfil"></div>
-                                    
-                                    <div class="bkg-perfil"></div>
-                
-                                </div>
+                        $stmt = $pdo->prepare($mysql);
+                        $stmt->execute();
 
-                            </td>
+                        $vitorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                            <td>10</td>
+                        $ordem = [];
 
-                        </tr>
+                        if (!empty($vitorias)) {
+
+                            $ordem[0] = [$vitorias[0]["nick"], $vitorias[0]["vitorias"]];
+
+                        }
+
+                        foreach ($vitorias as $key => $item) { 
+
+                            if ($key > 0) {
+
+                                // Comparar com o último elemento adicionado no array ordem
+                                if ($item["vitorias"] > $ordem[count($ordem) - 1][1]) {
+
+                                    // Adiciona no início se as vitórias forem maiores
+                                    array_unshift($ordem, [$item["nick"], $item["vitorias"]]);
+
+                                } else {
+
+                                    // Adiciona ao final se não for maior
+                                    array_push($ordem, [$item["nick"], $item["vitorias"]]);
+
+                                }
+
+                            }
+
+                        }
+
+                        for($i = 1; $i <= count($ordem); $i++){
+
+                            $nickNum = $ordem[$i-1][0];
+
+                            if($nickNum == $_SESSION["nome"]){
+
+                                $suaPos = $i;
+
+                            }
+
+                            $vitoriasNum = $ordem[$i-1][1];
+
+                            if($i == 1){
+
+                                $pos = "🥇";
+
+                                $color = "#DAA520";
+
+                            }elseif($i == 2){
+
+                                $pos = "🥈";
+
+                                $color = "#A9A9A9";
+
+                            }elseif($i == 3){
+
+                                $pos = "🥉";
+
+                                $color = "#8C4B2A";
+
+                            }else{
+
+                                $pos = $i;
+
+                                $color = "rgba(128, 128, 128, 0.5)";
+
+                            }
+
+                            echo "
+                                <tr>
+
+                                    <td style='background-color: $color;' class='posicao-tabela'>$pos</td>
+
+                                    <td>$nickNum</td>
+
+                                    <td>$vitoriasNum</td>
+
+                                </tr>";
+                            
+
+
+                        }
+
+                        ?>
 
                     </tbody>
 
                 </table>
 
-            </div>            
+            </div>           
+
+            <div class="informacoes-ranking">
+                
+                <div class="usuario">
+
+                    <div class="foto-perfil"><img src="<?php echo $_SESSION["path"]; ?>" /></div>
+
+                    <div class="bkg-perfil">
+                        
+                        <p class="nick" ><?php echo $_SESSION["nome"]?></p>
+
+                        <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
+
+                        <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : 'Nenhum título equipado'; ?></p>
+                        
+                    </div>
+
+                </div>
+                
+                <div class="info">Ganhe e Suba no Ranking</div>
+
+                <div class="posicao">
+
+                    <h1>Nº <?php echo $suaPos ?></h1>
+
+                </div>
+
+                <div class="voltar">
+
+                    <button id="voltarRanking"><img src="assets/midias/icons/icons8-voltar-64.png">Voltar</button>
+
+                </div>
+
+            </div> 
 
         </div>
 

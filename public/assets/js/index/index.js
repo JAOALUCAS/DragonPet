@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         overlay.style.display = "flex";
 
-        shopContainer.style.display = "grid";
+        shopContainer.style.display = "flex";
 
         const verificarAudioState = verificarAudio();
 
@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         }
            
-        sl.src = `/public/assets/midias/silder/${idx}.png`;
+        sl.src = `http://localhost:8000/public/assets/midias/silder/${idx}.png`;
 
    }
 
@@ -362,40 +362,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
         shopCard.style.display = "block";
 
-        let iconCategoria = shopCard.querySelector(".icon-categoria");
-
-        iconCategoria.style.display = "block";
-
    });
 
    background.addEventListener("click", ()=>{
 
         shopBackground.style.display = "block";
         
-        let iconCategoria = shopBackground.querySelector(".icon-categoria");
-
-        iconCategoria.style.display = "block";
-
    });
 
    titulo.addEventListener("click", ()=>{
 
         shopTitulo.style.display = "block";
-        
-        let iconCategoria = shopTitulo
-        .querySelector(".icon-categoria");
-
-        iconCategoria.style.display = "block";
 
     });
 
     perfil.addEventListener("click", ()=>{
 
         shopPerfil.style.display = "block";
-        
-        let iconCategoria = shopPerfil.querySelector(".icon-categoria");
-
-        iconCategoria.style.display = "block";
 
     });
 
@@ -415,7 +398,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
             categorias.style.display = "flex";
     
-            sliderContainer.style.display = "flex";
+            if(window.innerWidth > 400){
+                
+                sliderContainer.style.display = "flex";
+
+            }
     
             informacoes.style.display = "flex";
     

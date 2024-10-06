@@ -1,0 +1,44 @@
+.perfil .foto-perfil{
+    height: 60px;
+    width: 50px;
+    border: 5px black solid;
+    border-right: 1px black solid;
+}
+
+.foto-perfil img{
+    height: 100%;
+    width: 100%;
+}
+
+.bkg-perfil{
+    height: 60px;
+    width: 250px;
+    border: 5px black solid;
+    background-color: rgb(29, 17, 17);
+    overflow: hidden;
+}
+
+.usuario .bkg-perfil{
+    display: flex;
+    justify-content: center;
+}
+
+.bkg-perfil p{
+    position: absolute;    
+    font-size: 20px;
+}
+
+.nick{
+    color: white;
+    margin-left: 10px;
+}
+
+.bkg-perfil img{
+    height: 60px;
+    width: 250px;
+}
+
+.bkg-perfil .tc{
+    margin-left: 5px;
+    margin-top: 20px;
+}

@@ -132,6 +132,15 @@ button img{
     position: absolute;
     bottom: 5%;
     left: 5%;
+    display: flex;
+}
+
+.logout p{
+    margin-top: 15px;
+    margin-left: 5px;
+    font-size: 15px;
+    width: 300px;
+    word-wrap: break-word
 }
 
 .logout button{
@@ -255,8 +264,8 @@ button img{
 
 .shop{
     position: absolute;
-    height: 90vh;
-    width: 95vw;   
+    height: 100%;
+    width: 100%;   
     background: rgba(0, 0, 0, 0.7);
     border: 5px #FF4500 solid;
     z-index: 5;
@@ -264,12 +273,23 @@ button img{
     border-radius: 10px;
     padding: 10px;
     display: none;
-    grid-template-areas: "m  a"
-                         "s  s";
-    grid-template-columns: 7fr 3fr;
-    grid-template-rows: 7fr 3fr;
-    gap: 10px;
+    flex-direction: column;
     animation: shopMoveShow 2s ease-in-out;
+}
+
+.shop-cima{
+    height: 65%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px;
+}
+
+.shop-baixo{
+    height: 25%;
+    width: 100%;
+    display: flex;
 }
 
 .sClose{
@@ -277,7 +297,6 @@ button img{
 }
 
 .slider-container, .categorias, .informacoes{
-    background: rgba(129, 85, 18, 0.2);
     animation: shopOpacity 2.5s ease-in-out;
 }
 
@@ -286,13 +305,11 @@ button img{
 }
 
 .slider-container{
-    grid-area: m;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
-    padding: 20px;
 }
 
 .slider{
@@ -308,11 +325,11 @@ button img{
 }
 
 .categorias{
-    grid-area: a;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-right: 100px;
 }
 
 .categorias button{
@@ -355,7 +372,6 @@ button img{
 }
 
 .informacoes{
-    grid-area: s;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -365,7 +381,6 @@ button img{
     height: 60px;
     width: 300px;
     display: flex;
-    background-color: aqua;
 }
 
 .dinheiro {
@@ -429,12 +444,13 @@ button img{
 
 .ranking{
     position: absolute;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     background: rgba(0, 0, 0, 0.7);
     border: 5px #FF4500 solid;
     z-index: 5;
     display: none;
+    flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
     animation: rankingShowMove 2s ease-in-out;
@@ -455,7 +471,6 @@ button img{
     height: 200px;
     width: 200px;
     border: 5px black solid;
-    background-color: aqua;
     margin-bottom: 50px;
 }
 
@@ -464,7 +479,6 @@ button img{
     width: 400px;
     position: absolute;
     top: 30%;
-    background-color: aqua;
 }
 
 .info{
@@ -528,7 +542,7 @@ thead{
 
 td{
     color: white;
-    height: 80px;
+    height: 40px;
     background-color: rgba(137,118,137,255);
 }
 
@@ -545,7 +559,6 @@ td{
     margin-top: 10px;
     margin-left: 35px;
     border-radius: 15px;
-    background: rgba(129, 85, 18, 0.2);
     animation: shopOpacity 1.5s ease-in-out;
 }
 
@@ -567,15 +580,6 @@ td{
     0%{transform: rotateZ(-2deg);}
     50%{transform: rotateZ(2deg);}
     100%{transform: rotateZ(-2deg);}
-}
-
-.icon-categoria{
-    display: flex;
-    top: 0%;
-    left: -10%;
-    animation: balanceMove 2s infinite ease-in-out;
-    position: absolute;
-    z-index: 2;
 }
 
 .card, .titulo-container, .backgrounds-prods, .gif-perfil{
@@ -661,14 +665,6 @@ td{
     background-color: #218838; 
 }
 
-.icon-categoria{
-    display: none;
-    height: 40px;
-    position: absolute;
-    bottom: 30%;
-    margin-left: 150px;
-}
-
 .shop-backgrounds .produtos, .shop-perfil .produtos{
     height: 73%;
     display: flex;
@@ -735,7 +731,7 @@ td{
 }
 
 .shop-titulos .produtos{
-    overflow-y: auto;
+    overflow: auto;
     flex-direction: column;
     height: 75%;
 }
@@ -749,7 +745,7 @@ td{
     margin: 5px 20px;
 }
 
-.titulo-container .tc{
+.tc{
     background: linear-gradient(to right, #ffd700, #ffac33, #ffdd66);
     -webkit-background-clip: text;
     background-clip: text;
@@ -783,25 +779,140 @@ td{
     width: 30px;
 }
 
-.zeno{
-    position: absolute;
-    top: 0%;
-    left: 0%;
+.shop-card .produtos{
+    margin-top: 20px;
 }
 
-.zeno img{
-    height: 100px;
-    width: 100px;
+
+@media (min-height: 700px){
+    
+    .pop-ups{
+        display: none;
+    }
+
+    .shop-card .produtos{
+        margin-top: 100px;
+    }
+
+}
+
+@media (max-width: 1250px){
+
+    .intrucoes-up, .shop-up, .ranking-up{
+        left: 36%;
+    }
+
+}
+
+@media (min-width: 550px) and (max-width: 900px){
+
+    .intrucoes-up, .shop-up, .ranking-up{
+        left: 28%;
+    }
+
+}
+
+@media (max-width: 500px){
+
+    .intrucoes-up, .shop-up, .ranking-up{
+        left: 15%;
+    }
+
 }
 
 @media (max-width: 400px){
 
-    .direitos, .logout, .pop-ups{
+    .direitos, .logout, .pop-ups, .slider-container, .informacoes-ranking .usuario, .info{
         display: none;
     }
 
     .shop{
-        height: 100vh;
-        width: 100vw;
+        margin-bottom: -60px;
     }
+
+    .ranking{
+        margin-bottom: -69px;
+    }
+
+    .perfil{
+        margin-bottom: 10px;
+    }
+
+    .categorias{
+        padding: 0;
+    }
+
+    .categorias, .shop-cima, .dinheiro, .gif-perfil{
+        margin: 0;
+    }
+
+    .ranking{
+        flex-direction: column-reverse;
+    }
+
+    .shop-baixo, .informacoes, .produtos, .informacoes-card, .informacoes-background,.informacoes-titulos, .informacoes-perfil{
+        flex-direction: column;
+    }
+
+    .img-card{
+        display: none;
+    }
+
+    .card{
+        margin-bottom: 3px;
+        padding: 0;
+    }
+
+    .produtos{
+        margin-top: -30px;
+    }
+
+    .informacoes-card, .informacoes-background, .informacoes-titulos, .informacoes-perfil{
+        margin-top: 13px;
+        margin-left: -30px;
+    }
+
+    .informacoes-card .perfil, .informacoes-background .perfil , .informacoes-titulos .perfil, .informacoes-perfil .perfil{
+        display: none;
+    }
+
+    .backgrounds-prods{
+        margin: 0px 15px;
+    }
+
+     .produtos-bk .coluna1, .produtos-bk .coluna2{
+        margin-top: 10px;
+        margin-left: -75px;
+    }
+
+    .shop-titulos .produtos{
+        margin-left: -35px;
+    }
+
+    .shop-titulos .coluna1, .shop-titulos .coluna2, .shop-titulos .coluna3{
+        margin-left: 80px;
+    }
+
+    .titulo-container{
+        margin: 0px 5px;
+    }
+
+    .produtos-pf{
+        overflow: auto;
+    }
+
+    .produtos-pf .coluna1, .produtos-pf .coluna2{
+        flex-wrap: wrap;
+    }
+
+    .informacoes-ranking .posicao{
+        margin: 5px 0px;
+    }
+
+    .tabela{
+        height: 70%;
+        width: 95%;
+        margin-right: 105px;
+    }
+
 }

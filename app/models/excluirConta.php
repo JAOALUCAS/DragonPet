@@ -1,6 +1,5 @@
 <?php
 
-
 require_once "../conf/Conexao.php";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -39,12 +38,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         }else{
 
-            $response["error"] = "Email não encontrado no sistema";
+             $response["error"] = "Email não encontrado no sistema";
 
         }  
 
     }
-
+    
     echo json_encode($response);
 
 }

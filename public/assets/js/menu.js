@@ -117,7 +117,6 @@ document.addEventListener("DOMContentLoaded",()=>{
         perfilOpcoes.style.display = "none";
 
         gameOpcoes.style.display = "none";
-
         
         if(checkConfig.classList.contains("selecionado")){
 

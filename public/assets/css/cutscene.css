@@ -363,3 +363,25 @@
 .marca2 img{
     height: 15px;
 }
+
+@media (max-width: 400px){
+
+    .cutscene{
+        animation: cutsceneMoveShow 3s ease-in-out;
+    }
+        
+    @keyframes cutsceneMoveShow {
+        from{left: -75%;}
+        to{left: 0%;}
+    }   
+
+    .aClose{
+        animation: cutsceneMoveClose 1s ease-in-out;
+    }
+    
+    @keyframes cutsceneMoveClose {
+        from{left: 0%;}
+        to{left: -75%;}
+    }
+
+}

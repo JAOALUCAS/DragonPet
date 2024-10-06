@@ -2,7 +2,7 @@
 
 require_once "../conf/Conexao.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") { 
 
     $response = [];
 
@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if (!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/", $_POST["nick"])) {
 
-            $response["error"] = "O nick contém caracteres inválidos";
+             $response["error"] = "O nick contém caracteres inválidos";
 
         } else {
 
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->rowCount() > 0) {
 
-                $response["error"] = "Nick já registrado";
+                 $response["error"] = "Nick já registrado";
 
             }
 
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
 
-            $response["error"] = "Email inválido";
+             $response["error"] = "Email inválido";
 
         } else {
 
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->rowCount() > 0) {
 
-                $response["error"] = "Email já registrado";
+                 $response["error"] = "Email já registrado";
 
             }
 
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (!preg_match('/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+$/', $_POST["senha"])) {
 
-            $response["error"] = "A senha contém caracteres inválidos";
+             $response["error"] = "A senha contém caracteres inválidos";
 
         } else {
 
@@ -70,13 +70,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($arquivo["error"] != 0) {
 
-            $response["error"] = "Falha ao enviar arquivo";
+             $response["error"] = "Falha ao enviar arquivo";
 
         }
 
         if ($arquivo["size"] > 2097152) {
 
-            $response["error"] = "Arquivo muito grande! Max: 2MB";
+             $response["error"] = "Arquivo muito grande! Max: 2MB";
 
         }
 
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($extensao != "jpg" && $extensao != "png") {
 
-            $response["error"] = "Tipo de arquivo não aceito";
+             $response["error"] = "Tipo de arquivo não aceito";
 
         }
 
@@ -98,9 +98,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $deu_certo = move_uploaded_file($arquivo["tmp_name"], $path);
 
-        if ($deu_certo && empty($response["error"])) {
+        if ($deu_certo && empty( $response["error"])) {
 
-            $mysqlInsert = "INSERT INTO jogadores(email, nick, senha, foto, path) VALUES(:email, :nick, :senha, :foto, :path)";
+            $saldo = 0;
+
+            $vitorias = 0;
+
+            $mysqlInsert = "INSERT INTO jogadores(email, nick, senha, foto, path, saldo, vitorias) VALUES(:email, :nick, :senha, :foto, :path, :saldo, :vitorias)";
 
             $pdo = Conexao::conectar(__DIR__ . "/../conf/conf.ini");
 
@@ -111,7 +115,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ":nick" => $nick,
                 ":senha" => $senha,
                 ":foto" => $nomeDoArquivo,
-                ":path" => $path
+                ":path" => $path,
+                ":saldo" => $saldo,
+                ":vitorias" => $vitorias
             ]);
 
             $usuario = $stmt->fetch();
@@ -120,14 +126,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 header("Location: http://localhost:8000/public/");
 
-                exit();
+                exit;
 
             }
 
         }
 
     }
-
+    
     echo json_encode($response);
+
 }
 

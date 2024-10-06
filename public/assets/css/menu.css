@@ -194,6 +194,15 @@ input[type="checkbox"] {
     margin-left: 45px;
 }
 
+.config-menu .opcoes li{
+    display: flex;
+    padding-left: 30px;
+}
+
+.opcoes li p{
+    color: rgb(98,35,11);
+}
+
 @keyframes opcoesMoveShow{
     from{
         opacity: 0;
@@ -249,4 +258,53 @@ input[type="checkbox"] {
 
 .jogadores img{
     height: 20px;
+}
+
+.opcoes-cima{
+    display: flex;    
+}
+
+@media (max-width: 400px){
+ 
+    .menu{
+        margin-top: 75px;
+    }
+    
+    @keyframes menuCloseMove {
+        from{right: 0%;}
+        to{right: -30%;}
+    }
+    
+    @keyframes menuShowMove {
+        from{right: -30%;}
+        to{right: 0%;}
+    }
+
+    .config-menu{
+        height: 100%;
+        width: 100%;
+        margin-top: 55px;
+    }
+    
+    .opcoes{
+        width: 100%;
+    }
+
+    .config-menu .opcoes li img{
+        width: 30px;
+        height: 30px;
+    }
+
+    #checkHistori, #rederecionar-historico{
+        display: none;
+    }   
+
+    .config-menu .opcoes li p{
+        display: none;
+    }
+
+    .tela-cheia, .audio, .musica{
+        flex-direction: column;
+    }
+    
 }
