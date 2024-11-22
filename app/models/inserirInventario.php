@@ -10,7 +10,7 @@ require_once "../conf/Conexao.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $response = [];
+    $error = "";
 
     //Pegar infos do item
     $infoItem = $_POST["infoItem"];
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $custo = (int)$custoSemSimbolo;
 
     //Toda compra faz com que o item seja equipado automaticamente
-    $equipado = $infoSeparadas[3];
+    $equipado = trim($infoSeparadas[3]);
     
     //Conseguir o saldo
     $id = $_SESSION["id"];
@@ -88,14 +88,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ":equipado" => $equipado
         ]);
 
+        $_SESSION["sucessoLoja"] = "Compra bem sucedida!";
+
     }else{
 
-         $response["error"] = "Saldo insuficiente";
+        $error = "Saldo insuficiente";
+
+    }
+
+    if(!empty($error)){
+        
+        $_SESSION["errorLoja"] = $error;
 
     }
 
     header("Location: http://localhost:8000/public/");
     
-    echo json_encode($response);
 
 }

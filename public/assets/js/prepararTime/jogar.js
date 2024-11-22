@@ -1,4 +1,521 @@
-document.addEventListener("DOMContentLoaded", ()=>{   
+document.addEventListener("DOMContentLoaded", ()=>{  
+    
+    let cards = document.querySelectorAll(".card");
+
+    let cardVendido = localStorage.getItem("vendido");
+
+    cardVendido = JSON.stringify(cardVendido);
+    
+    const atualizar =  document.getElementById("atualizar");
+
+    let vendeuCarta = false;
+
+    if(cardVendido !== null && cardVendido !== "null"){
+
+        vendeuCarta = true;
+
+    }
+
+    function exibirCard(){  
+
+        const tipoCard = document.getElementById("tipoCard");
+
+        const CardTemplate = document.getElementById(tipoCard.value);
+
+        let nomes = [];
+
+        let ataques = [];
+
+        let defesas = [];
+        
+        let personagensObjeto = localStorage.getItem("personagens");
+
+        if(personagensObjeto){
+            
+            let personagensObjetoSeparado = personagensObjeto.split("{");
+
+            let arrayCaracteristicaString = [];
+
+            Array.from(personagensObjetoSeparado).forEach((personagemObjetoSeparado)=>{
+
+                let caracteristicaString = personagemObjetoSeparado.split(",");
+
+                arrayCaracteristicaString.push(caracteristicaString);
+
+            });
+            
+            Array.from(arrayCaracteristicaString).forEach((fraseCaracteristicaString)=>{
+
+                Array.from(fraseCaracteristicaString).forEach((palavraCaracteristicaString)=>{
+                                
+                    let palavra = palavraCaracteristicaString.split('"');
+
+                    palavra.forEach((caracteristica, index)=>{
+
+                        if(caracteristica == "nome"){
+                            
+                            nomes.push(palavra[index+2]);
+
+                        }else if(caracteristica == "vida" || caracteristica == "ataque"){
+
+                            let numTratar = palavra[index+1];
+
+                            numTratar = numTratar.replace(":" , "");
+
+                            numTratar = parseInt(numTratar);
+
+                            if(caracteristica == "vida"){
+
+                                defesas.push(numTratar);
+
+                            }else{
+
+                                ataques.push(numTratar);
+
+                            }
+
+                        }
+
+                    });                        
+
+                });
+
+            });
+                
+            if(cards.length !== 0){
+                    
+                let cardsNaoSlotOuCongelado = [];
+
+                cards.forEach((card)=>{
+                    
+                    let verificarClone = document.querySelector("." + card.classList[1] + "Clone");
+
+                    if(!card.classList.contains("slots") && !card.classList.contains("congelado")){
+
+                        cardsNaoSlotOuCongelado.push(card.classList[1]);
+
+                    }
+
+                    if(verificarClone !== null && !verificarClone.classList.contains("slots")){
+
+                        cardsNaoSlotOuCongelado.push(card.classList[1] + "Clone");
+
+                    }
+
+                });
+                
+                if(cardsNaoSlotOuCongelado.length !== 0){
+
+                    let qualClonar = [];
+
+                    cards.forEach((card, index)=>{
+
+                        if(card.classList.contains("slots")){
+
+                            qualClonar.push(card.classList[1]);
+
+                        }
+
+                    });
+
+                    qualClonar.forEach((cartaoClonado)=>{
+
+                        let cardClonar = document.querySelector("." + cartaoClonado);
+                        
+                        let verificarClone = document.querySelector("." + cartaoClonado + "Clone");
+
+                        if(verificarClone == null || verificarClone.classList.contains("slots")){
+
+                            let clone = cardClonar.cloneNode(true); 
+                            
+                            let number = cartaoClonado.split('')[4];
+
+                            clone.style.top = "45%";
+    
+                            if(number == 1){
+                                
+                                clone.style.left = "15%";
+    
+                            }else if(number == 2){
+                                
+                                clone.style.left = "27%";
+    
+                            }else if(number == 3){
+    
+                                clone.style.left = "39%";
+    
+                            }else if(number == 4){
+    
+                                clone.style.left = "51%";
+    
+                            }else{
+                                
+                                clone.style.left = "63%";
+    
+                            }
+    
+                            clone.classList.add(cartaoClonado + "Clone");
+
+                            clone.classList.remove("slots");
+
+                            for(let i = 1; i <= 5; i++){
+
+                                if(clone.classList.contains(`slot${i}`)){
+        
+                                    clone.classList.remove(`slot${i}`);
+        
+                                }
+        
+                            }
+                            
+                            let container = document.getElementById("container");
+    
+                            container.appendChild(clone);
+                            
+                        }
+
+                    });
+
+                } 
+
+                if(nomes.length !== 0){
+                    
+                    if(vendeuCarta){
+
+                        cards.forEach((card)=>{
+
+                            if(card == cardVendido){
+
+                                card.style.display =  "block";
+
+                                card.style.top = "45%";
+
+                                if(card.classList[1] == "card1"){
+
+                                    card.style.left = "15%";
+
+                                }else if(card.classList[1] == "card2"){
+
+                                    card.style.left = "27%";
+
+                                } else if(card.classList[1] == "card3"){
+
+                                    card.style.left = "39%";
+
+                                } else if(card.classList[1] == "card4"){
+
+                                    card.style.left = "51%";
+
+                                } else{
+
+                                    card.style.left = "63%";
+
+                                }
+
+                            }
+
+                        });
+
+                        vendeuCarta = false;
+
+                        localStorage.removeItem("vendido");
+
+                    }
+
+                    cardsNaoSlotOuCongelado.forEach((cardMudar, index)=>{       
+
+                        let nome = nomes[index];
+
+                        let vida = defesas[index];
+
+                        let ataque = ataques[index];
+
+                        let maldade = document.querySelector("." + cardMudar);
+
+                        maldade.classList.add("roletar");
+
+                        let mudarImagem = document.querySelector("." + cardMudar).querySelector(".foto-p");
+
+                        if(nome == "Pilaf" || nome == "Tartaruga do Mestre Kame"){                        
+
+                            mudarImagem.src = `http://localhost:8000/public/assets/midias/personagens/${nome}.png`;
+                            
+                            mudarImagem.style.height = "120px";
+
+                            mudarImagem.style.marginLeft = "0px";
+
+                            if(nome == "Pilaf"){
+
+                                mudarImagem.style.marginLeft = "20px";
+
+                            }else{
+
+                                mudarImagem.style.height = "80px";
+
+                                
+                                mudarImagem.style.marginLeft = "10px";
+
+                            }
+
+                        }else{
+
+                            mudarImagem.src = `http://localhost:8000/public/assets/midias/personagens/${nome}.webp`;
+                            
+                            mudarImagem.style.height = "120px";
+
+                            mudarImagem.style.marginLeft = "0px";
+
+                        }
+                            
+                        if(tipoCard.value === "Cardfuturista") {
+
+                            let mudarVida = document.querySelector("." + cardMudar).querySelector(".vidap");
+
+                            mudarVida.innerHTML = vida;
+
+                            let mudarAtaque = document.querySelector("." + cardMudar).querySelector(".ataquep");
+
+                            mudarAtaque.innerHTML = ataque;
+
+                            let mudarNome = document.querySelector("." + cardMudar).querySelector(".nomep");
+
+                            mudarNome.innerHTML = nome;
+
+                        } else if (tipoCard.value === "CardDourado") {
+
+                            let mudarNome = document.querySelector("." + cardMudar).querySelector(".centro .nome");
+                            
+                            mudarNome.innerHTML = nome;
+
+                            let mudarVida = document.querySelector("." + cardMudar).querySelector(".def").getElementsByTagName("h1")[1];
+
+                            mudarVida.innerHTML = vida;
+
+                            let mudarAtaque = document.querySelector("." + cardMudar).querySelector(".atk").getElementsByTagName("h1")[1];
+
+                            mudarAtaque.innerHTML = ataque;
+
+                        } else if (tipoCard.value === "CardOriental") {
+
+                            let mudarNome = document.querySelector("." + cardMudar).querySelector(".apelidop");
+
+                            mudarNome.innerHTML = nome;
+
+                            let mudarVida = document.querySelector("." + cardMudar).querySelector(".dep");
+
+                            mudarVida.innerHTML = `DEF ${vida}`;
+
+                            let mudarAtaque = document.querySelector("." + cardMudar).querySelector(".akp");
+
+                            mudarAtaque.innerHTML = `ATK ${ataque}`;
+
+                        } else if (tipoCard.value === "CardNormal") {
+
+                            let mudarNome = document.querySelector("." + cardMudar).querySelector(".desc .nome p");
+
+                            mudarNome.innerHTML = nome;
+
+                            let mudarVida = document.querySelector("." + cardMudar).querySelector(".var-per p:nth-child(2)");
+
+                            mudarVida.innerHTML = vida;
+
+                            let mudarAtaque = document.querySelector("." + cardMudar).querySelector(".var-per p:nth-child(4)");
+
+                            mudarAtaque.innerHTML = ataque;
+
+                        }   
+
+                    });
+
+                }
+
+            }else{
+
+                for(let i = 1; i <= nomes.length; i++){
+            
+                    let nome = nomes[i-1];
+
+                    let vida = defesas[i-1];
+
+                    let ataque = ataques[i-1];
+                    
+                    let clone = CardTemplate.content.cloneNode(true);
+
+                    let cardMudar = clone.querySelectorAll(".card");
+
+                    Array.from(cardMudar).forEach((cardMudarClasses)=>{
+
+                        let cardNumClasse = `card${i}`;
+
+                        cardMudarClasses.classList.replace(cardMudarClasses.classList[1], cardNumClasse);
+
+                    });
+                    
+                    let mudarImagem = clone.querySelector(".foto-p");
+
+                    if(nome == "Pilaf" || nome == "Tartaruga do Mestre Kame"){                        
+
+                        mudarImagem.src = `http://localhost:8000/public/assets/midias/personagens/${nome}.png`;
+                        
+                        mudarImagem.style.height = "120px";
+
+                        mudarImagem.style.marginLeft = "0px";
+
+                        if(nome == "Pilaf"){
+
+                            mudarImagem.style.marginLeft = "20px";
+
+                        }else{
+
+                            mudarImagem.style.height = "80px";
+
+                            
+                            mudarImagem.style.marginLeft = "10px";
+
+                        }
+
+                    }else{
+
+                        mudarImagem.src = `http://localhost:8000/public/assets/midias/personagens/${nome}.webp`;
+                        
+                        mudarImagem.style.height = "120px";
+
+                        mudarImagem.style.marginLeft = "0px";
+
+                    }
+
+                    if (tipoCard.value === "Cardfuturista") {
+
+                        let mudarNomeVida = clone.querySelector(".vidap");
+
+                        mudarNomeVida.innerHTML = vida;
+
+                        let mudarNomeAtaque = clone.querySelector(".ataquep");
+
+                        mudarNomeAtaque.innerHTML = ataque;
+
+                        let mudarNome = clone.querySelector(".nomep");
+
+                        mudarNome.innerHTML = nome;
+
+                    } else if (tipoCard.value === "CardDourado") {
+
+                        let mudarNome = clone.querySelector(".centro .nome");
+                        
+                        mudarNome.innerHTML = nome;
+
+                        let mudarVida = clone.querySelector(".def").getElementsByTagName("h1")[1];
+
+                        mudarVida.innerHTML = vida;
+
+                        let mudarAtaque = clone.querySelector(".atk").getElementsByTagName("h1")[1];
+
+                        mudarAtaque.innerHTML = ataque;
+
+                    } else if (tipoCard.value === "CardOriental") {
+
+                        let mudarNome = clone.querySelector(".apelidop");
+
+                        mudarNome.innerHTML = nome;
+
+                        let mudarVida = clone.querySelector(".dep");
+
+                        mudarVida.innerHTML = `DEF ${vida}`;
+
+                        let mudarAtaque = clone.querySelector(".akp");
+
+                        mudarAtaque.innerHTML = `ATK ${ataque}`;
+
+                    } else if (tipoCard.value === "CardNormal") {
+
+                        let mudarNome = clone.querySelector(".desc .nome p");
+
+                        mudarNome.innerHTML = nome;
+
+                        let mudarVida = clone.querySelector(".var-per p:nth-child(2)");
+
+                        mudarVida.innerHTML = vida;
+
+                        let mudarAtaque = clone.querySelector(".var-per p:nth-child(4)");
+
+                        mudarAtaque.innerHTML = ataque;
+
+                    }
+
+                    let container = document.getElementById("container");
+
+                    container.appendChild(clone);
+
+                }
+                
+                return cards = document.querySelectorAll(".card");
+
+            }
+
+        }
+
+    }
+
+
+    function exibirItem(){
+        
+        let itensObjeto = localStorage.getItem("itens");
+
+        let nomes = [];
+
+        if(itensObjeto){
+            
+            let itensObjetoSeparado = itensObjeto.split("{");
+
+            let arrayCaracteristicaString = [];
+
+            Array.from(itensObjetoSeparado).forEach((itemObjetoSeparado)=>{
+
+                let caracteristicaString = itemObjetoSeparado.split(",");
+
+                arrayCaracteristicaString.push(caracteristicaString);
+
+            });
+            
+            Array.from(arrayCaracteristicaString).forEach((fraseCaracteristicaString)=>{
+
+                Array.from(fraseCaracteristicaString).forEach((palavraCaracteristicaString)=>{
+                                
+                    let palavra = palavraCaracteristicaString.split('"');
+
+                    palavra.forEach((caracteristica, index)=>{
+
+                        if(caracteristica == "nome"){
+                            
+                            nomes.push(palavra[index+2]);
+
+                        }
+
+                    });                        
+
+                });
+
+            });
+
+            if(nomes.length !== 0){
+
+                for(let i = 0; i < nomes.length; i++){
+                    
+                    let item = document.getElementById(`item${i+1}`);
+
+                    item.src = `http://localhost:8000/public/assets/midias/itens/${nomes[i]}.png`;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    exibirCard();
+
+    exibirItem();
 
     let moeda = null;
 
@@ -19,14 +536,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
         moeda = 10;
 
     }
+    
 
     let numCard = null;
     
     let numItem = null;
     
     let imgItem = null;
-
-    let cardVendido = null;
 
     let cardCongelado = null;
 
@@ -35,8 +551,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let numGelo = null;
 
     let seMoveuNosSlots = false;
-
-    const cards = document.querySelectorAll(".card");
 
     const itens = document.querySelectorAll(".item");
 
@@ -51,8 +565,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const iClass = document.querySelectorAll(".i");
 
     const container = document.getElementById("container");
-    
-    const atualizar =  document.getElementById("atualizar");
 
     const congelar = document.getElementById("congelar");
 
@@ -61,6 +573,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const gelo = document.querySelectorAll(".gelo");
 
     const descongelar = document.getElementById("descongelar");
+
+    const pareceAtualizar = document.getElementById("parece-atualizar");
 
     atualizarMoeda(0);
 
@@ -76,15 +590,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         if(moeda < 3){
 
-            cards.forEach((card)=>{
+            document.querySelectorAll("*").forEach(element => {
 
-                if(!card.classList.contains("slots")){
-                    
-                    card.draggable = false;
-
-                }
-
-
+                element.setAttribute("draggable", "false");
+                
             });
 
         }
@@ -93,7 +602,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
             atualizar.style.display = "none";
 
+            pareceAtualizar.style.display = "block";
+
         }else{
+            
+            pareceAtualizar.style.display = "none";
 
             atualizar.style.display = "block";
 
@@ -143,6 +656,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     function cardDragAndDrop(){
 
+        atualizarMoeda(0);
+
         let style = null;
 
         slots.forEach((slot)=>{
@@ -167,17 +682,52 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                         if(card == numCard){
 
-                            if(card.classList.contains("slots")){
+                            let verificarClone = document.querySelector("." + card.classList[1] + "Clone");
 
-                                card.classList.replace(card.classList[3], slot.classList[2]);
+                            if(verificarClone !== null && verificarClone.classList[1] == card.classList[1]){
+                                    
+                                if(verificarClone.classList.contains("slots")){
+
+                                    verificarClone.classList.replace(verificarClone.classList[4], slot.classList[2]);
+
+                                }else{
+                                    
+                                    slot.classList.add("ocupado");
+
+                                    let top = getComputedStyle(slot).getPropertyValue("top");
+
+                                    verificarClone.style.top = top;
+
+                                    verificarClone.classList.add("slots");
+
+                                    verificarClone.classList.add(slot.classList[2]);
+
+                                    atualizarMoeda(-3);
+
+                                }                           
 
                             }else{
+                                    
+                                if(card.classList.contains("slots")){
 
-                                slot.classList.add("ocupado")
-                                card.classList.add("slots");
-                                card.classList.add(slot.classList[2]);
+                                    card.classList.replace(card.classList[3], slot.classList[2]);
 
-                                atualizarMoeda(-3);
+                                }else{
+
+                                    slot.classList.add("ocupado");
+
+                                    let top = getComputedStyle(slot).getPropertyValue("top");
+
+                                    card.style.top = top;
+
+                                    card.classList.add("slots");
+
+                                    card.classList.add(slot.classList[2]);
+
+                                    atualizarMoeda(-3);
+
+                                }
+
 
                             }
 
@@ -267,6 +817,50 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                 congelar.style.display = "block";
 
+            }else if(elemento.classList.contains("foto-p")){
+
+                let congImg = 0;
+
+                let vendImg = 0;
+
+                cards.forEach((card)=>{
+
+                    if(card.contains(elemento)){
+
+                        cardCongelado = card;
+
+                        cardVendido = card;
+
+                        if(card.classList.contains("slots")){
+
+                            vendImg = 1;
+
+                        }else{
+
+                            congImg = 1;
+
+                        }
+
+                    }
+
+                });
+
+                if(congImg == 1){
+
+                    congelar.style.display = "block";                    
+
+                }else if(vendImg == 1){
+
+                    vender.style.display = "block";
+
+                }else{
+                    
+                    congelar.style.display = "none";
+                    
+                    vender.style.display = "none";
+
+                }
+
             }else{
 
                 congelar.style.display = "none";
@@ -304,6 +898,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }
 
             atualizarMoeda(-1);
+            
+            exibirCard();
+
+            exibirItem();
 
         });
 
@@ -332,11 +930,45 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                 if(card == cardVendido){
 
+                    localStorage.setItem("vendido", card.classList[1]);
+
                     atualizarMoeda(1);
 
-                    card.remove();
+                    card.style.display = "none";
+
+                    card.classList.remove("slots");
+
+                    let slotCardOcupado = null;
+
+                    for(let i = 1; i <= 5; i++){
+
+                        if(card.classList.contains(`slot${i}`)){
+
+                            slotCardOcupado = `slot${i}`;
+
+                            card.classList.remove(`slot${i}`);
+
+                        }
+
+                    }
+
+                    if(slotCardOcupado !== null){
+
+                        slots.forEach((slot)=>{
+
+                            if(slot.classList[2] == slotCardOcupado){
+
+                                slot.classList.remove("ocupado")
+
+                            }
+
+                        });
+
+                    }
 
                 }
+
+                vendeuCarta = true;
 
             });
 
@@ -349,7 +981,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         let ultimoElementoClicado = null;
 
-        document.addEventListener('click', (event)=>{
+        document.addEventListener("click", (event)=>{
 
             ultimoElementoClicado = event.target;
 
@@ -371,7 +1003,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
             }
 
-            if(cardCongelado == ultimoElementoClicado){
+            if(cardCongelado == ultimoElementoClicado || cardCongelado.contains(ultimoElementoClicado)){
 
                 cards.forEach((card)=>{
 
@@ -382,50 +1014,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     }
     
                 });
-                
-                switch (true){
 
-                    case cardCongelado.classList.contains("card1"):
+                let number = cardCongelado.classList[1].split('')[4];
 
-                        const gelo1 = document.querySelector(".gelo1");
+                let geloFrase = `.gelo${number}`;
 
-                        gelo1.style.display = "flex";
+                let gelo = document.querySelector(geloFrase);
 
-                        break;
-
-                    case cardCongelado.classList.contains("card2"):
-
-                        const gelo2 = document.querySelector(".gelo2");
-
-                        gelo2.style.display = "flex";
-
-                        break;
-
-                    case cardCongelado.classList.contains("card3"):
-
-                        const gelo3 = document.querySelector(".gelo3");
-
-                        gelo3.style.display = "flex";
-
-                        break;
-
-                    case cardCongelado.classList.contains("card4"):
-
-                        const gelo4 = document.querySelector(".gelo4");
-
-                        gelo4.style.display = "flex";
-
-                        break;
-
-                    case cardCongelado.classList.contains("card5"):
-
-                        const gelo5 = document.querySelector(".gelo5");
-
-                        gelo5.style.display = "flex";
-
-                        break;
-
-                }
+                gelo.style.display = "flex";
 
             }else if(itemCongelado == ultimoElementoClicado){
                 
@@ -492,8 +1088,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
         });
 
     }
-
-
 
     function mostrarDescongelar(){
     
@@ -690,7 +1284,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                         container.appendChild(itemEfect);
 
-                        const cardLeft = getComputedStyle(card);
+                        let cardLeft = getComputedStyle(card);
 
                         itemEfect.style.left = cardLeft.left;
 
@@ -716,6 +1310,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                         });
 
+                        card.classList.add("comEfeitoItem");
+                        
+                        let nomeItemClasse = imgItem.replace(/^.*\/|\.[^.]*\??.*$/g, '');
+
+                        card.classList.add(nomeItemClasse);
+
+
                     }
 
                     numItem = null;
@@ -723,6 +1324,28 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 }
 
             });
+
+        });
+
+    }
+
+    function pareceAtualizarF(){
+
+        pareceAtualizar.addEventListener("click", ()=>{
+
+            const verificarAudioState = verificarAudio();
+
+            const errorSound = new Audio("/public/assets/midias/audios/errorSound.mp3");
+                        
+            if(verificarAudioState == "mudo"){
+
+                errorSound.pause();
+
+            }else{
+            
+                errorSound.play();
+
+            }
 
         });
 
@@ -747,5 +1370,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     definirNumItem();
 
     efeitoItem();
+
+    pareceAtualizarF();
 
 });

@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     const sl = document.getElementById("sl");
                
-    sl.src = "http://localhost:5500/public/assets/midias/silder/1.png";
+    sl.src = "http://localhost:8000/public/assets/midias/silder/1.png";
 
     const popUp = document.querySelectorAll(".pop-up");
 

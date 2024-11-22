@@ -19,7 +19,7 @@ window.addEventListener("load",()=>{
         const turno = document.getElementById("turno");
 
         const vitorias = document.getElementById("vitorias");
-
+        
         if(sessionCards != null){
 
             sessionCards.forEach((card)=>{
@@ -27,7 +27,6 @@ window.addEventListener("load",()=>{
                 const cardClasses =  Object.values(card.classes);
 
                 let possuiTodasClasses = false;
-
 
                 cards.forEach((cCard)=>{
 
@@ -40,7 +39,10 @@ window.addEventListener("load",()=>{
                         }else if(cardClasses.length == 4){
 
                             cCard.classList.add(cardClasses[2]);
+
                             cCard.classList.add(cardClasses[3]);
+
+                            cCard.style.top = "15%";
 
                             slots.forEach((slot)=>{
 

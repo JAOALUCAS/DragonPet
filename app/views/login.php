@@ -1,3 +1,76 @@
+<?php
+
+require_once "../conf/Conexao.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $error = "";
+
+    if (isset($_POST["email"]) && isset($_POST["senha"])) {
+
+        $email = $_POST["email"];
+
+        $senha = $_POST["senha"];
+
+        $mysql = "SELECT * FROM jogadores WHERE email = :email";
+
+        $pdo = Conexao::conectar('../conf/conf.ini');
+
+        $stmt = $pdo->prepare($mysql);
+        
+        $stmt->execute([":email" => $email]);
+
+        // Verifica se o usuário foi encontrado
+        $usuario = $stmt->fetch();
+
+        if ($usuario) { 
+
+            if (password_verify($senha, $usuario["senha"])) {
+
+                if (!isset($_SESSION)) {
+
+                    session_start();
+
+                }
+
+                $_SESSION["id"] = $usuario["id"];
+
+                $_SESSION["nome"] = $usuario["nick"];
+
+                $_SESSION["path"] = $usuario["path"];
+
+                $_SESSION["saldo"] = $usuario["saldo"];
+
+                header("Location: http://localhost:8000/public/");
+                
+                exit; 
+
+            } else {
+
+                $error = "Senha incorreta";
+
+            }
+
+        } else {
+
+            $error = "Usuário não encontrado";
+
+        }
+
+    }
+
+    if(!empty($error)){
+        
+        echo "<div class='error'>
+                <div class='aviso'>!</div>
+                $error
+            </div>";
+            
+    }
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +81,7 @@
     <link rel="stylesheet" href="../../public/assets/css/conta.css">
     <script src="../../public/assets/js/forms/senha.js"></script>
     <script src="../../public/assets/js/forms/validacao.js"></script>
+    <script src="../../public/assets/js/forms/error.js"></script>
 </head>
 <body>
     
@@ -17,7 +91,7 @@
 
             <h1>Iniciar sessão</h1>
 
-            <form id="form" action="../models/login.php" method="post">
+            <form id="form" action="" method="post">
 
                 <div class="email">
 
@@ -47,7 +121,7 @@
 
             <div class="links">
 
-                <a href="cadastro.html">Não possuo conta</a>
+                <a href="cadastro.php">Não possuo conta</a>
 
                 ou
 

@@ -184,6 +184,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                 comprarBtn.style.backgroundColor = "#B22222";
 
                             });
+                            
+                            comprarForm.action = "../app/models/desequiparInventario.php";
 
                         }else{
 
@@ -202,11 +204,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                 comprarBtn.style.backgroundColor = "#32CD32";
 
                             });
-
+                            
+                            comprarForm.action = "../app/models/equiparInventario.php";
 
                         }
-                        
-                        comprarForm.action = "../app/models/equiparOuDesequipar.php";
 
                     }
 

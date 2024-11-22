@@ -19,19 +19,21 @@ $itens = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 unset($_SESSION["gif"]);
 
+unset($_SESSION["titulo"]);
+
 if (!empty($itens)) {
 
     $data = [];
 
     for($i = 0; $i < count($itens); $i++){
 
-        if($itens[$i]["categoria"] == "titulo" && $itens[$i]["equipado"] == " equipado"){
+        if($itens[$i]["categoria"] == "titulo" && $itens[$i]["equipado"] == "equipado"){
                 
             $_SESSION["titulo"] = $itens[$i]["nome_item"];
 
         }
 
-        if($itens[$i]["categoria"] == "gif" && $itens[$i]["equipado"] == " equipado"){
+        if($itens[$i]["categoria"] == "gif" && $itens[$i]["equipado"] == "equipado"){
 
             switch($itens[$i]["nome_item"]){
                 case " Goku e kuririn":
@@ -75,21 +77,50 @@ if (!empty($itens)) {
         localStorage.setItem('itens', JSON.stringify(itens));
     </script>";
 
-    $displayStyle = isset($_SESSION["gif"]) ? "block" : "none";
+}
 
-    $mysql = "SELECT saldo FROM jogadores WHERE id = :id";
 
-    $pdo = Conexao::conectar('../app/conf/conf.ini');
+$mysql = "SELECT saldo FROM jogadores WHERE id = :id";
 
-    $stmt = $pdo->prepare($mysql);
+$pdo = Conexao::conectar('../app/conf/conf.ini');
 
-    $stmt->execute([":id" => $id]);
+$stmt = $pdo->prepare($mysql);
 
-    $saldoArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$stmt->execute([":id" => $id]);
 
-    $saldo = $saldoArray[0]["saldo"];
+$saldoArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$saldo = $saldoArray[0]["saldo"];
+
+
+if(isset($_SESSION["errorLoja"])){
+
+    $error = $_SESSION["errorLoja"];
+
+    unset($_SESSION["errorLoja"]);
+    
+    echo "<div class='error'>
+            <div class='aviso'>!</div>
+            $error
+        </div>";
 
 }
+
+if(isset($_SESSION["sucessoLoja"])){
+
+    $sucesso = $_SESSION["sucessoLoja"];
+    
+    unset($_SESSION["sucessoLoja"]);
+
+    echo "<div class='certo'>
+            <div class='bom'>✔</div>
+                $sucesso
+        </div>";
+
+}
+
+
+$displayStyle = isset($_SESSION["gif"]) ? "block" : "none";
 
 ?>
 
@@ -108,6 +139,7 @@ if (!empty($itens)) {
     <link rel="stylesheet" href="assets/css/menu.css">
     <link rel="stylesheet" href="assets/css/tutorial.css">
     <link rel="stylesheet" href="assets/css/usuario.css">
+    <script src="assets/js/forms/error.js"></script>
     <script src="assets/js/musicas.js"></script>
     <script src="assets/js/index/index.js"></script>
     <script src="assets/js/index/cutscene.js"></script>
@@ -153,9 +185,9 @@ if (!empty($itens)) {
 
         <div class="buttons">
 
-            <button><a href="../app/views/jogar.php">Jogar</a></button>
+        <a href="../app/views/jogar.php"><button>Jogar</button></a>
 
-            <button id="tutorial">Intruções</button>
+            <button id="tutorial">Instruções</button>
 
             <button id="shop">Shop</button>
 
@@ -697,7 +729,7 @@ if (!empty($itens)) {
 
                     <div id="slider" class="slider">
 
-                        <img id="sl" src="">
+                        <img id="sl" src="assets/midias/silder/1.png">
 
                     </div>
 
@@ -731,7 +763,7 @@ if (!empty($itens)) {
 
                             <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
 
-                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : 'Nenhum título equipado'; ?></p>
+                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : ''; ?></p>
                             
                         </div>
 
@@ -763,7 +795,7 @@ if (!empty($itens)) {
 
                         <div class="titulo-card">                            
 
-                            <p class="n">#3</p>
+                            <p class="n">#1</p>
 
                             <h2>Card futurista</h2>
 
@@ -869,7 +901,7 @@ if (!empty($itens)) {
 
                             <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
 
-                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : 'Nenhum título equipado'; ?></p>
+                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : ''; ?></p>
                             
                         </div>
 
@@ -1201,7 +1233,7 @@ if (!empty($itens)) {
 
                             <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
 
-                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : 'Nenhum título equipado'; ?></p>
+                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : ''; ?></p>
                             
                         </div>
 
@@ -1886,7 +1918,7 @@ if (!empty($itens)) {
 
                             <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
 
-                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : 'Nenhum título equipado'; ?></p>
+                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : ''; ?></p>
                         
                         </div>
 
@@ -2224,7 +2256,7 @@ if (!empty($itens)) {
 
                             <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
 
-                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : 'Nenhum título equipado'; ?></p>
+                            <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : ''; ?></p>
                         
                         </div>
 
@@ -2382,7 +2414,7 @@ if (!empty($itens)) {
 
                         <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
 
-                        <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : 'Nenhum título equipado'; ?></p>
+                        <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : ''; ?></p>
                         
                     </div>
 

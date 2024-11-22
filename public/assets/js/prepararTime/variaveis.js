@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         vida = 5;
 
-        turno = 0;
+        turno = 1;
 
         vitorias = 0;
 

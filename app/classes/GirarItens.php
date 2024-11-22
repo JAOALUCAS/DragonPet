@@ -20,7 +20,7 @@ class GirarItens
             6 => ['Pílula', 'Aumenta a vida em 5 pontos'],
             7 => ['Carne de dinossauro', 'Aumenta o ataque em 3 pontos'],
             8 => ['Arroz Cozido', 'Aumenta a vida em 2 pontos e a velocidade de ataque em 5%'],
-            9 => ['Frutas Frescas', 'Aumenta a vida em 3 pontos'],
+            9 => ['Frutas Fresca', 'Aumenta a vida em 3 pontos'],
             10 => ['Legumes Variados', 'Aumenta o ataque em 1 ponto e a vida em 2 pontos'],
             11 => ['Tofu', 'Aumenta a vida em 4 pontos'],
             12 => ['Macarrão Instantâneo', 'Aumenta a velocidade de ataque em 5% e o ataque em 1 ponto']
@@ -42,12 +42,12 @@ class GirarItens
             3 => ['Semente dos Deuses', 'Recupera totalmente a vida do personagem uma vez por batalha'],
             4 => ['Brave Sword', 'Aumenta o ataque em 4 pontos e a velocidade de ataque em 5%'],
             5 => ['Brincos Potara', 'Permite fusão com outro personagem, combinando suas vidas e ataques'],
-            6 => ['Esfera do Dragão', 'Coletar todas as sete esferas permite realizar um desejo poderoso (balanceamento a ser definido)'],
+            6 => ['Esfera do Dragão', 'Faça um desejo!'],
             7 => ['Great Saiyaman Costume', 'Aumenta a vida em 6 pontos e o ataque em 3 pontos'],
             8 => ['Weighted Training Clothes', 'Aumenta a vida em 8 pontos, mas diminui a velocidade de ataque em 5%']
         ],
         'Lendário' => [
-            1 => ['Super esferas do dragão', 'Coletar todas as sete super esferas permite realizar um desejo extremamente poderoso (balanceamento a ser definido)']
+            1 => ['Super esferas do dragão', 'Faça um desejo super poderoso!']
         ]
     ];
     

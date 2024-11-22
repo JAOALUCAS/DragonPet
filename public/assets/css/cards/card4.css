@@ -1,0 +1,209 @@
+
+.card{
+    position: absolute;
+    height: 150px;
+    width: 130px;
+    border: 5px black solid;
+    top: 45%;
+}
+
+.card{
+    z-index: 1;
+    background-color: rgb(119, 26, 26);
+    color: yellow;
+}
+
+.card .perso{
+    position: relative;
+    top: 13%;
+    left: 11%;
+}
+
+.card .perso img{
+    filter: grayscale(50%);
+    height: 120px;
+    width: 100px;
+}
+
+.card .header{
+    position: absolute;
+    z-index: 2;
+    height: 20px;
+    width: 80px;
+    left: 20%;
+    top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6px;
+}
+
+.card .nome{
+    position: absolute;
+    left: 25%;
+}
+
+.card .sheilong{
+    position: relative;
+    height: 85px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.card .desc-sheilong{
+    margin-bottom: -150px;
+    transform: rotateY(180deg);
+}
+
+.card .triangulo{
+    position: absolute;
+    top: 1%;
+    height: 20px;
+    width: 50px;
+    background-color: rgb(138, 5, 5);
+    border: 5px orange solid;
+    border-top: none;
+    border-radius: 40%;
+}
+
+.card .bordas{
+    position: absolute;
+    height: 140px;
+    width: 20px;
+    margin: 5px;
+}
+
+.card .laterais{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    height: 125px;
+    width: 5px;
+    background-color: yellow;
+}
+
+.card .laterais img{
+    width: inherit;
+    height: 10px;
+    margin-top: 1px;
+}
+
+.card .quinas{
+    position: absolute;
+    z-index: 3;
+    height: 20px;
+    width: inherit;
+    background-image: url(../../midias/itens/Nuvem\ do\ Goku.png);
+    background-size: cover;
+}
+
+.card .cima{
+    display: flex;
+}
+
+.card .cima .verde{
+    height: 5px;
+    width: 10px;
+    background-color: green;
+    border-top: 1px yellow solid;
+    border-left: 1px yellow solid;
+}
+
+.card .quadrado{
+    height: 4px;
+    width: 5px;
+    background-color: yellow;
+    border: 1px red solid;
+}
+
+.card .quad-verd{
+    position: absolute;
+    margin: 0.5px;
+    height: 3px;
+    width: 3px;
+    background-color: green;
+}
+
+.card .meio{
+    display: flex;
+    margin-top: -2px;
+}
+
+.card .meio .verde{
+    height: 5px;
+    width: 5px;
+    background-color: green;
+    border-left: 1px yellow solid;
+}
+
+.card .baixo{
+    margin-top: -1px;
+}
+
+.card .quina-baixo-esq{
+    margin-top: -5px;
+    transform: rotateZ(180deg);
+    transform: rotateX(180deg);
+}
+
+.borda-dir{
+    right: 0%;
+}
+
+.card .quina-cima-dir{
+    transform: rotateY(180deg);
+}
+
+.card .quina-baixo-dir{
+    margin-top: -5px;
+    transform: rotateY(180deg);
+    transform: rotateZ(180deg);
+}
+
+.card .lateral-dir{
+    margin-left: 14px;
+}
+
+.card .desc{
+    position: absolute;
+    bottom: 20%;
+    right: 75%;
+}
+
+.card .desc .triangulo{
+    transform: rotateZ(180deg);
+}
+
+.card .var{
+    position: absolute;
+    font-size: 8px;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.card .atk, .def{
+    width: 40px;
+    display: flex;
+}
+
+.apelidop, .akp, .dep{
+    color: #e1b12c;
+}
+
+.apelidop{
+    margin-left: 7px;
+    overflow: hidden;
+}
+
+.foto-personagem{
+    margin-top: 15px;
+    position: absolute;
+    z-index: 0;
+}
+
+.foto-personagem img{
+    height: 120px;
+}

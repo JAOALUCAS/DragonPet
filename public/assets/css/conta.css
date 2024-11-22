@@ -133,34 +133,6 @@ input[type="file"]{
     margin-left: 150px;
 }
 
-p{
-    font-size: 17px;
-    margin-bottom: 20px;
-}
-
-.excluir{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-size: 15px;
-    width: 100%;
-}
-
-.certeza{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 30px 0px;
-}
-
-input[type="checkbox"]{
-    height: 15px;
-    width: 15px;
-    margin-top: 10px;
-    margin-left: -30px;
-}
-
 .ocultar-senha{
     position: absolute;
     height: 25px;
@@ -199,6 +171,55 @@ span{
     margin-bottom: 2px;
     padding-bottom: 1px;
     border-bottom: 1px #afafaf solid;
+}
+
+.aviso, .bom{
+    height: 25px;
+    width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 2px white solid;
+    border-radius: 50%;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.error, .certo{
+    height: 50px;
+    width: 100vw;
+    color: white;
+    background-color: #e63636;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    animation: errorAnimation 1s ease-in-out;
+    cursor: pointer;
+}
+
+.certo{
+    background-color: #4cd137;
+}
+
+.certo a{
+    color: white;
+}
+
+@keyframes errorAnimation{
+    from{margin-top: -100px;}
+    to{margin-top: 0px;}
+}
+
+.error-reverse{
+    animation: errorAnimationReverse 1s ease-in-out;
+}
+
+@keyframes errorAnimationReverse{
+    from{margin-top: 0px;}
+    to{margin-top: -100px;}
 }
 
 @media  (max-width: 400px) {

@@ -48,43 +48,13 @@
     pointer-events: none;
     width: 30px;
     height: 30px;
-    bottom: 0%; 
+    top: 0%; 
     left: 0%; 
 }
 
-
 .i img{
     height: 30px;
-}
-
-.i1{
-    animation: itemAnimate 5s infinite;
-}
-
-.i2{
-    bottom: 0%; 
-    left: 30%; 
-    animation: itemAnimate 4.5s infinite;
-}
-
-.i3{
-    bottom: 21%;
-    left: 55%;
-    animation: itemAnimate 3.5s infinite;
-}
-
-
-.i4{
-    bottom: 3%;
-    left: 70%;
-    animation: itemAnimate 3s infinite;
-}
-
-
-.i5{
-    bottom: 10%;
-    left: 90%;
-    animation: itemAnimate 2.5s infinite;
+    animation: itemAnimate 3s infinite ease-in-out;
 }
 
 .crosshair{
@@ -96,7 +66,18 @@
     pointer-events: none;
 }
 
+.comEfeitoItem{
+    box-shadow: 0 0 15px #cc8e35;
+}
+
 @keyframes itemAnimate{
-    to{top: 0%;}
-    from{top: 100%;}
+    0%, 100%{
+        transform: rotate(0);
+    }
+    40%{
+        transform: rotate(30deg);
+    }
+    70%{
+        transform: rotate(-30deg);
+    }
 }

@@ -1,0 +1,214 @@
+.card{
+    position: absolute;
+    height: 150px;
+    width: 130px;
+    border: 5px black solid;
+    top: 45%;
+    background-color: #968362;
+}
+
+.card .header{
+    height: 20px;
+    width: 100%;
+    background-color: yellow;
+    border-bottom: 1px orange solid;
+}
+
+.card .header img{
+    height: 20px;
+    width: 20px;
+    background-color: black;
+}
+
+.card .centro{
+    position: absolute;
+    top: -1%;
+    left: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url(../../fonte/Roboto-Black.ttf);
+}
+
+.card .centro .nome{
+    width: 100%;
+    position: absolute;
+    font-size: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    -webkit-text-stroke: 0.1px white;
+}
+
+.card .barras{
+    position: relative;
+    display: flex;
+}
+
+.card .barra{
+    height: 20px;
+    width: 1px;
+    margin: 2px;
+    background-color: black;
+    opacity: 0.3;
+    transform: rotateZ(50deg);
+}
+
+.card .desc{
+    height: 40px;
+    width: 100%;
+    background-color: orange;
+    border-top: 1px black solid;
+    position: absolute;
+    bottom: 0%;
+}
+
+.card .desc .logo {
+    position: absolute;
+    z-index: 2;
+    left: 30%;
+    bottom: 70%;
+}
+
+.card .desc .logo img{
+    height: 20px;
+}
+
+.card .perso{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card .perso img{
+    border-right: 5px rgb(176, 179, 13) solid;
+    border-left: 5px rgb(176, 179, 13) solid;
+    height: 100px;
+    width: 120px;
+}
+
+.card .circulo{
+    margin-left: 5px;
+    position: relative;
+    border-radius: 50%;
+}
+
+.card .circulo-verm{
+    transform: rotateX(-30deg);
+    top: -20%;
+    height: 50px;
+    width: 100px;
+    border: 2px red solid;
+    border-left: 10px red solid;
+    border-right: 10px red solid;
+    border-bottom: none;
+}
+
+.card .circulo-azul{
+    transform: rotateX(-40deg);
+    top: -120%;
+    left: 17%;
+    height: 40px;
+    width: 50px;
+    border: 2px blue solid;
+    border-left: 10px blue solid;
+    border-right: 10px blue solid;
+    border-bottom: none;
+}
+
+@font-face{
+    font-family: 'Techno hideo';
+    src: url(../../public/assets/fonte/techno_hideo.ttf);
+}
+
+.card .atk{
+    height: 15px;
+    width: 70%;
+    position: absolute;
+    background: linear-gradient(yellow, orange);
+    border: 2px rgb(102, 15, 15) solid;  
+    border-left: none;  
+    top: -10%;
+    left: 15%;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    font-family: 'Techno hideo';
+    color: red;
+    -webkit-text-stroke: 0.1px white;
+}
+
+.card .atk .atkh{
+    margin-left: 5px;
+    color: rgb(3, 3, 104);
+}
+
+.card .dragon{
+    position: absolute;
+    background: linear-gradient(yellow, orange);
+    height: 25px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px rgb(102, 15, 15) solid;      
+    z-index: 2;
+}
+
+.card .dragon img{
+    height: 20px;
+}
+
+.card .atk-dragon{
+    top: -10%;
+}
+
+.card .def{
+    height: 15px;
+    width: 70%;
+    position: absolute;
+    background: linear-gradient(yellow, orange);
+    border: 2px rgb(102, 15, 15) solid;  
+    border-right: none;  
+    bottom: -20%;
+    left: 6%;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Techno hideo';
+    color: blue;
+    -webkit-text-stroke: 0.1px white;
+}
+
+.atk h1 , .def h1{
+    font-size: 8px;
+}
+
+.card .def .defh{
+    color: red;
+}
+
+.card .def-dragon{
+    top: 40%;
+    right: 0%;
+}
+
+.foto-personagem{
+    position: absolute;
+    z-index: 0;
+}
+
+.foto-personagem img{
+    height: 120px;
+}

@@ -41,7 +41,7 @@ body, html {
     top: 0%;
     left: 0%;
     display: flex;
-    width: 50%;
+    width: 55%;
     height: 50px;
     justify-content: space-evenly;
 }
@@ -62,7 +62,6 @@ i{
     top: -15%;
     font-size: 2rem;
 }
-
 
 #vidaI{
     left: 160px;
@@ -87,7 +86,10 @@ i{
 }
 
 .nome-time{
-    border-left: 1px black solid;;
+    width: 100px;
+    border-left: 1px black solid;
+    overflow: hidden;
+    padding-left: 10px;
 }
 
 .buttons-cima{
@@ -226,15 +228,28 @@ button {
     margin-right: 10px;
 }
 
-#atualizar img{
+#parece-atualizar{
+    display: none;
+    position: absolute;
+    z-index: 1;
+    left: 0%;
+    cursor: pointer;
+}
+
+#atualizar{
+    cursor: pointer;
+}
+
+#atualizar img, #parece-atualizar img{
     width: 50px;
 }
 
-#atualizar span{
+#atualizar span, #parece-atualizar span{
     margin-bottom: 50px;
 }
 
 #finalizar{
+    cursor: pointer;
     width: 350px;
 }
 
@@ -266,10 +281,9 @@ button {
     margin-left: 5px;
 }
 
-
 .gelo{
     position: absolute;
-    height: 180px;
+    height: 160px;
     width: 130px;
     background-color: rgba(54, 114, 192, 0.4);
     z-index: 5;
@@ -281,186 +295,23 @@ button {
     top: 45%;
 }
 
-.card{
-    position: absolute;
-    height: 150px;
-    width: 130px;
-    background-color: white;
-    border: 5px black solid;
-    top: 45%;
-    left: 15%;
-    display: none;
-}
-
-.header{
-    display: flex;
-}
-
-.lado-esquerdo, .lado-direito{
-    position: absolute;
-    z-index: 3;
-    width: 45px;
-    height: 45px;
-    background-color: black;
-}
-
-.lado-direito{
-    height: 35px;
-    width: 40px;
-}
-
-.lado-esquerdo{
-    border-bottom-right-radius: 100%;
-}
-
-.lado-direito{
-    border-bottom-left-radius: 50%;
-}
-
-.lado-esquerdo img{
-    height: 30px;
-}
-
-.lado-direito img{
-    height: 40px;
-}
-
-.lado-direito img{
-    margin-left: 8px;
-    margin-top: -5px;
-}
-
-
-.header .laterais{
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    height: 15px;
-    background-color: black;
-}
-
-.lado-direito{
-    right: 0%;
-}
-
-.centro{
-    display: flex;
-    position: absolute;
-    height: 5px;
-    width: 30px;
-    z-index: 3;
-    margin-left: 48px;
-    margin-top: 5px;
-}
-
-.barra{
-    background: linear-gradient(yellow, rgb(202, 62, 62));
-    width: 3px;
-    height: inherit;
-    border-right: 1px black solid;
-}
-
-.barra-lado-esq{
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%;
-}
-
-.barra-lado-dir{
-    border-top-right-radius: 50%;
-    border-bottom-right-radius: 50%;
-}
-
-.desc{
-    width: 100%;
-    height: 50px;
-    position: absolute;
-    z-index: 2;
-    background-color: rgba(255, 255, 255, 0.5);
-    margin-top: 75px;
-    border: 5px rgb(180, 180, 11) solid;
-    pointer-events: none;
-}
-
-.desc::before {
-    content: '';
-    width: 100%;
-    height: 5px;
-    position: absolute;
-    margin-top: 0px;
-    background: linear-gradient(yellow, brown);
-    border: 1px black solid;
-    z-index: 2;
-}
-
-.nome{
-    font-weight: bold;
-    width: 100%;
-    margin-top: 5px;
-    text-align: center;
-    font-size: 10px;
-}
-
-.nome p {
-    margin-top: 7px;
-}
-
-.var-per{
-    position: absolute;
-    display: flex;
-    margin-top: 10px;
-    right: -9%;
-    width: 130px;
-    background-color: black;
-}
-
-.var-per img{
-    height: 30px;
-}
-
-.var-per p{
-    font-size: 20px;
-   font-weight: bold;
-    margin-top: 5px;
-    background: -webkit-linear-gradient(yellow,brown);
-    background-clip: border-box;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 0.1px brown;
-}
-
-.gelo1{
+.card1, .gelo1{
     left: 15%;
 }
 
-.gelo2{
+.card2, .slot2, .gelo2{
     left: 27%;
 }
 
-.gelo3{
+.card3, .slot3, .gelo3{
     left: 39%;
 }
 
-.gelo4{
+.card4, .slot4, .gelo4{
     left: 51%;
 }
 
-.gelo5{
-    left: 63%;
-}
-
-.card2, .slot2{
-    left: 27%;
-}
-
-.card3, .slot3{
-    left: 39%;
-}
-
-.card4, .slot4{
-    left: 51%;
-}
-
-.card5, .slot5{
+.card5, .slot5, .gelo5{
     left: 63%;
 }
 
@@ -471,3 +322,227 @@ button {
 .slots{
     top: 15%;
 }
+
+
+#CardNormal, #CardOriental, #CardDourado, #Cardfuturista{
+    display: none;
+}
+
+.roletar{
+    animation: roletar 1.5s ease-in-out;
+}
+
+@keyframes roletar {
+    0%{display: block;}
+    50%{display: none;}
+    100%{display: block;}
+}
+
+
+#categoriaBtn, #menu{
+    cursor: pointer;
+}
+
+.categoria-personagens{
+    position: absolute;
+    z-index: 7;
+    height: 95vh;
+    width: 90%;   
+    background: #a67759;
+    border: 5px black solid;
+    z-index: 5;
+    margin-top: 50px;
+    overflow-y: auto;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: categoriaAparecer 2s ease-in-out;
+}
+
+@keyframes categoriaAparecer{
+    from{margin-bottom: -1000px;}
+    to{margin-top: 50px;}
+}
+
+.cSumir{
+    animation: categoriaDesaparecer 2s ease-in-out;
+}
+
+@keyframes categoriaDesaparecer{
+    from{margin-top: 50px;}
+    to{margin-bottom: -1000px;}
+}
+
+.personagens-turno, .itens-raridade{
+    height: 80%;
+    width: 90%;
+}
+
+.personagem-turno, .item-raridade{
+    background-color: #dfa26e;
+    height: 200px;
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.itens-raridade{
+    display: none;
+}
+
+.personagem-turno img , .item-raridade img{
+    height: 100px;
+    margin-top: 50px;
+    margin-left: 5px;
+}
+
+.item-raridade img{
+    height: 70px;
+}
+
+#ses{
+    margin-left: 20px;
+}
+
+#diferente-img1{
+    height: 70px;
+    margin-top: 60px;
+    margin-left: 15px;
+}
+
+ #diferente-img2{
+    height: 90px;
+    margin-left: 15px;
+}
+
+.turno-titulo{
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.turno-titulo h1{
+    color: #a57656;
+    margin-right: 5px;
+}
+
+.turno-titulo img{
+    height: 30px;
+    margin-top: 5px;
+    margin-left: 30px;
+}
+
+.agrupar{
+    display: flex;
+}
+
+.agrupar .ag1{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.agrupar .ag2{
+    margin-left: 0px;
+}
+
+.categoria-personagens .voltar{
+    position: fixed;
+    right: 5%;
+    bottom: 2%;
+}
+
+.voltar button {
+    height: 60px;
+    width: 350px;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px #cc5200;
+}
+
+.voltar img{
+    height: 40px;
+}
+
+.voltar button:hover {
+    background-color: #ff4500;
+    transform: translateY(-5px);
+    box-shadow: 0 6px #b33c00;
+}
+
+@font-face{
+    font-family: 'Comic Sans';
+    src: url(../fonte/ComicSansMS3.ttf);
+}
+
+.frasePerson, .fraseItem{
+    position: absolute;
+    z-index: 2;
+    display: none;
+    height: 50px;
+    width: 300px;
+    background-color: white;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Comic Sans';
+    border: 1px black solid;
+    box-shadow: 2px 2px 2px gray;
+    color: black;
+}
+
+#hf{
+    margin-bottom: 30px;
+}
+
+
+#ac{
+    height: 100px;
+    transform: rotateZ(20deg);
+    z-index: 0;
+}
+
+#ca{
+    height: 100px;
+    transform: rotateY(160deg);
+    z-index: 0;
+}
+
+.opcoes-categoria{
+    position: fixed;
+    display: flex;
+    left: 6%;
+    bottom: 2%;
+}
+
+.pImg, .iImg{
+    cursor: pointer;
+}
+
+.pC button{
+    background-color: #ffc444;
+    height: 60px;
+    width: 350px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px #b68722;
+}
+
+.pC button:hover{
+    background-color: #b68722;
+    transform: translateY(-5px);
+    box-shadow: 0 6px #836015;
+}
+
+#raro , #lenda{
+    margin-top: 10px;
+    margin-left: 70px;
+}
+
+

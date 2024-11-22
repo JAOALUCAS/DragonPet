@@ -12,7 +12,6 @@ window.addEventListener("beforeunload", ()=>{
 
     const vitorias = document.getElementById("vitorias");
 
-
     function cardSaveSessionStorage(){
 
         const cardObjects = [];

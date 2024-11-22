@@ -1,83 +1,114 @@
-document.addEventListener("DOMContentLoaded", ()=>{
-
+document.addEventListener("DOMContentLoaded", () => {
+    
     const shopCard = document.querySelector(".shop-card");
 
     const shopBkg = document.querySelector(".shop-backgrounds");
-
+    
     const shopTitu = document.querySelector(".shop-titulos");
 
     const shopPer = document.querySelector(".shop-perfil");
 
     const forms = document.getElementsByTagName("form");
 
-    Array.from(forms).forEach((form)=>{
+    Array.from(forms).forEach((form) => {
 
-            form.addEventListener("submit", ()=>{
+        form.addEventListener("submit", (event) => {
 
-                event.preventDefault();
+            event.preventDefault();
 
-                const comprarDiv = form.parentNode;
+            const comprarDiv = form.parentNode;
 
-                const itemDiv = comprarDiv.parentNode;
+            const itemDiv = comprarDiv.parentNode;
 
-                let custo = itemDiv.querySelector(".custo").getElementsByTagName("p")[0].innerHTML;
-                
-                let categoriaSemSeparar;
+            const custoElement = itemDiv.querySelector(".custo");
 
-                Array.from(itemDiv.classList).forEach((classe)=>{
-                
-                    categoriaSemSeparar = classe.split("-")
+            let custo = '';
 
-                });                    
-                
-                const numeroClasses = categoriaSemSeparar.length;
-                
-                let categoria;
+            if (custoElement) {
 
-                if(numeroClasses > 1){
+                const custoP = custoElement.getElementsByTagName("p")[0];
 
-                    if(categoriaSemSeparar[0] == "prod"){
+                if (custoP) {
 
-                         categoria = categoriaSemSeparar[1];
+                    custo = custoP.innerHTML;
 
-                    }else{
+                }
 
-                         categoria = categoriaSemSeparar[0];
+            }
+
+            let categoriaSemSeparar;
+
+            Array.from(itemDiv.classList).forEach((classe) => {
+
+                categoriaSemSeparar = classe.split("-");
+
+            });
+
+            const numeroClasses = categoriaSemSeparar.length;
+
+            let categoria;
+
+            if (numeroClasses > 1) {
+
+                if (categoriaSemSeparar[0] == "prod") {
+
+                    categoria = categoriaSemSeparar[1];
+
+                } else {
+
+                    categoria = categoriaSemSeparar[0];
+
+                }
+
+            } else {
+
+                categoria = categoriaSemSeparar[0];
+
+            }
+
+            let nomeItem = '';
+
+            if (categoria == "card" || categoria == "background" || categoria == "gif") {
+
+                const tituloCard = itemDiv.querySelector(".titulo-card");
+
+                if (tituloCard) {
+
+                    const h2 = tituloCard.getElementsByTagName("h2")[0];
+
+                    if (h2) {
+
+                        nomeItem = h2.innerHTML;
 
                     }
 
-                }else{
+                }
 
-                     categoria = categoriaSemSeparar[0];
+            } else if (categoria == "titulo") {
+
+                const tc = itemDiv.querySelector(".tc");
+
+                if (tc) {
+
+                    nomeItem = tc.innerHTML;
 
                 }
 
-                let nomeItem;
+            }
 
-                if(categoria == "card" || categoria == "background" || categoria == "gif"){
+            let inputHidden = document.createElement("input");
 
-                    nomeItem = itemDiv.querySelector(".titulo-card").getElementsByTagName("h2")[0].innerHTML;
-                    
+            inputHidden.setAttribute("type", "hidden");
 
-                }else if(categoria == "titulo"){
+            inputHidden.setAttribute("name", "infoItem");
 
-                    nomeItem = itemDiv.querySelector(".tc").innerHTML;
+            inputHidden.setAttribute("value", `${categoria}, ${nomeItem}, ${custo}, equipado`);
 
-                }
+            form.appendChild(inputHidden);
 
-                let inputHidden = document.createElement("input");
+            form.submit();
 
-                inputHidden.setAttribute("type", "hidden");
-
-                inputHidden.setAttribute("name", "infoItem");
-
-                inputHidden.setAttribute("value", `${categoria}, ${nomeItem}, ${custo}, equipado`);
-
-                form.appendChild(inputHidden);
-
-                form.submit();
-
-            });
+        });
 
     });
 

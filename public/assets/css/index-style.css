@@ -195,7 +195,7 @@ button img{
 }
 
 .intrucoes-up{
-    top: 68%;
+    top: 65%;
     left: 38%;
     display: flex;
     align-items: center;
@@ -208,7 +208,7 @@ button img{
 }
 
 .shop-up{
-    top: 80%;
+    top: 77%;
     left: 38%;
     display: flex;
     align-items: center;
@@ -224,7 +224,7 @@ button img{
 }
 
 .ranking-up{
-    bottom: 4%;
+    bottom: 6%;
     left: 38%;
     display: flex;
     justify-content: center;
@@ -476,7 +476,7 @@ button img{
 
 .informacoes-ranking .bkg-perfil{
     height: 70px;
-    width: 400px;
+    width: 410px;
     position: absolute;
     top: 30%;
 }
@@ -781,6 +781,53 @@ td{
 
 .shop-card .produtos{
     margin-top: 20px;
+}
+
+
+.aviso, .bom{
+    height: 25px;
+    width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 2px white solid;
+    border-radius: 50%;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.error, .certo{
+    height: 50px;
+    width: 100vw;
+    color: white;
+    background-color: #e63636;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    animation: errorAnimation 1s ease-in-out;
+    cursor: pointer;
+}
+
+.certo{
+    background-color: #4cd137;
+}
+
+
+@keyframes errorAnimation{
+    from{margin-top: -100px;}
+    to{margin-top: 0px;}
+}
+
+.error-reverse{
+    animation: errorAnimationReverse 1s ease-in-out;
+}
+
+@keyframes errorAnimationReverse{
+    from{margin-top: 0px;}
+    to{margin-top: -100px;}
 }
 
 
