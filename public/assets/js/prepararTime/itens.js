@@ -16,21 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function crosshairFunc(){
 
-        document.addEventListener("mousemove", (event)=>{
-    
-            crosshair.forEach((crosshair)=>{
-
-                x = parseInt(event.pageX) - 40;
-
-                y = parseInt(event.pageY) - 40;
-
-                crosshair.style.left = `${x}px`;
-
-                crosshair.style.top = `${y}px`;
-
-            });
-
-        });
+        document.body.style.cursor = 'url(/public/assets/midias/icons/icons8-definir-localização-90.png), auto';
 
     }
 
@@ -41,12 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const elemento = event.target;
 
             if(elemento.classList.contains("item") || elemento.classList.contains("img")){
-
-                crosshair.forEach((crosshair)=>{
-
-                    crosshair.style.display = "block";
-
-                });
 
                 container.style.cursor = "none";
 
@@ -59,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             let itemStyle = getComputedStyle(item);
                         
                             item.style.borderImage = 'url("/public/assets/midias/icons/scan.png") 80';
-
+                            
                         }else{
 
                             item.style.borderImage = "none";
@@ -92,12 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 });
 
-                crosshair.forEach((crosshair)=>{
-
-                    crosshair.style.display = "none";
-
-                });
-
                 container.style.cursor = "default";
 
                 numItem = null;
@@ -119,6 +93,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
     
         });
+
+    }
+
+    function mudarLeftItem(){
+
+        
 
     }
 

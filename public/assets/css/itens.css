@@ -54,20 +54,8 @@
 
 .i img{
     height: 30px;
+    opacity: 0.7;
     animation: itemAnimate 3s infinite ease-in-out;
-}
-
-.crosshair{
-    display: none;
-    position: fixed;
-    z-index: 9;
-    width: 30px;
-    height: 30px;
-    pointer-events: none;
-}
-
-.comEfeitoItem{
-    box-shadow: 0 0 15px #cc8e35;
 }
 
 @keyframes itemAnimate{

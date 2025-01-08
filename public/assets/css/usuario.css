@@ -42,3 +42,14 @@
     margin-left: 5px;
     margin-top: 20px;
 }
+
+.tc{
+    background: linear-gradient(to right, #ffd700, #ffac33, #ffdd66);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5), 
+                 0px 0px 10px rgba(255, 223, 0, 0.7),
+                 0px 0px 20px rgba(255, 223, 0, 0.5);
+}

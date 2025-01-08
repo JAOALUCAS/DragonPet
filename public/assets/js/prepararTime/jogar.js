@@ -1,7 +1,27 @@
-document.addEventListener("DOMContentLoaded", ()=>{  
+me diga qual a diferença dos dois codigos
+
+document.addEventListener("DOMContentLoaded", ()=>{ 
+    
+    let container = document.getElementById("container");
+    
+    let sessionCards = JSON.parse(sessionStorage.getItem("cards"));
+
+    if(sessionCards != null){
+
+        sessionCards.forEach((cardBuscado)=>{
+
+            let novoCard = document.createElement("div");
+
+            novoCard.innerHTML = cardBuscado;
+
+            container.appendChild(novoCard);
+
+        });
+
+    }
     
     let cards = document.querySelectorAll(".card");
-
+    
     let cardVendido = localStorage.getItem("vendido");
 
     cardVendido = JSON.stringify(cardVendido);
@@ -167,8 +187,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                 }
         
                             }
-                            
-                            let container = document.getElementById("container");
     
                             container.appendChild(clone);
                             
@@ -222,7 +240,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                     }
 
-                    cardsNaoSlotOuCongelado.forEach((cardMudar, index)=>{       
+                    cardsNaoSlotOuCongelado.forEach((cardMudar, index)=>{    
 
                         let nome = nomes[index];
 
@@ -442,8 +460,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                     }
 
-                    let container = document.getElementById("container");
-
                     container.appendChild(clone);
 
                 }
@@ -455,7 +471,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
         }
 
     }
-
 
     function exibirItem(){
         
@@ -513,7 +528,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     }
 
-    exibirCard();
+    if(sessionCards == null){
+        
+        exibirCard();
+
+    }
 
     exibirItem();
 
@@ -536,7 +555,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
         moeda = 10;
 
     }
-    
 
     let numCard = null;
     
@@ -564,8 +582,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     const iClass = document.querySelectorAll(".i");
 
-    const container = document.getElementById("container");
-
     const congelar = document.getElementById("congelar");
 
     const vender = document.getElementById("vender");
@@ -578,25 +594,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     atualizarMoeda(0);
 
-    function verificarAudio(){
+    function verificarAudio(qualSom){
 
-        return localStorage.getItem("audio");
+        const verificarAudioState = localStorage.getItem("audio");
+
+        if(verificarAudioState !== "mudo"){
+
+            const soundEffect = new Audio("/public/assets/midias/audios/"+qualSom+"Sound.mp3");
+
+            soundEffect.play();
+
+        }
 
     }
 
     function atualizarMoeda(decremento){
 
         moeda+=decremento;
-
-        if(moeda < 3){
-
-            document.querySelectorAll("*").forEach(element => {
-
-                element.setAttribute("draggable", "false");
-                
-            });
-
-        }
         
         if(moeda < 1){
 
@@ -640,149 +654,156 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     }
 
-    function definirNumCard(){
+    let penultimoElementoClicado = null;
 
-        cards.forEach((card)=>{
+    let ultimoElementoClicado = null;
 
-            card.addEventListener("dragstart",()=>{
-    
-                numCard = card;
-    
-            });
-    
-        });
-
-    }
-
-    function cardDragAndDrop(){
-
+    function cardClickDrop(){
+        
         atualizarMoeda(0);
 
         let style = null;
 
-        slots.forEach((slot)=>{
+        document.addEventListener("click", (event)=>{
 
-            slot.addEventListener("dragover",(event)=>{
+            const elementoAtual = event.target;
 
-                event.preventDefault();
+            // Atualiza o penúltimo elemento clicado
+            penultimoElementoClicado = ultimoElementoClicado;
+        
+            // Atualiza o último elemento clicado
+            ultimoElementoClicado = elementoAtual;
 
-                style = getComputedStyle(slot);
+            let isPenultimoCard = penultimoElementoClicado?.classList?.contains("card");
 
-            });
+            let isUltimoSlot = ultimoElementoClicado.classList.contains("slots");
 
-            slot.addEventListener("drop", (event)=>{
+            if(!isPenultimoCard){
 
-                congelar.style.display = "none";
+                cards.forEach((card)=>{
 
-                const elemento = event.target;
+                    if(card.contains(penultimoElementoClicado) || card == penultimoElementoClicado){
+                        
+                        penultimoElementoClicado = card;
 
-                if(elemento.classList.contains("slots") && !elemento.classList.contains("ocupado")){
+                        isPenultimoCard = true;
 
-                    cards.forEach((card)=>{
+                    }
 
-                        if(card == numCard){
+                });
 
-                            let verificarClone = document.querySelector("." + card.classList[1] + "Clone");
+            }
 
-                            if(verificarClone !== null && verificarClone.classList[1] == card.classList[1]){
-                                    
-                                if(verificarClone.classList.contains("slots")){
+            if(!isUltimoSlot){
 
-                                    verificarClone.classList.replace(verificarClone.classList[4], slot.classList[2]);
+                let transformarUltimoElementoEmSlot = false;
 
-                                }else{
-                                    
-                                    slot.classList.add("ocupado");
+                areas.forEach((area)=>{
 
-                                    let top = getComputedStyle(slot).getPropertyValue("top");
+                    if(area.contains(ultimoElementoClicado) || area == ultimoElementoClicado){
+                        
+                        ultimoElementoClicado = area;
+                        
+                        transformarUltimoElementoEmSlot = true;
 
-                                    verificarClone.style.top = top;
+                    }
 
-                                    verificarClone.classList.add("slots");
+                });
 
-                                    verificarClone.classList.add(slot.classList[2]);
+                if(transformarUltimoElementoEmSlot){
 
-                                    atualizarMoeda(-3);
+                    slots.forEach((slot)=>{
+                        
+                        let verificarNumberSlot = ultimoElementoClicado.classList[1].split('')[4];
 
-                                }                           
+                        let stringClassSlot = `${slot.classList[2]}`;
 
-                            }else{
-                                    
-                                if(card.classList.contains("slots")){
+                        if(stringClassSlot.includes(verificarNumberSlot)){
 
-                                    card.classList.replace(card.classList[3], slot.classList[2]);
+                            ultimoElementoClicado = slot;
 
-                                }else{
-
-                                    slot.classList.add("ocupado");
-
-                                    let top = getComputedStyle(slot).getPropertyValue("top");
-
-                                    card.style.top = top;
-
-                                    card.classList.add("slots");
-
-                                    card.classList.add(slot.classList[2]);
-
-                                    atualizarMoeda(-3);
-
-                                }
-
-
-                            }
-
-                            if(style.left == "auto"){
-
-                                card.style.left = "15%";
-
-                            }else{
-                                
-                                card.style.left = style.left;
-
-                            }
+                            isUltimoSlot = true;
 
                         }
 
                     });
-                    
-                    const verificarAudioState = verificarAudio();
 
-                    const selecionarSound = new Audio("/public/assets/midias/audios/selecionarSound.mp3");
-                                
-                    if(verificarAudioState === "mudo"){
+                }
 
-                        selecionarSound.pause();
+            }
 
-                    }else{
-                    
-                        selecionarSound.play();
+            if(isPenultimoCard && isUltimoSlot && !ultimoElementoClicado.classList.contains("ocupado")){
+                
+                congelar.style.display = "none";
+
+                const slotTop = getComputedStyle(ultimoElementoClicado).getPropertyValue("top");
+
+                const slotLeft = getComputedStyle(ultimoElementoClicado).getPropertyValue("left");
+
+                const slotClass = ultimoElementoClicado.classList[2];
+
+                const cardClone = document.querySelector(`.${penultimoElementoClicado.classList[1]}Clone`);
+
+                if (cardClone) {
+
+                    if (cardClone.classList.contains("slots")) {
+
+                        cardClone.classList.replace(cardClone.classList[4], slotClass);
+
+                    } else {
+
+                        ultimoElementoClicado.classList.add("ocupado");
+
+                        cardClone.style.top = slotTop;
+
+                        cardClone.classList.add("slots", slotClass);
+
+                        atualizarMoeda(-3);
 
                     }
 
-                }else{
-                    
-                    const verificarAudioState = verificarAudio();
+                } else {
 
-                    const errorSound = new Audio("/public/assets/midias/audios/errorSound.mp3");
-                                
-                    if(verificarAudioState == "mudo"){
+                    if (penultimoElementoClicado.classList.contains("slots")) {
 
-                        errorSound.pause();
+                        penultimoElementoClicado.classList.replace(penultimoElementoClicado.classList[3], slotClass);
 
-                    }else{
-                    
-                        errorSound.play();
+                    } else {
+
+                        ultimoElementoClicado.classList.add("ocupado");
+
+                        penultimoElementoClicado.style.top = slotTop;
+
+                        penultimoElementoClicado.classList.add("slots", slotClass);
+
+                        atualizarMoeda(-3);
 
                     }
 
                 }
 
-            });
+                
+                if(slotLeft == "auto"){
+
+                    penultimoElementoClicado.style.left = "15%";
+
+                }else{
+                    
+                    penultimoElementoClicado.style.left = slotLeft;
+
+                }
+    
+                verificarAudio("selecionar");
+
+            } else if (isUltimoSlot && ultimoElementoClicado.classList.contains("ocupado")) {
+
+                verificarAudio("error");
+
+            }
 
         });
 
     }
-
     function sumirBotaoAoClicarFora(){
                 
         document.addEventListener("click", (event)=>{
@@ -795,21 +816,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                 cardVendido = elemento;
 
-                if(elemento.classList.contains("slot1") || elemento.classList.contains("slot2")
-                    || elemento.classList.contains("slot3") || elemento.classList.contains("slot4")
-                    || elemento.classList.contains("slot5")){
+                cards.forEach((card)=>{
 
-                    congelar.style.display = "none";
+                    if(card.classList.contains("slots")){
+                            
+                        congelar.style.display = "none";
 
-                    vender.style.display = "block";
+                        vender.style.display = "block";
 
-                }else{
+                    }else{
+                            
+                        vender.style.display = "none";
 
-                    vender.style.display = "none";
+                        congelar.style.display = "block";
 
-                    congelar.style.display = "block";
+                    }
 
-                }
+                });
 
             }else if(elemento.classList.contains("item") || elemento.classList.contains("img")){
 
@@ -819,9 +842,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
             }else if(elemento.classList.contains("foto-p")){
 
-                let congImg = 0;
+                let congelarBtnVerificarImg = false;
 
-                let vendImg = 0;
+                let venderBtnVerificar = false;
 
                 cards.forEach((card)=>{
 
@@ -833,11 +856,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                         if(card.classList.contains("slots")){
 
-                            vendImg = 1;
+                            venderBtnVerificar = true;
 
                         }else{
 
-                            congImg = 1;
+                            congelarBtnVerificarImg = true;
 
                         }
 
@@ -845,11 +868,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                 });
 
-                if(congImg == 1){
+                if(congelarBtnVerificarImg){
 
                     congelar.style.display = "block";                    
 
-                }else if(vendImg == 1){
+                }else if(venderBtnVerificar){
 
                     vender.style.display = "block";
 
@@ -883,19 +906,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
    
         atualizar.addEventListener("click", ()=>{
             
-            const verificarAudioState = verificarAudio();
-
-            const moedaSound = new Audio("/public/assets/midias/audios/moedaSound.mp3");
-                        
-            if(verificarAudioState == "mudo"){
-
-                moedaSound.pause();
-
-            }else{
-            
-                moedaSound.play();
-
-            }
+            verificarAudio("moeda");
 
             atualizarMoeda(-1);
             
@@ -907,24 +918,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     }
 
-
     function venderClick(){
         
         vender.addEventListener("click",()=>{
             
-            const verificarAudioState = verificarAudio();
-
-            const vender = new Audio("/public/assets/midias/audios/venderSound.mp3");
-                       
-            if(verificarAudioState == "mudo"){
-
-                vender.pause();
-
-            }else{
-            
-                vender.play();
-
-            }
+            verificarAudio("vender");
 
             cards.forEach((card)=>{
 
@@ -938,19 +936,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                     card.classList.remove("slots");
 
-                    let slotCardOcupado = null;
+                    let slotCardOcupado = card.classList[3];
 
-                    for(let i = 1; i <= 5; i++){
-
-                        if(card.classList.contains(`slot${i}`)){
-
-                            slotCardOcupado = `slot${i}`;
-
-                            card.classList.remove(`slot${i}`);
-
-                        }
-
-                    }
+                    card.classList.remove(card.classList[3]);
 
                     if(slotCardOcupado !== null){
 
@@ -958,7 +946,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                             if(slot.classList[2] == slotCardOcupado){
 
-                                slot.classList.remove("ocupado")
+                                slot.classList.remove("ocupado");
 
                             }
 
@@ -976,10 +964,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     }
 
-
     function congelarClick(){
-
-        let ultimoElementoClicado = null;
 
         document.addEventListener("click", (event)=>{
 
@@ -989,30 +974,18 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         congelar.addEventListener("click",()=>{
             
-            const verificarAudioState = verificarAudio();
-
-            const congelar = new Audio("/public/assets/midias/audios/congelarSound.mp3");
-                      
-            if(verificarAudioState == "mudo"){
-
-                congelar.pause();
-
-            }else{
-            
-                congelar.play();
-
-            }
+            verificarAudio("congelar");
 
             if(cardCongelado == ultimoElementoClicado || cardCongelado.contains(ultimoElementoClicado)){
 
                 cards.forEach((card)=>{
 
                     if(card == cardCongelado){
-    
+
                         card.classList.add("congelado");
-    
+
                     }
-    
+
                 });
 
                 let number = cardCongelado.classList[1].split('')[4];
@@ -1105,102 +1078,60 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     }
 
-    function descongelarClick(){
+    function descongelarClick() {
 
-        let ultimoElementoClicado = null;
-
-        document.addEventListener('click', (event)=>{
+        document.addEventListener('click', (event) => {
 
             ultimoElementoClicado = event.target;
 
         });
-  
-        descongelar.addEventListener("click",()=>{
-            
-            const verificarAudioState = verificarAudio();
+    
+        descongelar.addEventListener("click", () => {
 
-            const descongelarSound = new Audio("/public/assets/midias/audios/descongelarSound.mp3");
-                     
-            if(verificarAudioState == "mudo"){
+            verificarAudio("descongelar");
+    
+            // Esconde o gelo correspondente
+            gelo.forEach((geloElemento) => {
 
-                descongelarSound.pause();
+                if (geloElemento === numGelo) {
 
-            }else{
-            
-                descongelarSound.play();
-
-            }
-
-            gelo.forEach((gelo)=>{
-
-                if(gelo == numGelo){
-
-                    gelo.style.display = "none";
+                    geloElemento.style.display = "none";
 
                 }
 
             });
-            
-            switch(true){
+    
+            // Mapeia as classes de gelo para os elementos correspondentes
+            const geloMap = {
+                gelo1: ".card1",
+                gelo2: ".card2",
+                gelo3: ".card3",
+                gelo4: ".card4",
+                gelo5: ".card5",
+                gelo6: ".item1",
+                gelo7: ".item2"
+            };
+    
+            // Verifica qual elemento foi clicado e descongela
+            for (let geloClass in geloMap) {
 
-                case ultimoElementoClicado.classList.contains("gelo1"):
+                if (ultimoElementoClicado.classList.contains(geloClass)) {
 
-                    const card1 = document.querySelector(".card1");
+                    const elemento = document.querySelector(geloMap[geloClass]);
 
-                    card1.classList.remove("congelado")
+                    if (elemento) {
 
-                    break;
+                        elemento.classList.remove("congelado");
 
-                case ultimoElementoClicado.classList.contains("gelo2"):
+                    }
 
-                    const card2 = document.querySelector(".card2");
+                    break; // Sai do loop após encontrar o primeiro elemento correspondente
 
-                    card2.classList.remove("congelado")
+                }
 
-                    break;
-
-                case ultimoElementoClicado.classList.contains("gelo3"):
-
-                    const card3 = document.querySelector(".card3");
-
-                    card3.classList.remove("congelado")
-
-                    break;
-
-                case ultimoElementoClicado.classList.contains("gelo4"):
-
-                    const card4 = document.querySelector(".card4");
-
-                    card4.classList.remove("congelado")
-
-                    break;
-
-                case ultimoElementoClicado.classList.contains("gelo5"):
-
-                    const card5 = document.querySelector(".card5");
-
-                    card5.classList.remove("congelado")
-
-                    break;
-
-                case ultimoElementoClicado.classList.contains("gelo6"):
-
-                    const item1 = document.querySelector(".item1");
-
-                    item1.classList.remove("congelado")
-
-                    break;
-
-                case ultimoElementoClicado.classList.contains("gelo7"):
-
-                    const item2 = document.querySelector(".item2");
-
-                    item2.classList.remove("congelado")
-
-                    break;
-                    
             }
-
+    
+            // Esconde o botão de descongelar
             descongelar.style.display = "none";
 
         });
@@ -1229,7 +1160,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                         }
                        
-                        
                     }
     
                 });
@@ -1260,19 +1190,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                         });
                         
-                        const verificarAudioState = verificarAudio();
-                                            
-                        const moedaSound = new Audio("/public/assets/midias/audios/moedaSound.mp3");
-
-                        if(verificarAudioState == "mudo"){
-
-                            moedaSound.pause();
-            
-                        }else{
-                        
-                            moedaSound.play();
-            
-                        }
+                        verificarAudio("moeda");
             
                         atualizarMoeda(-4);     
                         
@@ -1282,12 +1200,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                         itemEfect.style.display = "block";
 
-                        container.appendChild(itemEfect);
-
-                        let cardLeft = getComputedStyle(card);
-
-                        itemEfect.style.left = cardLeft.left;
-
+                        card.appendChild(itemEfect);
+                        
                         let valorI = 1;
 
                         iClass.forEach((i)=>{
@@ -1333,27 +1247,111 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         pareceAtualizar.addEventListener("click", ()=>{
 
-            const verificarAudioState = verificarAudio();
-
-            const errorSound = new Audio("/public/assets/midias/audios/errorSound.mp3");
-                        
-            if(verificarAudioState == "mudo"){
-
-                errorSound.pause();
-
-            }else{
-            
-                errorSound.play();
-
-            }
+            verificarAudio("error");
 
         });
 
     }
 
-    definirNumCard();
+    const setas = document.querySelectorAll(".seta");
 
-    cardDragAndDrop();
+    const areas = document.querySelectorAll(".area");
+
+    function qualTirarSeta(){
+        
+        let numSlotOcupado = [];
+
+        slots.forEach((slot)=>{
+
+            if(slot.classList.contains("ocupado")){
+                    
+                let number = slot.classList[2].split('')[4];
+
+                numSlotOcupado.push(number);
+
+            }
+
+        });
+
+        if(numSlotOcupado !== null){
+
+            numSlotOcupado.forEach((num)=>{
+
+                let setaSumir = document.querySelector(".seta"+num);
+
+                if (setaSumir) setaSumir.style.display = "none";
+                
+                let areaSumir = document.querySelector(".area"+num);
+
+                if (areaSumir) areaSumir.style.display = "none";
+
+            });
+
+        }
+
+    }
+
+    function mostrarSeta(event){
+       
+        setas.forEach((seta)=>{seta.style.display = "block";});
+
+        areas.forEach((area)=>{area.style.display = "block"});
+
+        qualTirarSeta();
+
+    }
+
+    function tirarSeta(){
+
+        setas.forEach((seta)=>{seta.style.display = "none";});
+
+        areas.forEach((area)=>{area.style.display = "none"});
+
+    }
+
+    cards.forEach((card)=>{
+
+        card.addEventListener("dragstart", mostrarSeta);
+
+        card.addEventListener("dragend", tirarSeta);
+
+    });
+
+    function verificarTirarSeta(ultimoElementoClicado) {
+
+        let setaMostrada = false; 
+    
+        cards.forEach((card) => {
+
+            if (card === ultimoElementoClicado || card.contains(ultimoElementoClicado)) {
+
+                mostrarSeta();
+
+                setaMostrada = true; 
+            }
+
+        });
+    
+        if (!setaMostrada) {
+
+            tirarSeta();
+
+        }
+        
+    }
+
+    document.addEventListener("click", (event)=>{
+
+        ultimoElementoClicado = event.target;
+
+        verificarTirarSeta(ultimoElementoClicado);
+
+    });
+
+
+   verificarTirarSeta();
+
+    cardClickDrop();
 
     sumirBotaoAoClicarFora();
 

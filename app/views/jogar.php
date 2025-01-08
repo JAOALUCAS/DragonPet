@@ -45,6 +45,8 @@ if (!empty($itens)) {
 
 }
 
+$displayStyle = isset($_SESSION["gif"]) ? "block" : "none";
+
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +60,7 @@ if (!empty($itens)) {
     <link rel="stylesheet" href="../../public/assets/css/animacao-load.css">
     <link rel="stylesheet" href="../../public/assets/css/itens.css">
     <link rel="stylesheet" href="../../public/assets/css/menu.css">
+    <link rel="stylesheet" href="../../public/assets/css/usuario.css">
     <link rel="stylesheet" href="<?php echo $url?>">
     <script src="../../public/assets/js/click.js"></script>
     <script src="../../public/assets/js/menu.js"></script>
@@ -71,6 +74,7 @@ if (!empty($itens)) {
     <script src="../../public/assets/js/prepararTime/variaveis.js"></script>
     <script src="../../public/assets/js/prepararTime/animacaoLoad.js"></script>
     <script src="../../public/assets/js/prepararTime/categoria.js"></script>
+    <script src="../../public/assets/js/prepararTime/finalizarTurno.js"></script>
 </head>
 <body>
 
@@ -208,13 +212,22 @@ if (!empty($itens)) {
 
             <button id="descongelar"><img src="../../public/assets/midias/icons/gotas-de-agua.png">Descongelar</button>
 
-            <form>
+
+            
+
+
+
+
+
+
+
+
+            
 
                 <input type="hidden" name="finalizarTurno">
 
                 <button id="finalizar">Finalizar turno<img src="../../public/assets/midias/icons/espadas.png"></button>
 
-            </form>
 
         </div>
 
@@ -895,6 +908,65 @@ if (!empty($itens)) {
 
         </div>
 
+        <div class="area area1">
+
+            <img src="../../public/assets/midias/icons/scan.png">
+
+        </div>
+        
+        <div class="area area2">
+
+            <img src="../../public/assets/midias/icons/scan.png">
+
+        </div>
+        
+        <div class="area area3">
+
+            <img src="../../public/assets/midias/icons/scan.png">
+
+        </div>
+        
+        <div class="area area4">
+
+            <img src="../../public/assets/midias/icons/scan.png">
+
+        </div>
+        
+        <div class="area area5">
+
+            <img src="../../public/assets/midias/icons/scan.png">
+
+        </div>
+
+        <div class="seta seta1">
+
+            <img src="../../public/assets/midias/icons/icons8-flecha-80.png">
+
+        </div>
+
+        <div class="seta seta2">
+
+            <img src="../../public/assets/midias/icons/icons8-flecha-80.png">
+
+        </div>
+
+        <div class="seta seta3">
+
+            <img src="../../public/assets/midias/icons/icons8-flecha-80.png">
+
+        </div>
+        
+        <div class="seta seta4">
+
+            <img src="../../public/assets/midias/icons/icons8-flecha-80.png">
+
+        </div>
+        
+        <div class="seta seta5">
+
+            <img src="../../public/assets/midias/icons/icons8-flecha-80.png">
+
+        </div>
 
         <div class="gelo gelo1">
             <img src="../../public/assets/midias/icons/icons8-gelo-64.png">
@@ -1342,7 +1414,7 @@ if (!empty($itens)) {
 
         <template id="CardNormal">
 
-            <div class='card card$i' draggable='true'>
+            <div class='card card$i'>
                         
                     <div class='header'>
                         
@@ -1442,17 +1514,82 @@ if (!empty($itens)) {
         <div class="itemEfect">
 
             <div class="i">
+
                 <img src="../../public/assets/midias/itens/Esfera do Dragão.png">
+                
             </div>
 
         </div>
 
-        <div class="crosshair">
-            <img src="../../public/assets/midias/icons/icons8-definir-localização-90.png">
+        <div class="matching" id="matching">
+
+            <img src="../../public/assets/midias/icons/icons8-estrelas-96.png" id="estrela1">
+
+            <img src="../../public/assets/midias/icons/icons8-estrelas-96.png" id="estrela2">
+
+            <img src="../../public/assets/midias/icons/icons8-troféu-90.png" id="trofeu1">
+
+            <img src="../../public/assets/midias/icons/icons8-troféu-90.png" id="trofeu2">
+
+            <div class="paralelograma">
+
+                <div class="topo">
+    
+                    <h1>Buscando Partida</h1> 
+
+                </div>
+
+                <div class="usuario">
+
+                    <div class="foto-perfil"><img id="ud" src="<?php echo $_SESSION["path"]; ?>" /></div>
+
+                    <div class="bkg-perfil" id="ub">
+                        
+                        <p class="nick" ><?php echo $_SESSION["nome"]?></p>
+
+                        <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
+
+                        <p class="tc" style="margin-top: <?php echo isset($_SESSION["gif"]) ? "-40px" :  "20px" ?>;"><?php echo isset($_SESSION["titulo"]) ? $_SESSION["titulo"] : ''; ?></p>
+                        
+                    </div>
+                    
+                </div>
+
+                <div class="adversario">
+
+                    <div class="foto-perfil"><img id="adImg" src="../../public/assets/midias/bots/padrao.jpg"></div>
+
+                    <div class="bkg-perfil" id="ab">
+                        
+                        <p class="nick" >********</p>
+
+                        <img style="display: <?php echo $displayStyle; ?>;" src="<?php echo isset($_SESSION["gif"]) ? $_SESSION["gif"] : '' ?>">
+
+                        <p class="tc">************</p>
+                        
+                    </div>
+
+                </div>
+
+                <div class="faixa faixa1"></div>
+
+                <div class="faixa faixa2"></div>
+
+                <div class="faixa faixa3"></div>
+
+                <div class="faixa faixa4"></div>
+
+                <div class="faixa faixa5"></div>
+
+            </div>
+            
+            <div class="voltar">
+
+                <button id="voltarMatching"><img src="../../public/assets/midias/icons/icons8-voltar-64.png">Voltar</button>
+
+            </div>
+
         </div>
-
-
-        <div class="teste"></div>
 
     </div>
 

@@ -2,8 +2,6 @@ window.addEventListener("load",()=>{
 
     function loadObjects(){
 
-        const cards = document.querySelectorAll(".card");
-
         const slots = document.querySelectorAll(".slots");
 
         const sessionCards = JSON.parse(sessionStorage.getItem("cards"));
@@ -19,62 +17,8 @@ window.addEventListener("load",()=>{
         const turno = document.getElementById("turno");
 
         const vitorias = document.getElementById("vitorias");
-        
-        if(sessionCards != null){
 
-            sessionCards.forEach((card)=>{
-
-                const cardClasses =  Object.values(card.classes);
-
-                let possuiTodasClasses = false;
-
-                cards.forEach((cCard)=>{
-
-                    if(cCard.classList.contains(cardClasses[1])){
-
-                        if(cardClasses.length > 2 && cardClasses.length < 4){
-
-                            cCard.classList.add(cardClasses[2]);
-
-                        }else if(cardClasses.length == 4){
-
-                            cCard.classList.add(cardClasses[2]);
-
-                            cCard.classList.add(cardClasses[3]);
-
-                            cCard.style.top = "15%";
-
-                            slots.forEach((slot)=>{
-
-                                if(slot.classList.contains(cardClasses[3])){
-
-                                    slot.classList.add("ocupado");
-
-                                    let style = getComputedStyle(slot);
-
-                                    if(style.left == "auto"){
-
-                                        cCard.style.left = "15%";
-        
-                                    }else{
-                                        
-                                        cCard.style.left = style.left;
-        
-                                    }
-
-                                }
-
-                            });
-
-                        }
-
-                    }
-
-                });
-
-            });
-
-        }
+        const container = document.getElementById("container");
 
         if(sessionGame != null){
 
@@ -90,17 +34,29 @@ window.addEventListener("load",()=>{
 
                 const vitoriasValue = game.vitorias;
 
+                let slotsArray =  game.slots;
+
+                if(slotsArray){
+
+                    slotsArray.forEach((classeSlot)=>{
+
+                        slots.forEach((slot)=>{
+
+                            if(slot.classList.contains(classeSlot))  slot.classList.add("ocupado");
+
+                        });
+
+                    });
+
+                }
+
                 if(geloClasses.length != 0){
 
                     geloClasses.forEach((gelo)=>{
 
                         gelos.forEach((gelos)=>{
 
-                            if(gelos.classList.contains(gelo[1])){
-
-                                gelos.style.display = "flex";
-
-                            }
+                            if(gelos.classList.contains(gelo[1])) gelos.style.display = "flex";
 
                         });
 

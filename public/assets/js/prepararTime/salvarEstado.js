@@ -12,22 +12,17 @@ window.addEventListener("beforeunload", ()=>{
 
     const vitorias = document.getElementById("vitorias");
 
+    const tipoCard = document.getElementById("tipoCard");
+
+    const slots = document.querySelectorAll(".slots");
+
     function cardSaveSessionStorage(){
 
         const cardObjects = [];
 
         cards.forEach((card)=>{
 
-            if(card !== null){
-
-                const cardSerializado = card.outerHTML;
-
-                cardObjects.push({
-                    "classes": card.classList,
-                    "div": cardSerializado
-                });
-
-            }
+            cardObjects.push(card.outerHTML);
 
         });
 
@@ -39,14 +34,17 @@ window.addEventListener("beforeunload", ()=>{
 
         const gameObjects = [];
         const geloArray = [];
+        const slotsArray = [];
 
         gelos.forEach((gelo)=>{
 
-            if(gelo.style.display == "flex"){
+            if(gelo.style.display == "flex") geloArray.push(gelo.classList);
 
-                geloArray.push(gelo.classList);
+        });
 
-            }
+        slots.forEach((slot)=>{
+
+            if(slot.classList.contains("ocupado")) slotsArray.push(slot.classList[2]);
 
         });
 
@@ -55,7 +53,8 @@ window.addEventListener("beforeunload", ()=>{
             "moedas": moedas.innerText,
             "vida": vida.textContent,
             "turno": turno.textContent,
-            "vitorias": vitorias.textContent
+            "vitorias": vitorias.textContent,
+            "slots": slotsArray
         });
 
         sessionStorage.setItem("game", JSON.stringify(gameObjects));
@@ -63,6 +62,7 @@ window.addEventListener("beforeunload", ()=>{
     }
 
     cardSaveSessionStorage();
+
     gameSaveSessionStorage();
 
 });
